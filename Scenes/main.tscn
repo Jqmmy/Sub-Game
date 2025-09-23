@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://61cvkp3cyet7"]
+
+[ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+background_color = Color(0.177088, 0.426222, 0.857949, 1)
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 3
+tonemap_exposure = 0.25
+tonemap_white = 16.0
+glow_enabled = true
+adjustment_enabled = true
+adjustment_saturation = 0.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0xm2m"]
+points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(5, 10, 5)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xm2m"]
+radius = 0.4
+
+[node name="main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_h2yge")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89358, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, -11)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -0.847336, 7)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.30042, 13)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58787, 2.88973, -0.482041)
+mesh = SubResource("CapsuleMesh_0xm2m")

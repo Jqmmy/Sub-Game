@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://qg2ty2uh3qkc"]
+
+[ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_onrkg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ig7tw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d")]
+motion_mode = 1
+script = ExtResource("1_4flbx")
+camera_3d = NodePath("Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 80.0
+
+[node name="diver" parent="Camera3D" instance=ExtResource("2_onrkg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.66945, 1.44167)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/diver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88598e-07, 2.08685, -3.30118)
+light_color = Color(0.895421, 0.52207, 0.31861, 1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/diver"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.2097, 0.348008, 2.89349)
+light_color = Color(0.81928, 0.549729, 0.248106, 1)
+light_energy = 100.0
+light_size = 0.5
+spot_range = 15.0
+spot_angle = 45.785
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Camera3D/diver"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.1985, 0.348008, 2.89349)
+light_color = Color(0.819608, 0.54902, 0.247059, 1)
+light_energy = 100.0
+light_size = 0.5
+spot_range = 15.0
+spot_angle = 45.785
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

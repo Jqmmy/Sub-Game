@@ -1,23 +1,18 @@
 extends CharacterBody3D
 
 
-var current_speed = NORMAL_SPEED
-const NORMAL_SPEED = 5
-const BOOST_SPEED = 20.0
+var current_speed = 5
+var gravity = -9.8
+var jump_velocity = 100
 
 var sens:float = 0.05
-var boosting:bool = false
-var boosts:int = 3
 @export var camera_3d:Camera3D
-@onready var label: Label = $Label 
-@onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
-	print(get_tree().root.has_focus())
-	timer.timeout.connect(timeout)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !get_tree().root.has_focus():
 		get_tree().root.grab_focus()
 		print(get_tree().root.has_focus())
@@ -36,29 +31,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("sprinting") and boosts > 0:
-		boosting = true
-		boosts -= 1
-		current_speed = BOOST_SPEED
-		timer.start()
-	if boosting:
-		current_speed = lerpf(current_speed, NORMAL_SPEED, 1.0 - exp(-1.0 * delta))
-		if current_speed < 5.5:
-			current_speed = 5
-			boosting = false
-	label.text = str(boosts)
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	var float_booster:float
-	if Input.is_action_pressed("up"):
-		float_booster = 1.0
-	if Input.is_action_pressed("down"):
-		float_booster = -1.0
 	
-	var camera_direction := camera_3d.transform.basis * Vector3(input_dir.x, float_booster, input_dir.y)
-	var direction = (transform.basis * camera_direction).normalized()
-	var direction_up = (transform.basis * camera_3d.transform.basis) * Vector3(0,1.0,0)
+	if !is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = 0
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y += jump_velocity
+	
+	
+	var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	
 	if direction:
 		velocity = direction * current_speed
@@ -68,15 +52,3 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 	move_and_slide()
-
-func timeout():
-	if boosts > 3:
-		boosts = 3
-		print("wot")
-		return
-	
-	get_tree().create_timer(2).timeout.connect(
-		func():
-			boosts += 1
-			if boosts != 3:
-				timeout())

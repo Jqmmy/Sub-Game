@@ -3,21 +3,25 @@
 [ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y6xdh"]
-radius = 0.4
+radius = 0.3
+height = 1.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5wxv7"]
-radius = 0.4
+radius = 0.3
+height = 1.75
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d")]
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d") groups=["player"]]
+collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_4flbx")
 camera_3d = NodePath("Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 mesh = SubResource("CapsuleMesh_y6xdh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87538993, 0)
 shape = SubResource("CapsuleShape3D_5wxv7")
 
 [node name="Camera3D" type="Camera3D" parent="."]

@@ -1,5 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://61cvkp3cyet7"]
 
+[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scenes/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://b35fjfwrfx3p7" path="res://Scenes/node_3d.tscn" id="2_bo1nx"]
 
@@ -30,10 +31,8 @@ size = Vector2(50, 50)
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 size = Vector3(5, 10, 5)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xm2m"]
-radius = 0.3
-
 [node name="main" type="Node3D"]
+script = ExtResource("1_8gbba")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h2yge")
@@ -51,7 +50,7 @@ shape = SubResource("ConvexPolygonShape3D_0xm2m")
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8045998, 1.9507782, 7.9922137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44220328, 2.877091, 8.421569)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, -11)
@@ -69,9 +68,5 @@ mesh = SubResource("BoxMesh_ig7tw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.30042, 13)
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4116263, 2.1619809, 4.2206683)
-mesh = SubResource("CapsuleMesh_0xm2m")
-
 [node name="Node3D" parent="." instance=ExtResource("2_bo1nx")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7921562, 1.0843639, 6.8761387)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7921562, 1.9100122, 6.8761387)

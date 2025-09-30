@@ -1,11 +1,11 @@
+class_name Player
 extends CharacterBody3D
 
 
 var current_speed = 5
-var gravity = -9.8
-var jump_velocity = 100
+const JUMP_VELOCITY = 4.5
 
-var sens:float = 0.05
+var sens:float = 0.001
 @export var camera_3d:Camera3D
 
 
@@ -31,24 +31,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 
 func _physics_process(delta: float) -> void:
+
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
 	
-	if !is_on_floor():
-		velocity.y -= gravity * delta
-	else:
-		velocity.y = 0
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y += jump_velocity
-	
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 	
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	
 	if direction:
-		velocity = direction * current_speed
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
-		velocity.y = move_toward(velocity.y, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 	move_and_slide()

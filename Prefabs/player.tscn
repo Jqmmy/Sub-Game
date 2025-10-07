@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://qg2ty2uh3qkc"]
+[gd_scene load_steps=6 format=3 uid="uid://qg2ty2uh3qkc"]
 
 [ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://dnu0i17s3hiy1" path="res://Assets/blend files/charecter.blend" id="2_5wxv7"]
+[ext_resource type="Script" uid="uid://k7ikraa4f2gd" path="res://Scripts/Radar.gd" id="3_y5hcb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y6xdh"]
 radius = 0.3
@@ -18,6 +20,7 @@ camera_3d = NodePath("Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_y6xdh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -28,6 +31,17 @@ shape = SubResource("CapsuleShape3D_5wxv7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 fov = 80.0
 
+[node name="light" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12903579, 0.11631167, -0.1840871)
+spot_range = 6.64233
+spot_angle = 34.493515
+
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="charecter" parent="." instance=ExtResource("2_5wxv7")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_y5hcb")

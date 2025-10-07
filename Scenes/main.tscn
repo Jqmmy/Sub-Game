@@ -1,41 +1,41 @@
-[gd_scene load_steps=10 format=3 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=13 format=3 uid="uid://61cvkp3cyet7"]
 
-[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scenes/main.gd" id="1_8gbba"]
+[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://b35fjfwrfx3p7" path="res://Scenes/node_3d.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dnu0i17s3hiy1" path="res://Assets/blend files/charecter.blend" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine.tscn" id="5_kry3j"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+[sub_resource type="Sky" id="Sky_344ge"]
+sky_material = SubResource("ProceduralSkyMaterial_6bp64")
 
-[sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 1
-background_color = Color(0.177088, 0.426222, 0.857949, 1)
-sky = SubResource("Sky_0xm2m")
-tonemap_mode = 3
-tonemap_exposure = 0.25
-tonemap_white = 16.0
+[sub_resource type="Environment" id="Environment_ynf5e"]
+background_mode = 2
+sky = SubResource("Sky_344ge")
+tonemap_mode = 1
 glow_enabled = true
-adjustment_enabled = true
-adjustment_saturation = 0.8
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0xm2m"]
-points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_21xkr"]
+size = Vector3(500, 0, 500)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
-size = Vector2(50, 50)
+size = Vector2(500, 500)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 size = Vector3(5, 10, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
+size = Vector3(500, 50, 500)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_8gbba")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_h2yge")
+environment = SubResource("Environment_ynf5e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -44,13 +44,16 @@ shadow_enabled = true
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_0xm2m")
+shape = SubResource("BoxShape3D_21xkr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44220328, 2.877091, 8.421569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.9021742, -3.2594283)
+
+[node name="Submarine" parent="." instance=ExtResource("5_kry3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.281362)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, -11)
@@ -58,6 +61,10 @@ mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -0.847336, 7)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." groups=["scanable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.29346, -0.847336, 132.6823)
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
@@ -68,5 +75,34 @@ mesh = SubResource("BoxMesh_ig7tw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.30042, 13)
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="Node3D" parent="." instance=ExtResource("2_bo1nx")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7921562, 1.9100122, 6.8761387)
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." groups=["scanable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.23842, 11.266178, -150.28433)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." groups=["scanable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.60017, 6.9545403, -51.5626)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." groups=["scanable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.72587, 3.30042, 140.98584)
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="Ocean" type="Area3D" parent="."]
+collision_mask = 6
+gravity_space_override = 3
+gravity = 0.25
+linear_damp_space_override = 3
+linear_damp = 0.5
+angular_damp_space_override = 3
+angular_damp = 0.5
+script = ExtResource("4_jjvhh")
+metadata/_custom_type_script = "uid://cv1xvvvoq56j8"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ocean"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+shape = SubResource("BoxShape3D_kry3j")
+
+[node name="charecter" parent="." instance=ExtResource("5_21xkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.045701, 0, -4.818165)
+
+[editable path="CharacterBody3D"]

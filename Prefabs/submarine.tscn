@@ -32,6 +32,12 @@ script = ExtResource("1_8qaoj")
 [node name="diver" parent="." instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
 
+[node name="Armature" parent="diver" index="38"]
+visible = false
+
+[node name="Cube_001" parent="diver" index="50"]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.3420201, 0, -0.3420201, 0.9396926, -0.2604758, 1.6942953, 1.811058)
+
 [node name="Interactable" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4845965e-07, 2.0035195, 1.1950138)
 collision_mask = 4
@@ -105,3 +111,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.370361, 2.9148784)
 omni_range = 2.807
 
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+
+[editable path="diver"]

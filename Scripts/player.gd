@@ -9,10 +9,18 @@ const JUMP_VELOCITY = 4.5
 
 var sens:float = 0.05
 @export var camera_3d:Camera3D
-@onready var light: SpotLight3D = $Camera3D/light
+@export var head:Node3D
+@onready var light: SpotLight3D = $head/Camera3D/light
+@onready var radar: Radar = $Radar
+
+@onready var skeleton_3d: Skeleton3D = $charecter/Armature/Skeleton3D
+@onready var tube_r_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube r IK"
+@onready var tube_l_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube l IK"
 
 
 func _ready() -> void:
+	tube_l_ik.start()
+	tube_r_ik.start()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(_delta: float) -> void:
@@ -21,14 +29,16 @@ func _process(_delta: float) -> void:
 	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
 	var look_margin:float = 0.1
 	if look_vector.x > look_margin or look_vector.x < -look_margin:
-		rotate_y(look_vector.x * sens)
+		head.rotate_y(look_vector.x * sens)
+		skeleton_3d.set_bone_pose_rotation(skeleton_3d.find_bone("head.l"), head.quaternion)
 	if look_vector.y > look_margin or look_vector.y < -look_margin:
 		camera_3d.rotate_x(look_vector.y * sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * Settings.sens)
+		head.rotate_y(-event.relative.x * Settings.sens)
+		skeleton_3d.set_bone_pose_rotation(skeleton_3d.find_bone("head.l"), head.quaternion + camera_3d.quaternion)
 		camera_3d.rotate_x(-event.relative.y * Settings.sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 	
@@ -46,11 +56,15 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta
 			
 		
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			if radar.scan_closest_object(global_position).distance_squared_to(global_position) > 10:
+				print("more than ten", radar.scan_closest_object(global_position).distance_squared_to(global_position), radar.closest_object)
+			else:
+				print("less than ten")
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
 		if direction:
 			velocity.x = direction.x * current_speed
@@ -78,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		elif !Input.is_action_pressed("up"):
 			float_booster = 0
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		var camera_direction = (camera_3d.transform.basis * Vector3(input_dir.x, float_booster, input_dir.y)).normalized()
 		if direction or camera_direction:
 			velocity.x = direction.x * current_speed

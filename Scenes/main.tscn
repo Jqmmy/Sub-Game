@@ -50,7 +50,29 @@ shape = SubResource("BoxShape3D_21xkr")
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.9021742, -3.2594283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.007672, -3.2594283)
+
+[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" index="1"]
+process_mode = 3
+bones/9/rotation = Quaternion(0.006879357, -0.022963997, -0.042336967, 0.9988158)
+bones/29/rotation = Quaternion(0.006879358, 0.022964, 0.042336967, 0.9988158)
+bones/46/position = Vector3(0.7815659, 0.068822384, 1.7049948e-07)
+bones/47/position = Vector3(0.32287338, -0.018683076, -0.24769121)
+bones/48/position = Vector3(-0.7815659, 0.068822384, -2.0218019e-07)
+bones/49/position = Vector3(-0.32287338, -0.018683076, -0.24769121)
+
+[node name="forarm_l" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.031982042, 0.9976882, 0.059961252, 0.05771937, -0.058048252, 0.9966435, 0.99782044, 0.03533563, -0.055729404, 0.4586991, 1.217659, -0.01143628)
+
+[node name="SkeletonIK3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="6"]
+process_mode = 3
+target_node = NodePath("../../../../../Node3D")
+
+[node name="AnimationPlayer" parent="CharacterBody3D/charecter" index="1"]
+autoplay = "holding controls"
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -0.6680892, 4.2345366, -3.480213)
 
 [node name="Submarine" parent="." instance=ExtResource("5_kry3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.281362)
@@ -106,3 +128,4 @@ shape = SubResource("BoxShape3D_kry3j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.045701, 0, -4.818165)
 
 [editable path="CharacterBody3D"]
+[editable path="CharacterBody3D/charecter"]

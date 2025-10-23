@@ -1,10 +1,10 @@
 extends Node3D
 
-@onready var skeleton_ik_3d: SkeletonIK3D = $CharacterBody3D/charecter/Armature/Skeleton3D/SkeletonIK3D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	skeleton_ik_3d.start()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

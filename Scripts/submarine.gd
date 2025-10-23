@@ -3,6 +3,13 @@ extends RigidBody3D
 @onready var seat_pos: Node3D = $"seat pos"
 @onready var control: Control = $Control
 @onready var node_3d: Node3D = $Node3D
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
+
+@onready var exit_ik_target: Node3D = $"diver/Cube_017/Exit IK target"
+@onready var park_ik_target: Node3D = $"diver/Cube_018/Park IK target"
+@onready var map_ik_target: Node3D = $"diver/Cube_001/Map IK target"
+@export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
 var parked:bool = true:
@@ -57,7 +64,7 @@ func _process(delta: float) -> void:
 		var look_margin:float = 0.02
 		if axis.x > look_margin or axis.x < -look_margin:
 			Input.warp_mouse(screen_center + axis * max_dist)
-			player.rotate_y(-axis.x * Settings.sens * 4)
+			player.head.rotate_y(-axis.x * Settings.sens * 4)
 		if axis.y > look_margin or axis.y < -look_margin:
 			Input.warp_mouse(screen_center + axis * max_dist)
 			
@@ -65,22 +72,26 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if driving:
-		
+		var player:Player = get_tree().get_first_node_in_group("player")
 		if Input.is_action_just_pressed("reset view"):
-			var player:Player = get_tree().get_first_node_in_group("player")
 			player.camera_3d.rotation = Vector3.ZERO
 			player.rotation_degrees = Vector3(0,0,0)
 			Input.warp_mouse(control.size / 2)
 		
 		if Input.is_action_just_pressed("park"):
 			parked = !parked
+			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(park_ik_target)
 		if Input.is_action_just_pressed("exit cockpit"):
-			var player:Player = get_tree().get_first_node_in_group("player")
-			driving = false
-			player.process_mode = Node.PROCESS_MODE_PAUSABLE
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			player.reparent(get_parent())
-			player.global_position = node_3d.global_position
+			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(exit_ik_target)
+			#driving = false
+			#
+			#player.process_mode = Node.PROCESS_MODE_PAUSABLE
+			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			#player.reparent(get_parent())
+			#player.global_position = node_3d.global_position
+		if Input.is_action_just_pressed("Open map"):
+			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(map_ik_target)
+		
 
 func _physics_process(delta: float) -> void:
 	if driving and not parked:
@@ -97,10 +108,41 @@ func _physics_process(delta: float) -> void:
 		var axis = Input.get_axis("left", "right")
 		apply_torque(Vector3(0, -axis * rotation_speed, 0))
 		apply_central_force(direction * current_speed)
+		
+		var control_stick_normal_dir:float = (input_dir - -1) / (1 - -1)
+		var control_look_normal_dir:float = (axis - -1) / (1 - -1)
+		animation_tree.set("parameters/blend_amount/blend_amount", control_stick_normal_dir)
+		animation_tree.set("parameters/Blend2 2/blend_amount", control_look_normal_dir)
+		
+		var up_down_fan_direction:float
+		if float_booster == 1:
+			up_down_fan_direction = -0.5
+		elif float_booster == -1:
+			up_down_fan_direction = 0.5
+		
+		if input_dir:
+			var tween = get_tree().create_tween()
+			tween.set_ease(Tween.EASE_IN)
+			if input_dir > 0:
+				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", up_down_fan_direction + 1.5, 0.5)
+			elif input_dir < 0:
+				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -(up_down_fan_direction + 0.5), 0.5)
+			print(animation_tree.get("parameters/fan blend/blend_amount"))
+		elif float_booster != 0:
+			var tween = get_tree().create_tween()
+			if float_booster == 1:
+				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", 0.5, 0.5)
+			elif float_booster == -1:
+				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -1.5, 0.5)
+	if not driving:
+		if shape_cast_3d.is_colliding():
+			apply_central_force(Vector3(0,2.5,0))
 
 func _on_interactable_interacted() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Player
 	driving = true
+	player.skeleton_ik_3d.start()
+	player.right_arm_ik.start()
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	player.reparent(self)

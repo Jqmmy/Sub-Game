@@ -13,7 +13,8 @@ var sens:float = 0.05
 @onready var light: SpotLight3D = $head/Camera3D/light
 @onready var radar: Radar = $Radar
 
-@onready var skeleton_3d: Skeleton3D = $charecter/Armature/Skeleton3D
+@onready var skeleton_ik_3d: SkeletonIK3D = $"charecter/Armature/Skeleton3D/left arm IK"
+@onready var right_arm_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/right arm IK"
 @onready var tube_r_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube r IK"
 @onready var tube_l_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube l IK"
 
@@ -30,7 +31,6 @@ func _process(_delta: float) -> void:
 	var look_margin:float = 0.1
 	if look_vector.x > look_margin or look_vector.x < -look_margin:
 		head.rotate_y(look_vector.x * sens)
-		skeleton_3d.set_bone_pose_rotation(skeleton_3d.find_bone("head.l"), head.quaternion)
 	if look_vector.y > look_margin or look_vector.y < -look_margin:
 		camera_3d.rotate_x(look_vector.y * sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
@@ -38,7 +38,6 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * Settings.sens)
-		skeleton_3d.set_bone_pose_rotation(skeleton_3d.find_bone("head.l"), head.quaternion + camera_3d.quaternion)
 		camera_3d.rotate_x(-event.relative.y * Settings.sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 	

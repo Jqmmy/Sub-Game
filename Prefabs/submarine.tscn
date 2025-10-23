@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene load_steps=31 format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
@@ -23,20 +23,264 @@ radius = 1.1176758
 height = 4.865494
 radius = 1.0625
 
+[sub_resource type="Animation" id="Animation_0vtxn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_011:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.365, 1.656, 1.618)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("diver/Cube_011/Cube_014:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("diver/Cube_013:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ctasq"]
+resource_name = "fan_backward"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_013:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fyv3g"]
+resource_name = "fan_forward"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_013:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ibfwu"]
+resource_name = "moving_backward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_011:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.36499998, 1.656, 1.4987863)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("diver/Cube_011/Cube_014:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.17453292, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dws13"]
+resource_name = "moving_forward"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_011:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.365, 1.656, 1.618)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("diver/Cube_011/Cube_014:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8lpy1"]
+resource_name = "turning_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_011/Cube_014:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, -0.2617994)]
+}
+
+[sub_resource type="Animation" id="Animation_bhf8s"]
+resource_name = "turning_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("diver/Cube_011/Cube_014:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, 0.2617994)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8lpy1"]
+_data = {
+&"RESET": SubResource("Animation_0vtxn"),
+&"fan_backward": SubResource("Animation_ctasq"),
+&"fan_forward": SubResource("Animation_fyv3g"),
+&"moving_backward": SubResource("Animation_ibfwu"),
+&"moving_forward": SubResource("Animation_dws13"),
+&"turning_left": SubResource("Animation_8lpy1"),
+&"turning_right": SubResource("Animation_bhf8s")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_dws13"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dws13"]
+animation = &"moving_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ibfwu"]
+animation = &"turning_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8lpy1"]
+animation = &"turning_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qgl18"]
+animation = &"fan_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2uwnt"]
+animation = &"fan_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0vtxn"]
+animation = &"moving_forward"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_bhf8s"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_0vtxn"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ibfwu"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_likqu"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8lpy1"]
+graph_offset = Vector2(-419.69727, 275.46283)
+nodes/output/position = Vector2(620, 120)
+nodes/blend_amount/node = SubResource("AnimationNodeBlend2_ibfwu")
+nodes/blend_amount/position = Vector2(-160, 0)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0vtxn")
+nodes/Animation/position = Vector2(-420, -40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_dws13")
+"nodes/Animation 2/position" = Vector2(-420, 120)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_dws13")
+nodes/Add2/position = Vector2(180, -40)
+"nodes/Blend2 2/node" = SubResource("AnimationNodeBlend2_bhf8s")
+"nodes/Blend2 2/position" = Vector2(-160, 260)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ibfwu")
+"nodes/Animation 3/position" = Vector2(-440, 280)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_8lpy1")
+"nodes/Animation 4/position" = Vector2(-440, 440)
+"nodes/fan blend/node" = SubResource("AnimationNodeBlend2_likqu")
+"nodes/fan blend/position" = Vector2(20, 420)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_2uwnt")
+"nodes/Animation 6/position" = Vector2(-260, 520)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_qgl18")
+"nodes/Animation 5/position" = Vector2(-240, 700)
+"nodes/add control and fan/node" = SubResource("AnimationNodeAdd2_0vtxn")
+"nodes/add control and fan/position" = Vector2(400, 100)
+node_connections = [&"output", 0, &"add control and fan", &"blend_amount", 0, &"Animation", &"blend_amount", 1, &"Animation 2", &"Add2", 0, &"blend_amount", &"Add2", 1, &"Blend2 2", &"Blend2 2", 0, &"Animation 3", &"Blend2 2", 1, &"Animation 4", &"fan blend", 0, &"Animation 5", &"fan blend", 1, &"Animation 6", &"add control and fan", 0, &"Add2", &"add control and fan", 1, &"fan blend"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dws13"]
+radius = 1.0
+
 [node name="Submarine" type="RigidBody3D"]
 collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_8qaoj")
+IK = NodePath("diver/Cube_017/Exit IK target")
 
 [node name="diver" parent="." instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
 
-[node name="Armature" parent="diver" index="38"]
-visible = false
+[node name="Cube_013" parent="diver" index="29"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 1.4765942, 2.0456882, -0.26878822)
 
-[node name="Cube_001" parent="diver" index="50"]
+[node name="Cube_011" parent="diver" index="36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365, 1.656, 1.618)
+
+[node name="Cube_014" parent="diver/Cube_011" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.98480755, -0.17364815, 0, 0.17364815, 0.98480755, 0, 0.00073444843, 0)
+
+[node name="IK target" type="Node3D" parent="diver/Cube_011/Cube_014" index="2"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0.043, 0.113, -0.078)
+
+[node name="Exit IK target" type="Node3D" parent="diver/Cube_017" index="0"]
+
+[node name="Park IK target" type="Node3D" parent="diver/Cube_018" index="0"]
+
+[node name="Cube_001" parent="diver" index="43"]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.3420201, 0, -0.3420201, 0.9396926, -0.2604758, 1.6942953, 1.811058)
+
+[node name="Map IK target" type="Node3D" parent="diver/Cube_001" index="0"]
+
+[node name="Armature" parent="diver" index="45"]
+visible = false
 
 [node name="Interactable" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4845965e-07, 2.0035195, 1.1950138)
@@ -103,12 +347,30 @@ script = ExtResource("4_dws13")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5208664)
 shape = SubResource("CylinderShape3D_8qaoj")
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7687713, 3.2787437)
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.370361, 2.9148784)
 omni_range = 2.807
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8lpy1")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_8lpy1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_amount/blend_amount = 0.85
+parameters/Add2/add_amount = 0.5
+"parameters/Blend2 2/blend_amount" = 0.0
+"parameters/fan blend/blend_amount" = 1.0
+"parameters/add control and fan/add_amount" = 0.5
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50729907, 4.506975)
+shape = SubResource("CylinderShape3D_dws13")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8189431, 2.6175067)
 
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
 

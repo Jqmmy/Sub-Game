@@ -9,6 +9,9 @@ extends RigidBody3D
 @onready var exit_ik_target: Node3D = $"diver/Cube_017/Exit IK target"
 @onready var park_ik_target: Node3D = $"diver/Cube_018/Park IK target"
 @onready var map_ik_target: Node3D = $"diver/Cube_001/Map IK target"
+@onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@export_node_path("SubViewport") var viewport:NodePath
 @export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
@@ -34,6 +37,12 @@ var up_accel = 1.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#var depth_mesh_material = StandardMaterial3D.new()
+	#var depth_viewport_texture = ViewportTexture.new()
+	#depth_viewport_texture.viewport_path = viewport
+	#depth_mesh_material.albedo_texture = depth_viewport_texture
+	#depth_mesh_material.resource_local_to_scene = true
+	#mesh_instance_3d.mesh.surface_set_material(0, depth_mesh_material)
 	if parked:
 		gravity_scale = 0
 	else:
@@ -83,17 +92,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(park_ik_target)
 		if Input.is_action_just_pressed("exit cockpit"):
 			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(exit_ik_target)
-			#driving = false
-			#
-			#player.process_mode = Node.PROCESS_MODE_PAUSABLE
-			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			#player.reparent(get_parent())
-			#player.global_position = node_3d.global_position
+			driving = false
+			
+			player.process_mode = Node.PROCESS_MODE_PAUSABLE
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			player.reparent(get_parent())
+			player.global_position = node_3d.global_position
 		if Input.is_action_just_pressed("Open map"):
 			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(map_ik_target)
 		
 
 func _physics_process(delta: float) -> void:
+	
+	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
+	print(global_position.y, " ", ship_depth_ui.panel_container_2.custom_minimum_size.y)
+	
 	if driving and not parked:
 		var float_booster:float
 		if Input.is_action_pressed("up"):

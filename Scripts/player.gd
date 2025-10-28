@@ -6,22 +6,24 @@ const WATER_SPEED = 1.25
 const NORMAL_SPEED = 4
 const WATER_BOOST = 5
 const JUMP_VELOCITY = 4.5
+var radar_is_up:bool = false
+
 
 var sens:float = 0.05
 @export var camera_3d:Camera3D
 @export var head:Node3D
+@export var skeleton:Skeleton3D
 @onready var light: SpotLight3D = $head/Camera3D/light
 @onready var radar: Radar = $Radar
 
-@onready var skeleton_ik_3d: SkeletonIK3D = $"charecter/Armature/Skeleton3D/left arm IK"
-@onready var right_arm_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/right arm IK"
-@onready var tube_r_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube r IK"
-@onready var tube_l_ik: SkeletonIK3D = $"charecter/Armature/Skeleton3D/tube l IK"
+@export var skeleton_ik_3d: SkeletonIK3D
+@export var right_arm_ik: SkeletonIK3D 
+@onready var charecter: Node3D = $charecter
+@onready var animation_tree: AnimationTree = $charecter/AnimationTree
+@onready var radar_target_dist_label: Label = $"Radar/wrist UI/VBoxContainer/HBoxContainer/radar target dist"
 
 
 func _ready() -> void:
-	tube_l_ik.start()
-	tube_r_ik.start()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(_delta: float) -> void:
@@ -30,10 +32,23 @@ func _process(_delta: float) -> void:
 	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
 	var look_margin:float = 0.1
 	if look_vector.x > look_margin or look_vector.x < -look_margin:
-		head.rotate_y(look_vector.x * sens)
+		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
+			head.rotate_y(look_vector.x * sens)
+		else:
+			rotate_y(look_vector.x * sens)
+	else:
+		if head.rotation.y > 0.5:
+			head.rotation.y = 0.49
+		elif head.rotation.y < -0.5:
+			head.rotation.y = -0.49
+		
 	if look_vector.y > look_margin or look_vector.y < -look_margin:
 		camera_3d.rotate_x(look_vector.y * sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+		
+	if radar_is_up:
+		var distance_to_gem = global_position.distance_squared_to(radar.scan_closest_object(global_position))
+		radar_target_dist_label.text = str(int(distance_to_gem))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -46,6 +61,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			light.light_energy = 1
 		else:
 			light.light_energy = 0
+	if Input.is_action_just_pressed("radar"):
+		radar_is_up = true
+		if animation_tree.get("parameters/Transition/current_state") == "state_1":
+			animation_tree.set("parameters/Transition/transition_request", "state_0")
+		else:
+			animation_tree.set("parameters/Transition/transition_request", "state_1")
 	
 
 func _physics_process(delta: float) -> void:
@@ -63,7 +84,7 @@ func _physics_process(delta: float) -> void:
 				print("less than ten")
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
-		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction = (head.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
 		if direction:
 			velocity.x = direction.x * current_speed
@@ -91,7 +112,7 @@ func _physics_process(delta: float) -> void:
 		elif !Input.is_action_pressed("up"):
 			float_booster = 0
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
-		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction = (head.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		var camera_direction = (camera_3d.transform.basis * Vector3(input_dir.x, float_booster, input_dir.y)).normalized()
 		if direction or camera_direction:
 			velocity.x = direction.x * current_speed

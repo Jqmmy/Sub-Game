@@ -26,7 +26,7 @@ size = Vector3(500, 0, 500)
 size = Vector2(500, 500)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kry3j"]
-viewport_path = NodePath("CharacterBody3D/Radar/wrist UI")
+viewport_path = NodePath("Submarine/seat pos/CharacterBody3D/Radar/wrist UI")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
 resource_local_to_scene = true
@@ -292,13 +292,16 @@ shape = SubResource("BoxShape3D_21xkr")
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3297574, 3.1911795, -0.32431728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -3.2594283)
 
 [node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_21xkr")
 
 [node name="left arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="6"]
 target_node = NodePath("../../../../../Submarine/diver/Cube_011/Cube_014/IK target")
+
+[node name="right arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="7"]
+target_node = NodePath("../../../../../Submarine/button IK target")
 
 [node name="gems" type="Node3D" parent="."]
 transform = Transform3D(1, 0, -2.1316282e-14, 0, 1, 5.9604645e-08, 0, 0, 1, -0.093147546, 0.9999995, -17.612751)
@@ -342,19 +345,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.28
 material_override = SubResource("ShaderMaterial_21xkr")
 
 [node name="Cube_014" parent="Submarine/diver/Cube_011" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.98480684, -0.17364791, 0, 0.17364803, 0.9848062, 0, 0.00073444843, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9848068, -0.1736479, 0, 0.17364801, 0.9848061, 0, 0.00073444843, 0)
 
 [node name="IK target" parent="Submarine/diver/Cube_011/Cube_014" index="2"]
 transform = Transform3D(0.012844465, -0.10725807, 0.99414784, 0.99603045, 0.08899618, -0.0032670218, -0.08812497, 0.99024403, 0.107974686, 0.04958123, 0.10633516, -0.06226611)
-
-[node name="Exit IK target" parent="Submarine/diver/Cube_017" index="0"]
-transform = Transform3D(-0.5893797, -0.8065412, -0.046079054, 0.79018295, -0.58741283, 0.17480755, -0.16805673, 0.06661776, 0.9835234, 0.13878727, 9.482727, -1.1175098)
-
-[node name="Park IK target" parent="Submarine/diver/Cube_018" index="0"]
-transform = Transform3D(-0.97679234, -0.1179623, -0.178777, -0.098925285, -0.491852, 0.86504126, -0.18997398, 0.8626517, 0.46876806, -0.027904704, 0.12491989, -0.16334248)
-
-[node name="Map IK target" parent="Submarine/diver/Cube_001" index="0"]
-transform = Transform3D(-0.83394766, 0.48314574, 0.26664853, 0.09693785, -0.3474271, 0.9326843, 0.5432629, 0.8036579, 0.24290115, -0.13885228, 0.10910535, -0.12780094)
 
 [node name="ColorRect" parent="Submarine/Control" index="0"]
 offset_left = -7.5
@@ -362,7 +356,10 @@ offset_top = -7.5
 offset_right = 7.5
 offset_bottom = 7.5
 
-[node name="MeshInstance3D" parent="Submarine" index="14"]
+[node name="button IK target" parent="Submarine" index="12"]
+transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)
+
+[node name="MeshInstance3D" parent="Submarine" index="17"]
 surface_material_override/0 = SubResource("StandardMaterial3D_344ge")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
@@ -413,6 +410,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250.62766, 0)
 shape = SubResource("BoxShape3D_kry3j")
 
 [editable path="CharacterBody3D"]
+[editable path="CharacterBody3D/head/Camera3D/face mask"]
 [editable path="CharacterBody3D/charecter"]
 [editable path="Submarine"]
 [editable path="Submarine/diver"]

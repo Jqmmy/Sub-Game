@@ -31,15 +31,17 @@ func _process(_delta: float) -> void:
 		get_tree().root.grab_focus()
 	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
 	var look_margin:float = 0.1
+	print(head.rotation.y)
 	if look_vector.x > look_margin or look_vector.x < -look_margin:
 		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
 			head.rotate_y(look_vector.x * sens)
 		else:
 			rotate_y(look_vector.x * sens)
+			head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
 	else:
-		if head.rotation.y > 0.5:
+		if head.rotation.y >= 0.5:
 			head.rotation.y = 0.49
-		elif head.rotation.y < -0.5:
+		elif head.rotation.y <= -0.5:
 			head.rotation.y = -0.49
 		
 	if look_vector.y > look_margin or look_vector.y < -look_margin:
@@ -48,7 +50,10 @@ func _process(_delta: float) -> void:
 		
 	if radar_is_up:
 		var distance_to_gem = global_position.distance_squared_to(radar.scan_closest_object(global_position))
-		radar_target_dist_label.text = str(int(distance_to_gem))
+		if distance_to_gem > 1000:
+			radar_target_dist_label.text = "ERROR"
+		else:
+			radar_target_dist_label.text = str(int(distance_to_gem)) + "M"
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -62,9 +67,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			light.light_energy = 0
 	if Input.is_action_just_pressed("radar"):
-		radar_is_up = true
 		if animation_tree.get("parameters/Transition/current_state") == "state_1":
-			animation_tree.set("parameters/Transition/transition_request", "state_0")
+			animation_tree.set("parameters/Transition/transition_request", "state_2")
 		else:
 			animation_tree.set("parameters/Transition/transition_request", "state_1")
 	
@@ -78,10 +82,6 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-			if radar.scan_closest_object(global_position).distance_squared_to(global_position) > 10:
-				print("more than ten", radar.scan_closest_object(global_position).distance_squared_to(global_position), radar.closest_object)
-			else:
-				print("less than ten")
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
 		var direction = (head.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

@@ -6,9 +6,6 @@ extends RigidBody3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 
-@onready var exit_ik_target: Node3D = $"diver/Cube_017/Exit IK target"
-@onready var park_ik_target: Node3D = $"diver/Cube_018/Park IK target"
-@onready var map_ik_target: Node3D = $"diver/Cube_001/Map IK target"
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @export_node_path("SubViewport") var viewport:NodePath
@@ -89,9 +86,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if Input.is_action_just_pressed("park"):
 			parked = !parked
-			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(park_ik_target)
+			
 		if Input.is_action_just_pressed("exit cockpit"):
-			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(exit_ik_target)
+			
 			driving = false
 			
 			player.process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -99,13 +96,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.reparent(get_parent())
 			player.global_position = node_3d.global_position
 		if Input.is_action_just_pressed("Open map"):
-			player.right_arm_ik.target_node = player.right_arm_ik.get_path_to(map_ik_target)
+			pass
 		
 
 func _physics_process(delta: float) -> void:
-	
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
-	print(global_position.y, " ", ship_depth_ui.panel_container_2.custom_minimum_size.y)
 	
 	if driving and not parked:
 		var float_booster:float
@@ -140,7 +135,6 @@ func _physics_process(delta: float) -> void:
 				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", up_down_fan_direction + 1.5, 0.5)
 			elif input_dir < 0:
 				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -(up_down_fan_direction + 0.5), 0.5)
-			print(animation_tree.get("parameters/fan blend/blend_amount"))
 		elif float_booster != 0:
 			var tween = get_tree().create_tween()
 			if float_booster == 1:
@@ -159,4 +153,6 @@ func _on_interactable_interacted() -> void:
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	player.reparent(self)
-	player.global_position = seat_pos.global_position
+	player.global_transform = seat_pos.global_transform
+	player.animation_tree.set("parameters/Transition/transition_request", "state_0")
+	

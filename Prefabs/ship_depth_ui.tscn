@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://5xnlpfobcd64"]
 
-[ext_resource type="Script" uid="uid://4t4q54k0pct6" path="res://Prefabs/ship_depth_ui.gd" id="1_n8sj5"]
+[ext_resource type="Script" uid="uid://4t4q54k0pct6" path="res://Scripts/ship_depth_ui.gd" id="1_n8sj5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ehsr"]
 bg_color = Color(2.5027991e-06, 0.35911858, 0.62764484, 1)

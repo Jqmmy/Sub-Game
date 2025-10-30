@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene load_steps=36 format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
@@ -220,7 +220,7 @@ animation = &"moving_forward"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_likqu"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8lpy1"]
-graph_offset = Vector2(-419.69727, 275.46283)
+graph_offset = Vector2(-564.51447, -8.130981)
 nodes/output/position = Vector2(620, 120)
 nodes/blend_amount/node = SubResource("AnimationNodeBlend2_ibfwu")
 nodes/blend_amount/position = Vector2(-160, 0)
@@ -246,6 +246,9 @@ nodes/Add2/position = Vector2(180, -40)
 "nodes/add control and fan/position" = Vector2(400, 100)
 node_connections = [&"output", 0, &"add control and fan", &"blend_amount", 0, &"Animation", &"blend_amount", 1, &"Animation 2", &"Add2", 0, &"blend_amount", &"Add2", 1, &"Blend2 2", &"Blend2 2", 0, &"Animation 3", &"Blend2 2", 1, &"Animation 4", &"fan blend", 0, &"Animation 5", &"fan blend", 1, &"Animation 6", &"add control and fan", 0, &"Add2", &"add control and fan", 1, &"fan blend"]
 
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0vtxn"]
+graph_offset = Vector2(-210.21948, 136.64183)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dws13"]
 radius = 1.0
 
@@ -264,7 +267,6 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_8qaoj")
 viewport = NodePath("SubViewport")
-IK = NodePath("diver/Cube_017/Exit IK target")
 
 [node name="diver" parent="." instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
@@ -276,19 +278,13 @@ transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 1.4765942, 2.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365, 1.656, 1.618)
 
 [node name="Cube_014" parent="diver/Cube_011" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.98480743, -0.17364809, 0, 0.17364813, 0.98480725, 0, 0.00073444843, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9848074, -0.17364807, 0, 0.17364812, 0.98480713, 0, 0.00073444843, 0)
 
 [node name="IK target" type="Node3D" parent="diver/Cube_011/Cube_014" index="2"]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0.043, 0.113, -0.078)
 
-[node name="Exit IK target" type="Node3D" parent="diver/Cube_017" index="0"]
-
-[node name="Park IK target" type="Node3D" parent="diver/Cube_018" index="0"]
-
 [node name="Cube_001" parent="diver" index="43"]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.3420201, 0, -0.3420201, 0.9396926, -0.2604758, 1.6942953, 1.811058)
-
-[node name="Map IK target" type="Node3D" parent="diver/Cube_001" index="0"]
 
 [node name="Armature" parent="diver" index="45"]
 visible = false
@@ -303,7 +299,7 @@ metadata/_custom_type_script = "uid://xo27f5p84mpt"
 shape = SubResource("BoxShape3D_ibfwu")
 
 [node name="seat pos" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.61289287, 0.021933794)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61289287, 0.021933794)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 1.16279836e-07, 1.9628918, 1.8115007)
@@ -375,6 +371,15 @@ parameters/Add2/add_amount = 0.5
 "parameters/Blend2 2/blend_amount" = 0.0
 "parameters/fan blend/blend_amount" = 1.0
 "parameters/add control and fan/add_amount" = 0.5
+
+[node name="button IK target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.087155804, 0.9961947, 0, -0.9961947, 0.087155804, 0.376, 1.739, -0.301)
+
+[node name="button animation player" type="AnimationPlayer" parent="."]
+
+[node name="button animationtree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_0vtxn")
+anim_player = NodePath("../button animation player")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50729907, 4.506975)

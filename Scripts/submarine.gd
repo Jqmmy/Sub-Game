@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@onready var seat_pos: Node3D = $"seat pos"
+@export var seat_pos:Node3D
 @onready var control: Control = $Control
 @onready var node_3d: Node3D = $Node3D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -8,11 +8,15 @@ extends RigidBody3D
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var ship_animation_tree: AnimationTree = $diver/AnimationTree
 @export_node_path("SubViewport") var viewport:NodePath
 @export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
+var doors_open:bool = false
+var exiting:bool = false
 var parked:bool = true:
+	
 	set(value):
 		parked = value
 		if parked:
@@ -44,7 +48,7 @@ func _ready() -> void:
 		gravity_scale = 0
 	else:
 		gravity_scale = 1
-
+	ship_animation_tree.animation_finished.connect(seat_animation_finished)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -75,6 +79,8 @@ func _process(delta: float) -> void:
 			Input.warp_mouse(screen_center + axis * max_dist)
 			
 			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
+		
+		#set up rotation clamps here at some point
 
 func _unhandled_input(event: InputEvent) -> void:
 	if driving:
@@ -83,18 +89,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.camera_3d.rotation = Vector3.ZERO
 			player.rotation_degrees = Vector3(0,0,0)
 			Input.warp_mouse(control.size / 2)
-		
+	
 		if Input.is_action_just_pressed("park"):
 			parked = !parked
-			
+	
 		if Input.is_action_just_pressed("exit cockpit"):
-			
+			ship_animation_tree["parameters/Transition 2/transition_request"] = "b"
 			driving = false
-			
-			player.process_mode = Node.PROCESS_MODE_PAUSABLE
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			player.reparent(get_parent())
-			player.global_position = node_3d.global_position
+			exiting = true
+			#ship_animation_tree.animation_finished.connect(
+				#func(anim_name):
+				#if anim_name == "get in seat" and driving:
+					#print("yes")
+					#driving = false
+					#player.process_mode = Node.PROCESS_MODE_PAUSABLE
+					#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+					#player.reparent(get_parent())
+					#player.global_position = node_3d.global_position)
+	
 		if Input.is_action_just_pressed("Open map"):
 			pass
 		
@@ -147,12 +159,49 @@ func _physics_process(delta: float) -> void:
 
 func _on_interactable_interacted() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Player
-	driving = true
-	player.skeleton_ik_3d.start()
-	player.right_arm_ik.start()
+	var tween = get_tree().create_tween()
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	player.reparent(self)
-	player.global_transform = seat_pos.global_transform
-	player.animation_tree.set("parameters/Transition/transition_request", "state_0")
+	player.reparent(seat_pos)
 	
+	tween.tween_property(player, "global_transform", seat_pos.global_transform, 1.25)
+	tween.finished.connect(func(): ship_animation_tree["parameters/Transition 2/transition_request"] = "f")
+	exiting = false
+	#ship_animation_tree.animation_finished.connect(
+		#func(anim_name:String):
+			#if anim_name == "get in seat" and !driving:
+				#print("yep")
+				#driving = true
+				#player.skeleton_ik_3d.start()
+				#player.right_arm_ik.start()
+				#player.animation_tree.set("parameters/Transition/transition_request", "state_0"))
+
+func seat_animation_finished(anim_name:String):
+	var player = get_tree().get_first_node_in_group("player") as Player
+	if anim_name == "get in seat":
+		if exiting:
+			player.process_mode = Node.PROCESS_MODE_PAUSABLE
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			player.reparent(get_parent())
+			player.global_position = node_3d.global_position
+		else:
+			driving = true
+			player.skeleton_ik_3d.start()
+			player.right_arm_ik.start()
+			player.animation_tree.set("parameters/Transition/transition_request", "state_0")
+
+
+func _on_button_interacted() -> void:
+	doors_open = !doors_open
+	ship_animation_tree["parameters/OneShot/request"] = 1
+	ship_animation_tree.animation_finished.connect(func(anim_name):
+		if anim_name == "push door button":
+			if doors_open:
+				ship_animation_tree["parameters/Transition/transition_request"] = "close"
+			else:
+				ship_animation_tree["parameters/Transition/transition_request"] = "open")
+
+
+func _on_entrance_area_body_entered(body: Node3D) -> void:
+	ship_animation_tree["parameters/hatch/transition_request"] = "open"
+	ship_animation_tree["parameters/Transition/transition_request"] = "close"

@@ -26,6 +26,7 @@ window/size/initial_position_type=3
 
 player=""
 scanable=""
+hud=""
 
 [input]
 

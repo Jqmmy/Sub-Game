@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://dnu0i17s3hiy1" path="res://Assets/blend files/charecter.blend" id="2_5wxv7"]
+[ext_resource type="PackedScene" uid="uid://c2dqhqkbj57sy" path="res://Prefabs/game_hud.tscn" id="2_knrd4"]
 [ext_resource type="Script" uid="uid://k7ikraa4f2gd" path="res://Scripts/Radar.gd" id="3_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://bvnwhjvlfis5t" path="res://Assets/blend files/face mask.blend" id="4_2nftw"]
 
@@ -29,12 +30,12 @@ stencil_flags = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y5hcb"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_y5hcb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_knrd4"]
 viewport_path = NodePath("Radar/wrist UI")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nftw"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_y5hcb")
+albedo_texture = SubResource("ViewportTexture_knrd4")
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_2nftw"]
 
@@ -96,9 +97,6 @@ nodes/Add2/position = Vector2(-140, -140)
 "nodes/Animation 6/position" = Vector2(-380, -40)
 node_connections = [&"output", 0, &"Transition", &"head turn", 0, &"Animation", &"head turn", 1, &"Animation 2", &"Transition", 0, &"Add2", &"Transition", 1, &"Animation 5", &"Transition", 2, &"Animation 3", &"Add2", 0, &"Animation 4", &"Add2", 1, &"Animation 6"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_2nftw"]
-size = Vector3(0.21, 0.185, 1)
-
 [node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d", "head", "skeleton", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
 collision_layer = 4
 collision_mask = 9
@@ -108,6 +106,8 @@ head = NodePath("head")
 skeleton = NodePath("charecter/Armature/Skeleton3D")
 skeleton_ik_3d = NodePath("charecter/Armature/Skeleton3D/left arm IK")
 right_arm_ik = NodePath("charecter/Armature/Skeleton3D/right arm IK")
+
+[node name="game hud" parent="." instance=ExtResource("2_knrd4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87538993, 0)
@@ -130,9 +130,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.881784e-16, -0.018743634, 
 [node name="Circle_002" parent="head/Camera3D/face mask" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_juxdh")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
 
 [node name="Radar" type="Node" parent="."]
 script = ExtResource("3_y5hcb")
@@ -271,10 +271,6 @@ parameters/Transition/current_state = "state_0"
 parameters/Transition/transition_request = ""
 parameters/Transition/current_index = 0
 parameters/Add2/add_amount = 0.5
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6990491, -0.7729682)
-mesh = SubResource("BoxMesh_2nftw")
 
 [editable path="head/Camera3D/face mask"]
 [editable path="charecter"]

@@ -26,7 +26,7 @@ size = Vector3(500, 0, 500)
 size = Vector2(500, 500)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kry3j"]
-viewport_path = NodePath("Submarine/seat pos/CharacterBody3D/Radar/wrist UI")
+viewport_path = NodePath("CharacterBody3D/Radar/wrist UI")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
 resource_local_to_scene = true
@@ -292,13 +292,10 @@ shape = SubResource("BoxShape3D_21xkr")
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -3.2594283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -0.32532716)
 
 [node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_21xkr")
-
-[node name="left arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="6"]
-target_node = NodePath("../../../../../Submarine/diver/Cube_011/Cube_014/IK target")
 
 [node name="right arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="7"]
 target_node = NodePath("../../../../../Submarine/button IK target")
@@ -344,11 +341,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.28
 [node name="glass" parent="Submarine/diver" index="3"]
 material_override = SubResource("ShaderMaterial_21xkr")
 
-[node name="Cube_014" parent="Submarine/diver/Cube_011" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.9848068, -0.1736479, 0, 0.17364801, 0.9848061, 0, 0.00073444843, 0)
+[node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
+bones/10/rotation = Quaternion(0.56098527, 0.43045926, -0.43045962, 0.56098557)
+bones/14/rotation = Quaternion(-0.43045917, -0.56098527, 0.5609857, -0.43045962)
+bones/16/rotation = Quaternion(-0.27059764, -0.6532814, 0.6532817, -0.2705983)
+bones/18/rotation = Quaternion(-0.09229546, -0.70105726, 0.70105755, -0.09229641)
+bones/20/rotation = Quaternion(-0.09229649, 0.7010575, -0.7010573, -0.092295356)
+bones/22/rotation = Quaternion(-0.2705985, 0.6532818, -0.6532813, -0.27059737)
+bones/26/rotation = Quaternion(0.56098604, -0.43046007, 0.43045878, 0.56098485)
+bones/30/rotation = Quaternion(0.7010575, -0.09229708, 0.09229497, 0.70105726)
+bones/32/rotation = Quaternion(0.70105726, 0.09229505, -0.092297, 0.7010575)
 
-[node name="IK target" parent="Submarine/diver/Cube_011/Cube_014" index="2"]
-transform = Transform3D(0.012844465, -0.10725807, 0.99414784, 0.99603045, 0.08899618, -0.0032670218, -0.08812497, 0.99024403, 0.107974686, 0.04958123, 0.10633516, -0.06226611)
+[node name="entrance_004 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="6"]
+transform = Transform3D(0.99999994, -3.6109938e-08, 4.4703377e-08, 6.872379e-08, 0.9999999, -8.19453e-08, -1.0430827e-07, 9.4837844e-08, 0.9999999, -2.0861626e-07, 0.65902704, -3.7078936)
+
+[node name="entrance_003 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="8"]
+transform = Transform3D(1, 1.2761961e-07, -4.4703377e-08, 7.3590343e-09, 1, -8.803829e-08, -5.960447e-08, 8.671367e-08, 1.0000001, -8.940697e-08, 0.65902716, -3.7078938)
+
+[node name="entrance_002 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="9"]
+transform = Transform3D(0.99999994, 1.5748356e-07, -2.0861573e-07, -1.17968455e-07, 1, -5.836432e-08, 8.940766e-08, 8.471659e-09, 1, -2.9802322e-07, 0.6590269, -3.7078931)
+
+[node name="entrance_001 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="10"]
+transform = Transform3D(1.0000001, 6.992241e-08, 4.5297097e-13, -6.4223855e-08, 1, 2.3134024e-07, -4.4702766e-08, -5.4907616e-08, 1.0000001, -0.09999986, 0.65902704, -3.3346884)
+
+[node name="entrance -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="11"]
+transform = Transform3D(1.0000001, -6.719881e-08, 4.4702745e-08, 9.3667495e-08, 1, 5.6456543e-08, 7.45051e-08, 7.959679e-08, 1.0000001, 0.09999992, 0.65902704, -3.3346884)
+
+[node name="entrance_011 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="12"]
+transform = Transform3D(1, 7.2313014e-08, 2.9800617e-08, -7.158542e-08, 1, 8.1812914e-08, 2.9800681e-08, -3.739649e-08, 1, 1.1920929e-07, 0.659027, -3.7078934)
+
+[node name="entrance_009 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="14"]
+transform = Transform3D(1.0000001, -3.2164877e-07, -7.4504975e-08, 3.6088105e-07, 1.0000001, -3.3610104e-07, -4.4701842e-08, 3.1766194e-07, 1.0000001, -8.940697e-08, 0.6590269, -3.7078934)
+
+[node name="entrance_007 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="16"]
+transform = Transform3D(1.0000001, 7.940246e-07, 2.9802564e-07, -7.7764116e-07, 1, 1.1683949e-07, 4.4703637e-07, -9.740262e-08, 0.99999994, 5.2154064e-08, 0.6590271, -3.7078938)
+
+[node name="entrance_006 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="17"]
+transform = Transform3D(1.0000001, 3.8286657e-07, -3.576301e-07, -3.6699157e-07, 1, -1.1325966e-07, -3.5762952e-07, 8.996625e-08, 0.99999994, -9.685755e-08, 0.65902704, -3.7078938)
+
+[node name="AnimationTree" parent="Submarine/diver" index="25"]
+parameters/hatch/current_state = ""
+parameters/hatch/current_index = -1
+"parameters/Add2 2/add_amount" = 0.0
 
 [node name="ColorRect" parent="Submarine/Control" index="0"]
 offset_left = -7.5

@@ -8,6 +8,8 @@ const WATER_BOOST = 5
 const JUMP_VELOCITY = 4.5
 var radar_is_up:bool = false
 
+var ray_cast_is_hovering:bool = false
+var last_raycast_hover_target:Interactable
 
 var sens:float = 0.05
 @export var camera_3d:Camera3D
@@ -21,6 +23,7 @@ var sens:float = 0.05
 @onready var charecter: Node3D = $charecter
 @onready var animation_tree: AnimationTree = $charecter/AnimationTree
 @onready var radar_target_dist_label: Label = $"Radar/wrist UI/VBoxContainer/HBoxContainer/radar target dist"
+@onready var ray_cast_3d: RayCast3D = $head/Camera3D/RayCast3D
 
 
 func _ready() -> void:
@@ -31,7 +34,6 @@ func _process(_delta: float) -> void:
 		get_tree().root.grab_focus()
 	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
 	var look_margin:float = 0.1
-	print(head.rotation.y)
 	if look_vector.x > look_margin or look_vector.x < -look_margin:
 		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
 			head.rotate_y(look_vector.x * sens)
@@ -54,6 +56,24 @@ func _process(_delta: float) -> void:
 			radar_target_dist_label.text = "ERROR"
 		else:
 			radar_target_dist_label.text = str(int(distance_to_gem)) + "M"
+	
+	#hovering logic
+	var collider = ray_cast_3d.get_collider()
+	if ray_cast_3d.is_colliding():
+		
+		
+		if  collider is Interactable:
+			if not ray_cast_is_hovering:
+				ray_cast_is_hovering = true
+				collider.hovering = true
+				last_raycast_hover_target = collider
+		elif ray_cast_is_hovering:
+			ray_cast_is_hovering = false
+			collider.hovering = false
+	elif ray_cast_is_hovering:
+		ray_cast_is_hovering = false
+		last_raycast_hover_target.hovering = false
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

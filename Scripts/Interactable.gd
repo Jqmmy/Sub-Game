@@ -1,19 +1,18 @@
 class_name Interactable
 extends Area3D
 
-var hovering:bool = false
+var hovering:bool = false:
+	set = set_hovering
+@export_multiline var hover_text:String
 
 signal interacted
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mouse_entered.connect(on_mouse_entered)
-	mouse_exited.connect(on_mouse_exited)
 	body_entered.connect(func(body):
-		print(body)
 		if body.is_in_group("player"):
 			interacted.emit()
-			print("kdifgb"))
+			)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,9 +20,12 @@ func _process(delta: float) -> void:
 	if hovering:
 		if Input.is_action_just_pressed("interact"):
 			interacted.emit()
+		
 
-func on_mouse_entered():
-	hovering = true
-
-func on_mouse_exited():
-	hovering = false
+func set_hovering(value:bool):
+	hovering = value
+	var hud = get_tree().get_first_node_in_group("hud") as Hud
+	if hovering == true:
+		hud.add_hover_text(hover_text, InputMap.get_action_description("interact"))
+	else:
+		hud.add_hover_text("")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=39 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
@@ -248,6 +248,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4yf0q")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kry3j"]
+render_priority = 0
+shader = ExtResource("4_21xkr")
+shader_parameter/Refraction_Strength = 0.05
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Emission_Power = 1.0
+shader_parameter/Specular_Power = 1.0
+shader_parameter/Roughness_Power = 0.1
+shader_parameter/Rim_Power = 0.1
+shader_parameter/Blur = 0.0
+shader_parameter/Taint = Color(1, 1, 1, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_21xkr"]
 render_priority = 0
 shader = ExtResource("4_21xkr")
@@ -338,51 +350,34 @@ skeleton = NodePath("")
 [node name="Submarine" parent="." instance=ExtResource("5_kry3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.281362)
 
+[node name="floor glass" parent="Submarine/diver" index="2"]
+surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
+
 [node name="glass" parent="Submarine/diver" index="3"]
 material_override = SubResource("ShaderMaterial_21xkr")
 
 [node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
-bones/10/rotation = Quaternion(0.56098527, 0.43045926, -0.43045962, 0.56098557)
-bones/14/rotation = Quaternion(-0.43045917, -0.56098527, 0.5609857, -0.43045962)
-bones/16/rotation = Quaternion(-0.27059764, -0.6532814, 0.6532817, -0.2705983)
-bones/18/rotation = Quaternion(-0.09229546, -0.70105726, 0.70105755, -0.09229641)
-bones/20/rotation = Quaternion(-0.09229649, 0.7010575, -0.7010573, -0.092295356)
-bones/22/rotation = Quaternion(-0.2705985, 0.6532818, -0.6532813, -0.27059737)
-bones/26/rotation = Quaternion(0.56098604, -0.43046007, 0.43045878, 0.56098485)
-bones/30/rotation = Quaternion(0.7010575, -0.09229708, 0.09229497, 0.70105726)
-bones/32/rotation = Quaternion(0.70105726, 0.09229505, -0.092297, 0.7010575)
+bones/1/rotation = Quaternion(0.48217827, 0.22976136, -0.76653475, -0.35656485)
+bones/2/rotation = Quaternion(0.00018478351, 0.00010385103, 0.4190717, 0.9079532)
+bones/3/rotation = Quaternion(-0.0014791602, 6.861414e-05, 0.6644039, 0.7473722)
 
-[node name="entrance_004 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="6"]
-transform = Transform3D(0.99999994, -3.6109938e-08, 4.4703377e-08, 6.872379e-08, 0.9999999, -8.19453e-08, -1.0430827e-07, 9.4837844e-08, 0.9999999, -2.0861626e-07, 0.65902704, -3.7078936)
+[node name="chair" parent="Submarine/diver/armature for sub/Skeleton3D" index="0"]
+transform = Transform3D(0.36520374, 0.032267977, 0.17354645, 0.0031384742, 0.66125005, -0.05192284, -0.17462048, 0.079370275, 0.3620244, -0.033092618, 1.6087185, -0.023945153)
 
-[node name="entrance_003 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="8"]
-transform = Transform3D(1, 1.2761961e-07, -4.4703377e-08, 7.3590343e-09, 1, -8.803829e-08, -5.960447e-08, 8.671367e-08, 1.0000001, -8.940697e-08, 0.65902716, -3.7078938)
+[node name="chair pedal base" parent="Submarine/diver/armature for sub/Skeleton3D" index="1"]
+transform = Transform3D(0.90214735, 0.048393913, 0.42870444, 0.007752785, 0.9917095, -0.1282627, -0.43135756, 0.11903553, 0.89429355, 0.26543978, 0.8177037, 0.1474157)
 
-[node name="entrance_002 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="9"]
-transform = Transform3D(0.99999994, 1.5748356e-07, -2.0861573e-07, -1.17968455e-07, 1, -5.836432e-08, 8.940766e-08, 8.471659e-09, 1, -2.9802322e-07, 0.6590269, -3.7078931)
+[node name="entrance_012 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="2"]
+transform = Transform3D(-0.0038181078, 0.07117616, 0.033823233, -0.07824229, 0.00061166147, -0.010119467, -0.009391473, -0.034032553, 0.07055653, 0.36922982, 0.79334724, 0.36404604)
 
-[node name="entrance_001 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="10"]
-transform = Transform3D(1.0000001, 6.992241e-08, 4.5297097e-13, -6.4223855e-08, 1, 2.3134024e-07, -4.4702766e-08, -5.4907616e-08, 1.0000001, -0.09999986, 0.65902704, -3.3346884)
+[node name="entrance_013 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="3"]
+transform = Transform3D(-0.0038181078, 0.07117616, 0.033823233, -0.07824229, 0.00061166147, -0.010119467, -0.009391473, -0.034032553, 0.07055653, 0.027730852, 0.79041266, 0.52733237)
 
-[node name="entrance -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="11"]
-transform = Transform3D(1.0000001, -6.719881e-08, 4.4702745e-08, 9.3667495e-08, 1, 5.6456543e-08, 7.45051e-08, 7.959679e-08, 1.0000001, 0.09999992, 0.65902704, -3.3346884)
+[node name="chair arm" parent="Submarine/diver/armature for sub/Skeleton3D" index="4"]
+transform = Transform3D(0.112251624, 0.020458208, 0.040218547, 0.0009933495, 0.052675717, -0.08407136, -0.05372562, 0.0437183, 0.082476206, -0.28904554, 2.221117, -0.54819244)
 
-[node name="entrance_011 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="12"]
-transform = Transform3D(1, 7.2313014e-08, 2.9800617e-08, -7.158542e-08, 1, 8.1812914e-08, 2.9800681e-08, -3.739649e-08, 1, 1.1920929e-07, 0.659027, -3.7078934)
-
-[node name="entrance_009 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="14"]
-transform = Transform3D(1.0000001, -3.2164877e-07, -7.4504975e-08, 3.6088105e-07, 1.0000001, -3.3610104e-07, -4.4701842e-08, 3.1766194e-07, 1.0000001, -8.940697e-08, 0.6590269, -3.7078934)
-
-[node name="entrance_007 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="16"]
-transform = Transform3D(1.0000001, 7.940246e-07, 2.9802564e-07, -7.7764116e-07, 1, 1.1683949e-07, 4.4703637e-07, -9.740262e-08, 0.99999994, 5.2154064e-08, 0.6590271, -3.7078938)
-
-[node name="entrance_006 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="17"]
-transform = Transform3D(1.0000001, 3.8286657e-07, -3.576301e-07, -3.6699157e-07, 1, -1.1325966e-07, -3.5762952e-07, 8.996625e-08, 0.99999994, -9.685755e-08, 0.65902704, -3.7078938)
-
-[node name="AnimationTree" parent="Submarine/diver" index="25"]
-parameters/hatch/current_state = ""
-parameters/hatch/current_index = -1
-"parameters/Add2 2/add_amount" = 0.0
+[node name="chair arm top" parent="Submarine/diver/armature for sub/Skeleton3D" index="5"]
+transform = Transform3D(0.08248462, 0.030008132, 0.02569506, 0.0007899509, 0.058219936, -0.07052835, -0.039498124, 0.0638309, 0.05224893, -0.0016219545, 3.4775755, 0.079852864)
 
 [node name="ColorRect" parent="Submarine/Control" index="0"]
 offset_left = -7.5

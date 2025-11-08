@@ -1,10 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene load_steps=48 format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="3_0vtxn"]
 [ext_resource type="Script" uid="uid://ccu48ib8fb103" path="res://Scripts/Inside.gd" id="4_dws13"]
 [ext_resource type="PackedScene" uid="uid://5xnlpfobcd64" path="res://Prefabs/ship_depth_ui.tscn" id="5_0vtxn"]
+[ext_resource type="Script" uid="uid://cdl17nh4u20m3" path="res://Scripts/atractor.gd" id="6_ibfwu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0vtxn"]
 height = 0.1484375
@@ -73,7 +74,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_erfuo"]
-graph_offset = Vector2(-384.02087, 231.66483)
+graph_offset = Vector2(-386.57727, 4.2136536)
 nodes/output/position = Vector2(640, 260)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ctasq")
 nodes/Animation/position = Vector2(-360, 260)
@@ -196,7 +197,14 @@ resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_0vtxn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tyhre"]
-size = Vector3(0.6669922, 0.87646484, 0.20904541)
+size = Vector3(0.6669922, 0.87646484, 0.3274479)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8lpy1"]
+radius = 0.75
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bhf8s"]
+height = 0.11621094
+radius = 0.4086914
 
 [node name="Submarine" type="RigidBody3D" node_paths=PackedStringArray("seat_pos")]
 collision_layer = 2
@@ -208,6 +216,9 @@ viewport = NodePath("SubViewport")
 
 [node name="diver" parent="." instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
+
+[node name="sub" parent="diver" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4682245e-05, 2.0845084, 1.3890762)
 
 [node name="Skeleton3D" parent="diver/armature for sub" index="0"]
 bones/1/rotation = Quaternion(0.64519745, 0.28770146, 0.64621603, 0.28870934)
@@ -384,11 +395,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004882824, 2.1829977, -1.49
 shape = SubResource("ConcavePolygonShape3D_bhf8s")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.7826986, 1.5363228, 1.0146635)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.7826986, 1.5363228, 1.4892662)
 shape = SubResource("CylinderShape3D_fyv3g")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.7830002, 1.536, 1.0142491)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.7830002, 1.536, 1.4888518)
 shape = SubResource("CylinderShape3D_fyv3g")
 
 [node name="Control" type="Control" parent="."]
@@ -417,6 +428,7 @@ color = Color(0, 0, 0, 1)
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.053449, 1.5773609)
 collision_mask = 4
+priority = 1
 gravity_space_override = 3
 script = ExtResource("4_dws13")
 
@@ -473,15 +485,35 @@ size = Vector2i(256, 512)
 [node name="Ship depth UI" parent="SubViewport" instance=ExtResource("5_0vtxn")]
 
 [node name="entrance area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4455113)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6863565, 4.9961834)
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="entrance area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3883972, -0.04776001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.460407, 0.27095938)
 shape = SubResource("BoxShape3D_tyhre")
+
+[node name="Atractor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7321565, 4.980033)
+collision_mask = 4
+script = ExtResource("6_ibfwu")
+atractor_speed = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Atractor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8655925, 0)
+shape = SubResource("CylinderShape3D_8lpy1")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2734592, 5.004118)
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09168172, 0)
+shape = SubResource("CylinderShape3D_bhf8s")
 
 [connection signal="interacted" from="diver/armature for sub/Skeleton3D/Cylinder_001/button" to="." method="_on_button_interacted"]
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
 [connection signal="body_entered" from="entrance area" to="." method="_on_entrance_area_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
+[connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_2_body_exited"]
 
 [editable path="diver"]

@@ -69,7 +69,7 @@ func _process(_delta: float) -> void:
 				last_raycast_hover_target = collider
 		elif ray_cast_is_hovering:
 			ray_cast_is_hovering = false
-			collider.hovering = false
+			last_raycast_hover_target.hovering = false
 	elif ray_cast_is_hovering:
 		ray_cast_is_hovering = false
 		last_raycast_hover_target.hovering = false

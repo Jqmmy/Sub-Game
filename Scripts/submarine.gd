@@ -5,6 +5,7 @@ extends RigidBody3D
 @onready var node_3d: Node3D = $Node3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
+@onready var atractor: Area3D = $Atractor
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
@@ -13,8 +14,8 @@ extends RigidBody3D
 @export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
-var doors_open:bool = false
 var exiting:bool = false
+var hatch_open:bool = false
 var parked:bool = true:
 	
 	set(value):
@@ -38,12 +39,6 @@ var up_accel = 1.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#var depth_mesh_material = StandardMaterial3D.new()
-	#var depth_viewport_texture = ViewportTexture.new()
-	#depth_viewport_texture.viewport_path = viewport
-	#depth_mesh_material.albedo_texture = depth_viewport_texture
-	#depth_mesh_material.resource_local_to_scene = true
-	#mesh_instance_3d.mesh.surface_set_material(0, depth_mesh_material)
 	if parked:
 		gravity_scale = 0
 	else:
@@ -97,15 +92,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			ship_animation_tree["parameters/Transition 2/transition_request"] = "b"
 			driving = false
 			exiting = true
-			#ship_animation_tree.animation_finished.connect(
-				#func(anim_name):
-				#if anim_name == "get in seat" and driving:
-					#print("yes")
-					#driving = false
-					#player.process_mode = Node.PROCESS_MODE_PAUSABLE
-					#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-					#player.reparent(get_parent())
-					#player.global_position = node_3d.global_position)
 	
 		if Input.is_action_just_pressed("Open map"):
 			pass
@@ -163,18 +149,12 @@ func _on_interactable_interacted() -> void:
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	player.reparent(seat_pos)
+	player.light.light_energy = 0
 	
 	tween.tween_property(player, "global_transform", seat_pos.global_transform, 1.25)
 	tween.finished.connect(func(): ship_animation_tree["parameters/Transition 2/transition_request"] = "f")
 	exiting = false
-	#ship_animation_tree.animation_finished.connect(
-		#func(anim_name:String):
-			#if anim_name == "get in seat" and !driving:
-				#print("yep")
-				#driving = true
-				#player.skeleton_ik_3d.start()
-				#player.right_arm_ik.start()
-				#player.animation_tree.set("parameters/Transition/transition_request", "state_0"))
+
 
 func seat_animation_finished(anim_name:String):
 	var player = get_tree().get_first_node_in_group("player") as Player
@@ -192,16 +172,35 @@ func seat_animation_finished(anim_name:String):
 
 
 func _on_button_interacted() -> void:
-	doors_open = !doors_open
 	ship_animation_tree["parameters/OneShot/request"] = 1
 	ship_animation_tree.animation_finished.connect(func(anim_name):
 		if anim_name == "push door button":
-			if doors_open:
+			if ship_animation_tree["parameters/Transition/current_state"] == "open":
 				ship_animation_tree["parameters/Transition/transition_request"] = "close"
 			else:
 				ship_animation_tree["parameters/Transition/transition_request"] = "open")
+				
 
 
 func _on_entrance_area_body_entered(body: Node3D) -> void:
-	ship_animation_tree["parameters/hatch/transition_request"] = "open"
-	ship_animation_tree["parameters/Transition/transition_request"] = "close"
+	if not atractor.active:
+		get_tree().create_timer(2.0).timeout.connect(func():
+			if not atractor.active:
+				body.velocity.y -= 50
+				atractor.active = true)
+		ship_animation_tree["parameters/hatch/transition_request"] = "open"
+		ship_animation_tree["parameters/Transition/transition_request"] = "close"
+
+
+func _on_area_3d_2_body_entered(body: Node3D) -> void:
+	if atractor.active:
+		get_tree().create_timer(3.0).timeout.connect(func():
+			atractor.active = false)
+		ship_animation_tree["parameters/hatch/transition_request"] = "close"
+		ship_animation_tree["parameters/Transition/transition_request"] = "open"
+		
+
+
+func _on_area_3d_2_body_exited(body: Node3D) -> void:
+	if ship_animation_tree["parameters/Transition/current_state"] == "open":
+		ship_animation_tree["parameters/Transition/transition_request"] = "close"

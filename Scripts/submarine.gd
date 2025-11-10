@@ -6,6 +6,7 @@ extends RigidBody3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var atractor: Area3D = $Atractor
+@onready var radar_container: HBoxContainer = $"Control/radar container"
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
@@ -52,8 +53,6 @@ func _process(delta: float) -> void:
 			get_tree().root.grab_focus()
 			
 #region mouse & keyboard look controls
-		var max_dist = 100
-		var screen_center = control.size / 2
 		var player:Player = get_tree().get_first_node_in_group("player")
 		#if Settings.current_control == Settings.control.KEYBOARD:
 			#var mouse_pos = control.get_local_mouse_position()
@@ -64,25 +63,23 @@ func _process(delta: float) -> void:
 				#player.rotate_y(-screen_center.direction_to(mouse_pos).x * normalized_distance_from_center * Settings.sens * 4)
 				#player.camera_3d.rotate_x(-screen_center.direction_to(mouse_pos).y * normalized_distance_from_center * Settings.sens * 4)
 		#endregion
-		#else:
 		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
 		var look_margin:float = 0.02
 		if axis.x > look_margin or axis.x < -look_margin:
-			Input.warp_mouse(screen_center + axis * max_dist)
 			player.head.rotate_y(-axis.x * Settings.sens * 4)
 		if axis.y > look_margin or axis.y < -look_margin:
-			Input.warp_mouse(screen_center + axis * max_dist)
-			
 			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
 		
 		#set up rotation clamps here at some point
+		
+		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if driving:
 		var player:Player = get_tree().get_first_node_in_group("player")
 		if Input.is_action_just_pressed("reset view"):
 			player.camera_3d.rotation = Vector3.ZERO
-			player.rotation_degrees = Vector3(0,0,0)
+			player.head.rotation = Vector3.ZERO
 			Input.warp_mouse(control.size / 2)
 	
 		if Input.is_action_just_pressed("park"):
@@ -90,17 +87,26 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 		if Input.is_action_just_pressed("exit cockpit"):
 			ship_animation_tree["parameters/Transition 2/transition_request"] = "b"
+			radar_container.hide()
 			driving = false
 			exiting = true
 	
 		if Input.is_action_just_pressed("Open map"):
 			pass
+			
+		var radar_change_speed:float = 25.0
+		if Input.is_action_pressed("long radar"):
+			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()
+		if Input.is_action_pressed("short radar"):
+			radar_container.custom_minimum_size.x -= radar_change_speed * get_process_delta_time()
+		radar_container.custom_minimum_size.x = clamp(radar_container.custom_minimum_size.x, 40, 750)
 		
 
 func _physics_process(delta: float) -> void:
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
 	
 	if driving and not parked:
+		
 		var float_booster:float
 		if Input.is_action_pressed("up"):
 			float_booster = 1.0
@@ -139,6 +145,8 @@ func _physics_process(delta: float) -> void:
 				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", 0.5, 0.5)
 			elif float_booster == -1:
 				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -1.5, 0.5)
+	
+	
 	if not driving:
 		if shape_cast_3d.is_colliding():
 			apply_central_force(Vector3(0,2.5,0))
@@ -150,6 +158,7 @@ func _on_interactable_interacted() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	player.reparent(seat_pos)
 	player.light.light_energy = 0
+	
 	
 	tween.tween_property(player, "global_transform", seat_pos.global_transform, 1.25)
 	tween.finished.connect(func(): ship_animation_tree["parameters/Transition 2/transition_request"] = "f")
@@ -166,6 +175,7 @@ func seat_animation_finished(anim_name:String):
 			player.global_position = node_3d.global_position
 		else:
 			driving = true
+			radar_container.show()
 			player.skeleton_ik_3d.start()
 			player.right_arm_ik.start()
 			player.animation_tree.set("parameters/Transition/transition_request", "state_0")

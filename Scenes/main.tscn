@@ -356,35 +356,6 @@ surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
 [node name="glass" parent="Submarine/diver" index="3"]
 material_override = SubResource("ShaderMaterial_21xkr")
 
-[node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
-bones/1/rotation = Quaternion(0.48217827, 0.22976136, -0.76653475, -0.35656485)
-bones/2/rotation = Quaternion(0.00018478351, 0.00010385103, 0.4190717, 0.9079532)
-bones/3/rotation = Quaternion(-0.0014791602, 6.861414e-05, 0.6644039, 0.7473722)
-
-[node name="chair" parent="Submarine/diver/armature for sub/Skeleton3D" index="0"]
-transform = Transform3D(0.36520374, 0.032267977, 0.17354645, 0.0031384742, 0.66125005, -0.05192284, -0.17462048, 0.079370275, 0.3620244, -0.033092618, 1.6087185, -0.023945153)
-
-[node name="chair pedal base" parent="Submarine/diver/armature for sub/Skeleton3D" index="1"]
-transform = Transform3D(0.90214735, 0.048393913, 0.42870444, 0.007752785, 0.9917095, -0.1282627, -0.43135756, 0.11903553, 0.89429355, 0.26543978, 0.8177037, 0.1474157)
-
-[node name="entrance_012 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="2"]
-transform = Transform3D(-0.0038181078, 0.07117616, 0.033823233, -0.07824229, 0.00061166147, -0.010119467, -0.009391473, -0.034032553, 0.07055653, 0.36922982, 0.79334724, 0.36404604)
-
-[node name="entrance_013 -col" parent="Submarine/diver/armature for sub/Skeleton3D" index="3"]
-transform = Transform3D(-0.0038181078, 0.07117616, 0.033823233, -0.07824229, 0.00061166147, -0.010119467, -0.009391473, -0.034032553, 0.07055653, 0.027730852, 0.79041266, 0.52733237)
-
-[node name="chair arm" parent="Submarine/diver/armature for sub/Skeleton3D" index="4"]
-transform = Transform3D(0.112251624, 0.020458208, 0.040218547, 0.0009933495, 0.052675717, -0.08407136, -0.05372562, 0.0437183, 0.082476206, -0.28904554, 2.221117, -0.54819244)
-
-[node name="chair arm top" parent="Submarine/diver/armature for sub/Skeleton3D" index="5"]
-transform = Transform3D(0.08248462, 0.030008132, 0.02569506, 0.0007899509, 0.058219936, -0.07052835, -0.039498124, 0.0638309, 0.05224893, -0.0016219545, 3.4775755, 0.079852864)
-
-[node name="ColorRect" parent="Submarine/Control" index="0"]
-offset_left = -7.5
-offset_top = -7.5
-offset_right = 7.5
-offset_bottom = 7.5
-
 [node name="button IK target" parent="Submarine" index="12"]
 transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)
 

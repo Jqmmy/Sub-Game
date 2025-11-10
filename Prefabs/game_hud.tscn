@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2dqhqkbj57sy"]
+[gd_scene load_steps=3 format=3 uid="uid://c2dqhqkbj57sy"]
 
 [ext_resource type="Script" uid="uid://22fgd1uq70gh" path="res://game_hud.gd" id="1_xeuyx"]
+[ext_resource type="Texture2D" uid="uid://cuavlu46yt2sb" path="res://Assets/Textures/Crosshair.png" id="2_524wh"]
 
 [node name="game hud" type="Control" groups=["hud"]]
 layout_mode = 3
@@ -29,3 +30,20 @@ layout_mode = 2
 
 [node name="button text" type="Label" parent="hover labels"]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_524wh")
+expand_mode = 1

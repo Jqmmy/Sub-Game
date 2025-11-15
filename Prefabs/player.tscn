@@ -114,9 +114,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87538993, 0)
 shape = SubResource("CapsuleShape3D_5wxv7")
 
 [node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.575, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5735811, 0)
 fov = 80.0
 
 [node name="light" type="SpotLight3D" parent="head/Camera3D"]
@@ -133,6 +133,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_juxdh")
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
 target_position = Vector3(0, 0, -2)
 collide_with_areas = true
+
+[node name="looking direction" type="Marker3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Radar" type="Node" parent="."]
 script = ExtResource("3_y5hcb")

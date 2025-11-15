@@ -7,6 +7,7 @@ extends RigidBody3D
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var atractor: Area3D = $Atractor
 @onready var radar_container: HBoxContainer = $"Control/radar container"
+@onready var radar_fade_timer: Timer = $"radar fade timer"
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
@@ -15,7 +16,7 @@ extends RigidBody3D
 @export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
-var exiting:bool = false
+var exiting:bool = true
 var hatch_open:bool = false
 var parked:bool = true:
 	
@@ -26,6 +27,7 @@ var parked:bool = true:
 		else:
 			gravity_scale = 1
 
+var radar_timer:float
 var current_speed = 3.0
 var rotation_speed = 2.5
 var last_rotation_dir:float :
@@ -38,6 +40,7 @@ var front_accel = 3.0
 var up_accel = 1.5
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if parked:
@@ -45,6 +48,8 @@ func _ready() -> void:
 	else:
 		gravity_scale = 1
 	ship_animation_tree.animation_finished.connect(seat_animation_finished)
+	radar_container.modulate = Color(1,1,1,0)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -52,17 +57,8 @@ func _process(delta: float) -> void:
 		if !get_tree().root.has_focus():
 			get_tree().root.grab_focus()
 			
-#region mouse & keyboard look controls
 		var player:Player = get_tree().get_first_node_in_group("player")
-		#if Settings.current_control == Settings.control.KEYBOARD:
-			#var mouse_pos = control.get_local_mouse_position()
-			#if screen_center.distance_to(mouse_pos) > max_dist:
-				#Input.warp_mouse(screen_center + screen_center.direction_to(mouse_pos) * max_dist)
-			#var normalized_distance_from_center:float = (screen_center.distance_to(mouse_pos) - 33) / (max_dist - 33)
-			#if screen_center.distance_to(mouse_pos) > 33:
-				#player.rotate_y(-screen_center.direction_to(mouse_pos).x * normalized_distance_from_center * Settings.sens * 4)
-				#player.camera_3d.rotate_x(-screen_center.direction_to(mouse_pos).y * normalized_distance_from_center * Settings.sens * 4)
-		#endregion
+	
 		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
 		var look_margin:float = 0.02
 		if axis.x > look_margin or axis.x < -look_margin:
@@ -72,7 +68,39 @@ func _process(delta: float) -> void:
 		
 		#set up rotation clamps here at some point
 		
+		var radar_change_speed:float = 50.0
 		
+		
+		if Input.is_action_pressed("long radar"):
+			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()
+			radar_container.modulate = Color(1,1,1,1)
+			radar_fade_timer.start()
+			
+		if Input.is_action_pressed("short radar"):
+			radar_container.custom_minimum_size.x -= radar_change_speed * get_process_delta_time()
+			radar_container.modulate = Color(1,1,1,1)
+			radar_fade_timer.start()
+			
+		radar_container.custom_minimum_size.x = clamp(radar_container.custom_minimum_size.x, 40, 750)
+		
+		if Input.is_action_pressed("radar"):
+			var radar_ui_to_angle:float = -0.000391549 * radar_container.custom_minimum_size.x + 1.01366196
+			radar_container.modulate = Color(1,1,1,1)
+			radar_fade_timer.start()
+			radar_timer += delta
+			if radar_timer >= 3.0:
+				var scans = get_tree().get_nodes_in_group("scanable")
+				for scan in scans:
+					var direction_to_scan = Vector3(player.head.global_position.x, 0, player.head.global_position.z).direction_to(Vector3(scan.global_position.x, 0,scan.global_positionn.z))
+					var player_facing_direction = Vector3(player.head.global_position.x, 0, player.head.global_position.z).direction_to(Vector3(player.looking_direction.global_position.x, 0, player.looking_direction.global_position.z))
+					
+					print(direction_to_scan.dot(player_facing_direction))
+					if direction_to_scan.dot(player_facing_direction) > radar_ui_to_angle:
+						print(scan)
+				radar_timer = 0
+		if Input.is_action_just_released("radar"):
+			radar_timer = 0.0
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if driving:
@@ -94,13 +122,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("Open map"):
 			pass
 			
-		var radar_change_speed:float = 25.0
-		if Input.is_action_pressed("long radar"):
-			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()
-		if Input.is_action_pressed("short radar"):
-			radar_container.custom_minimum_size.x -= radar_change_speed * get_process_delta_time()
-		radar_container.custom_minimum_size.x = clamp(radar_container.custom_minimum_size.x, 40, 750)
 		
+		
+		
+
 
 func _physics_process(delta: float) -> void:
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
@@ -151,6 +176,7 @@ func _physics_process(delta: float) -> void:
 		if shape_cast_3d.is_colliding():
 			apply_central_force(Vector3(0,2.5,0))
 
+
 func _on_interactable_interacted() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Player
 	var tween = get_tree().create_tween()
@@ -175,7 +201,6 @@ func seat_animation_finished(anim_name:String):
 			player.global_position = node_3d.global_position
 		else:
 			driving = true
-			radar_container.show()
 			player.skeleton_ik_3d.start()
 			player.right_arm_ik.start()
 			player.animation_tree.set("parameters/Transition/transition_request", "state_0")
@@ -214,3 +239,8 @@ func _on_area_3d_2_body_entered(body: Node3D) -> void:
 func _on_area_3d_2_body_exited(body: Node3D) -> void:
 	if ship_animation_tree["parameters/Transition/current_state"] == "open":
 		ship_animation_tree["parameters/Transition/transition_request"] = "close"
+
+
+func _on_radar_fade_timer_timeout() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(radar_container, "modulate", Color(1.0, 1.0, 1.0, 0.0), 1.0)

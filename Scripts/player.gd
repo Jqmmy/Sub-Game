@@ -17,6 +17,7 @@ var sens:float = 0.05
 @export var skeleton:Skeleton3D
 @onready var light: SpotLight3D = $head/Camera3D/light
 @onready var radar: Radar = $Radar
+@onready var looking_direction: Marker3D = $"head/looking direction"
 
 @export var skeleton_ik_3d: SkeletonIK3D
 @export var right_arm_ik: SkeletonIK3D 

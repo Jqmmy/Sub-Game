@@ -155,7 +155,7 @@ animation = &"moving_forward"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_likqu"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8lpy1"]
-graph_offset = Vector2(-498.86853, 23.993652)
+graph_offset = Vector2(-423.22256, 76.040054)
 nodes/output/position = Vector2(620, 120)
 nodes/blend_amount/node = SubResource("AnimationNodeBlend2_ibfwu")
 nodes/blend_amount/position = Vector2(-160, 0)
@@ -394,6 +394,10 @@ shape = SubResource("CylinderShape3D_fyv3g")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.7830002, 1.536, 1.4888518)
 shape = SubResource("CylinderShape3D_fyv3g")
 
+[node name="radar fade timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -404,7 +408,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="radar container" type="HBoxContainer" parent="Control"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -515,6 +519,7 @@ shape = SubResource("CylinderShape3D_bhf8s")
 
 [connection signal="interacted" from="diver/armature for sub/Skeleton3D/Cylinder_001/button" to="." method="_on_button_interacted"]
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+[connection signal="timeout" from="radar fade timer" to="." method="_on_radar_fade_timer_timeout"]
 [connection signal="body_entered" from="entrance area" to="." method="_on_entrance_area_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
 [connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_2_body_exited"]

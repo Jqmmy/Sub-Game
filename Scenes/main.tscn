@@ -1,10 +1,11 @@
-[gd_scene load_steps=40 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=41 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
 [ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="6_21xkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -400,6 +401,9 @@ metadata/_custom_type_script = "uid://cv1xvvvoq56j8"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ocean"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250.62766, 0)
 shape = SubResource("BoxShape3D_kry3j")
+
+[node name="ship" parent="." instance=ExtResource("6_21xkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.253607, 2.8774195, -3.205452)
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/head/Camera3D/face mask"]

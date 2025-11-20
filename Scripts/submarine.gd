@@ -13,7 +13,6 @@ extends RigidBody3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var ship_animation_tree: AnimationTree = $diver/AnimationTree
 @export_node_path("SubViewport") var viewport:NodePath
-@export_node_path("Node3D") var IK:NodePath 
 
 var driving:bool = false
 var exiting:bool = true

@@ -74,7 +74,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_erfuo"]
-graph_offset = Vector2(-386.57727, 4.2136536)
+graph_offset = Vector2(-337.8532, 115.34033)
 nodes/output/position = Vector2(640, 260)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ctasq")
 nodes/Animation/position = Vector2(-360, 260)
@@ -219,6 +219,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="sub" parent="diver" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4682245e-05, 2.0845084, 1.3890762)
+
+[node name="control IK" type="Marker3D" parent="diver/joystick right and left base/Cube_014" index="2"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0.046, 0.099, -0.065)
 
 [node name="Skeleton3D" parent="diver/armature for sub" index="0"]
 bones/1/rotation = Quaternion(0.64519745, 0.28770146, 0.64621603, 0.28870934)

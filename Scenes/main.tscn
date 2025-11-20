@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=42 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/objective_waypoint.tscn" id="7_6bp64"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -309,10 +310,13 @@ shape = SubResource("BoxShape3D_21xkr")
 mesh = SubResource("PlaneMesh_h2yge")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -0.32532716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -0.32007647)
 
 [node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_21xkr")
+
+[node name="left arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="6"]
+target_node = NodePath("../../../../../Submarine/diver/joystick right and left base/Cube_014/control IK")
 
 [node name="right arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="7"]
 target_node = NodePath("../../../../../Submarine/button IK target")
@@ -361,6 +365,9 @@ surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
 [node name="glass" parent="Submarine/diver" index="3"]
 material_override = SubResource("ShaderMaterial_21xkr")
 
+[node name="control IK" parent="Submarine/diver/joystick right and left base/Cube_014" index="2"]
+transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
+
 [node name="button IK target" parent="Submarine" index="13"]
 transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)
 
@@ -403,7 +410,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250.62766, 0)
 shape = SubResource("BoxShape3D_kry3j")
 
 [node name="ship" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.253607, 2.8774195, -3.205452)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.253607, -1.1210489, -3.205452)
+
+[node name="Objective waypoint" parent="." instance=ExtResource("7_6bp64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.484236, 0.13374999, -27.992727)
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/head/Camera3D/face mask"]

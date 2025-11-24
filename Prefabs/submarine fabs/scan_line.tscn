@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://durd25idaxpyb"]
+
+[ext_resource type="Shader" uid="uid://cr8pxx2spskdr" path="res://Assets/materials/scan.gdshader" id="1_vf3wh"]
+[ext_resource type="Script" uid="uid://qngbd74c3tov" path="res://Scripts/scan_line.gd" id="2_uftsl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+render_priority = 1
+shader = ExtResource("1_vf3wh")
+shader_parameter/color1 = Color(1, 1, 1, 0)
+shader_parameter/color2 = Color(0.5058824, 0.6, 1, 0.47058824)
+shader_parameter/threshold = 1.25
+shader_parameter/fresnel_sharpness = 10.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bhf8s"]
+material = SubResource("ShaderMaterial_ynf5e")
+size = Vector2(50, 100)
+
+[node name="scan line" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+top_level = true
+mesh = SubResource("PlaneMesh_bhf8s")
+script = ExtResource("2_uftsl")

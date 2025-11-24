@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://5xnlpfobcd64"]
+
+[ext_resource type="Script" uid="uid://4t4q54k0pct6" path="res://Scripts/ship_depth_ui.gd" id="1_n8sj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ehsr"]
+bg_color = Color(2.5027991e-06, 0.35911858, 0.62764484, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 5
+
+[sub_resource type="Theme" id="Theme_n8sj5"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_4ehsr")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iol08"]
+
+[sub_resource type="Theme" id="Theme_1vodw"]
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_iol08")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ti6qa"]
+bg_color = Color(0.78822935, 0.033843208, 0.2134285, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_4wcn3"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ti6qa")
+
+[node name="Ship depth UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_n8sj5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n8sj5")
+alignment = 1
+
+[node name="depth label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme = SubResource("Theme_1vodw")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/PanelContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = SubResource("Theme_4wcn3")
+
+[node name="depth label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 50
+text = "5000"

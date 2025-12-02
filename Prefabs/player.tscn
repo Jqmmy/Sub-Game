@@ -169,6 +169,7 @@ process_mode = 3
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0.05)
 
 [node name="Skeleton3D" parent="charecter/Armature" index="1"]
+bones/1/position = Vector3(-2.775558e-17, -1.031744e-32, 0.7631609)
 bones/7/rotation = Quaternion(0.5756228, 0.40425515, 0.5816829, -0.40851107)
 bones/8/rotation = Quaternion(0.13539974, -0.011196219, 0.02456455, 0.9904232)
 bones/9/rotation = Quaternion(0.0068797413, -0.022963993, -0.042339325, 0.99881566)
@@ -218,8 +219,22 @@ bones/66/rotation = Quaternion(-0.6033707, -0.0047328514, 0.076678544, 0.7937518
 bones/67/rotation = Quaternion(-0.25005782, 0.000849701, -0.00218892, 0.9682281)
 bones/68/rotation = Quaternion(-0.3089617, 0.10821961, -0.09598867, 0.9400093)
 bones/69/rotation = Quaternion(-0.058834534, 0.54810345, -0.356721, 0.7542355)
+bones/70/position = Vector3(-6.889725e-17, 0, 0.7631609)
+bones/71/rotation = Quaternion(-0.47335565, -0.5482585, 0.44655657, 0.5252946)
 bones/72/rotation = Quaternion(0.054805778, -2.985568e-08, 9.659474e-09, 0.9984971)
+bones/73/rotation = Quaternion(-0.57450765, -2.0628836e-07, 2.3119976e-07, 0.8184992)
+bones/74/rotation = Quaternion(-0.17053017, -1.1746332e-07, 1.4330745e-07, 0.98535246)
+bones/75/position = Vector3(6.889725e-17, 0, 0.7631609)
+bones/76/rotation = Quaternion(-0.47335562, 0.5482585, -0.4465565, 0.52529454)
 bones/77/rotation = Quaternion(0.054805778, 2.985568e-08, -9.659474e-09, 0.9984971)
+bones/78/rotation = Quaternion(-0.57450765, 2.6217805e-07, -1.9675986e-07, 0.8184992)
+bones/79/rotation = Quaternion(-0.17053017, 1.1746332e-07, -1.4330745e-07, 0.98535246)
+bones/80/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/82/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/83/rotation = Quaternion(0.70710695, 0, -0.7071066, 0)
+
+[node name="head" parent="charecter/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 3.9334622e-17, 4.2632564e-14, -3.9334625e-17, 0.99999994, -1.5777218e-30, -4.2632564e-14, 3e-45, 1, -1.2434904e-17, 1.3164566, 4.2620675e-32)
 
 [node name="handle" parent="charecter/Armature/Skeleton3D/head" index="0"]
 visible = false
@@ -231,6 +246,9 @@ transform = Transform3D(-0.032276463, 0.997678, 0.059976388, 0.053258464, -0.058
 transform = Transform3D(-0.0011884018, -7.2313764e-05, 0.021984685, 0.031960353, 0.0006932877, 0.00081908517, -0.0010598057, 0.020988423, 4.8690476e-05, -0.0139416605, 0.17028299, 0.044341445)
 mesh = SubResource("PlaneMesh_y5hcb")
 surface_material_override/0 = SubResource("StandardMaterial3D_2nftw")
+
+[node name="torso" parent="charecter/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 2.5670716e-32)
 
 [node name="body_001" parent="charecter/Armature/Skeleton3D" index="5"]
 visible = false

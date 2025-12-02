@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=44 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
@@ -274,6 +274,15 @@ shader_parameter/Rim_Power = 0.1
 shader_parameter/Blur = 1.0
 shader_parameter/Taint = Color(1, 1, 1, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_344ge"]
+viewport_path = NodePath("Submarine/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynf5e"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_344ge")
+uv1_scale = Vector3(1.01, 1.635, 1)
+uv1_offset = Vector3(-0.015, -0.65, 0)
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_6bp64"]
 viewport_path = NodePath("Submarine/SubViewport")
 
@@ -312,8 +321,28 @@ mesh = SubResource("PlaneMesh_h2yge")
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_jjgbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 3.0726287, -0.32007647)
 
+[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" index="1"]
+bones/1/position = Vector3(-2.775558e-17, -1.031744e-32, 0.7631609)
+bones/70/position = Vector3(-6.889725e-17, 0, 0.7631609)
+bones/71/rotation = Quaternion(-0.47335565, -0.5482585, 0.44655657, 0.5252946)
+bones/73/rotation = Quaternion(-0.57450765, -2.0628836e-07, 2.3119976e-07, 0.8184992)
+bones/74/rotation = Quaternion(-0.17053017, -1.1746332e-07, 1.4330745e-07, 0.98535246)
+bones/75/position = Vector3(6.889725e-17, 0, 0.7631609)
+bones/76/rotation = Quaternion(-0.47335562, 0.5482585, -0.4465565, 0.52529454)
+bones/78/rotation = Quaternion(-0.57450765, 2.6217805e-07, -1.9675986e-07, 0.8184992)
+bones/79/rotation = Quaternion(-0.17053017, 1.1746332e-07, -1.4330745e-07, 0.98535246)
+bones/80/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/82/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/83/rotation = Quaternion(0.70710695, 0, -0.7071066, 0)
+
+[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 3.9334622e-17, 4.2632564e-14, -3.9334625e-17, 0.99999994, -1.5777218e-30, -4.2632564e-14, 3e-45, 1, -1.2434904e-17, 1.3164566, 4.2620675e-32)
+
 [node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_21xkr")
+
+[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 2.5670716e-32)
 
 [node name="left arm IK" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="6"]
 target_node = NodePath("../../../../../Submarine/diver/joystick right and left base/Cube_014/control IK")
@@ -363,10 +392,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26752472, 2.4597359, -3.28
 surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
 
 [node name="glass" parent="Submarine/diver" index="3"]
-material_override = SubResource("ShaderMaterial_21xkr")
+surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
 
 [node name="control IK" parent="Submarine/diver/joystick right and left base/Cube_014" index="2"]
 transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
+
+[node name="map button_001" parent="Submarine/diver" index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ynf5e")
 
 [node name="button IK target" parent="Submarine" index="13"]
 transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)

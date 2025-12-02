@@ -121,12 +121,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("Open map"):
 			pass
 			
-		
-		
-		
+
 
 
 func _physics_process(delta: float) -> void:
+	ship_depth_ui.radar.arc_position = fposmod(rotation.y, TAU)
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
 	
 	if driving and not parked:

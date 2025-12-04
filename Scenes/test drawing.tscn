@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://ew71ttol5l2h"]
+
+[ext_resource type="Script" uid="uid://cggtah5tfqvqq" path="res://sub_viewport_container.gd" id="1_4qsq4"]
+[ext_resource type="Texture2D" uid="uid://cuavlu46yt2sb" path="res://Assets/Textures/Crosshair.png" id="2_hnbe5"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." node_paths=PackedStringArray("color_rect")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4qsq4")
+color_rect = NodePath("SubViewport/ColorRect")
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1152, 648)
+render_target_clear_mode = 1
+
+[node name="ColorRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_hnbe5")

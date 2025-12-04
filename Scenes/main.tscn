@@ -1,12 +1,14 @@
-[gd_scene load_steps=44 format=4 uid="uid://61cvkp3cyet7"]
+
+[gd_scene load_steps=51 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
 [ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="4_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine.tscn" id="5_kry3j"]
+[ext_resource type="Shader" uid="uid://bjhvf7mov0ody" path="res://Assets/materials/pulse.gdshader" id="5_344ge"]
+[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="6_21xkr"]
-[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/objective_waypoint.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/submarine fabs/objective_waypoint.tscn" id="7_6bp64"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -290,12 +292,60 @@ viewport_path = NodePath("Submarine/SubViewport")
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_6bp64")
 
-[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
-size = Vector3(5, 10, 5)
+[sub_resource type="Gradient" id="Gradient_d1ilt"]
+offsets = PackedFloat32Array(0, 0.49839228, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6iyac"]
+gradient = SubResource("Gradient_d1ilt")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdnlq"]
+render_priority = 0
+shader = ExtResource("5_344ge")
+shader_parameter/albedo = Color(0.5618547, 0.048138715, 0, 1)
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_6iyac")
+shader_parameter/roughness = 0.0
+shader_parameter/uv_scale = Vector3(0, 0.16, 0)
+shader_parameter/uv_offset = Vector3(0, 0.2, 0)
+shader_parameter/vertex_offset_intensity = 0.695
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jkdf5"]
+material = SubResource("ShaderMaterial_fdnlq")
+top_radius = 0.1
+bottom_radius = 0.1
+radial_segments = 4
+rings = 32
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_kry3j"]
-radius = 0.25
-height = 0.5
+
+[sub_resource type="Gradient" id="Gradient_wsu2k"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.003215434, 0.8585209)
+colors = PackedColorArray(0.80049086, 0.80049074, 0.80049074, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k12tt"]
+gradient = SubResource("Gradient_wsu2k")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1bgf"]
+render_priority = 0
+shader = ExtResource("5_344ge")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_k12tt")
+shader_parameter/roughness = 0.0
+shader_parameter/uv_scale = Vector3(0, 1.205, 0)
+shader_parameter/uv_offset = Vector3(0, -0.3, 0)
+shader_parameter/vertex_offset_intensity = 0.085
+
+[sub_resource type="SphereMesh" id="SphereMesh_b3802"]
+material = SubResource("ShaderMaterial_h1bgf")
+rings = 124
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(3.755, 7.375, 5.945)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
 size = Vector3(500, 501.2553, 500)
@@ -406,24 +456,22 @@ transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08
 [node name="MeshInstance3D" parent="Submarine" index="18"]
 surface_material_override/0 = SubResource("StandardMaterial3D_344ge")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, -11)
-mesh = SubResource("BoxMesh_ig7tw")
-
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -0.847336, 7)
-mesh = SubResource("BoxMesh_ig7tw")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.707748, 2.4956536, -9.6929)
+mesh = SubResource("CylinderMesh_jkdf5")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="." groups=["scanable"]]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055217743, 3.6042378, -17.229092)
 mesh = SubResource("SphereMesh_kry3j")
 
+[node name="Objective waypoint2" parent="MeshInstance3D9" instance=ExtResource("7_6bp64")]
+
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
-mesh = SubResource("BoxMesh_ig7tw")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.316331, -12)
+mesh = SubResource("SphereMesh_b3802")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.30042, 13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3.5924094, 13)
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="Ocean" type="Area3D" parent="."]
@@ -442,7 +490,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250.62766, 0)
 shape = SubResource("BoxShape3D_kry3j")
 
 [node name="ship" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.253607, -1.1210489, -3.205452)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.858616, 2.2408152, -3.205452)
 
 [node name="Objective waypoint" parent="." instance=ExtResource("7_6bp64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.484236, 0.13374999, -27.992727)

@@ -7,6 +7,9 @@ extends RigidBody3D
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var atractor: Area3D = $Atractor
 @onready var radar_container: HBoxContainer = $"Control/radar container"
+@onready var radar_left: ColorRect = $"Control/radar container/radar left"
+@onready var radar_right: ColorRect = $"Control/radar container/radar right"
+
 @onready var radar_fade_timer: Timer = $"radar fade timer"
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
@@ -83,20 +86,25 @@ func _process(delta: float) -> void:
 		radar_container.custom_minimum_size.x = clamp(radar_container.custom_minimum_size.x, 40, 750)
 		
 		if Input.is_action_pressed("radar"):
-			var radar_ui_to_angle:float = -0.000391549 * radar_container.custom_minimum_size.x + 1.01366196
 			radar_container.modulate = Color(1,1,1,1)
 			radar_fade_timer.start()
 			radar_timer += delta
 			if radar_timer >= 3.0:
 				var scans = get_tree().get_nodes_in_group("scanable")
+				var camera_view = get_viewport().get_camera_3d()
+				const SCAN_LINE = preload("uid://durd25idaxpyb")
+				player.head.add_child(SCAN_LINE.instantiate())
 				for scan in scans:
-					var direction_to_scan = Vector3(player.head.global_position.x, 0, player.head.global_position.z).direction_to(Vector3(scan.global_position.x, 0,scan.global_positionn.z))
-					var player_facing_direction = Vector3(player.head.global_position.x, 0, player.head.global_position.z).direction_to(Vector3(player.looking_direction.global_position.x, 0, player.looking_direction.global_position.z))
-					
-					print(direction_to_scan.dot(player_facing_direction))
-					if direction_to_scan.dot(player_facing_direction) > radar_ui_to_angle:
-						print(scan)
+					var scan_screen_pos = camera_view.unproject_position(scan.global_position)
+					if not camera_view.is_position_in_frustum(scan.global_position):
+						continue
+					elif scan_screen_pos.x > radar_left.global_position.x and scan_screen_pos.x < radar_right.global_position.x:
+						print("scanned")
+						if radar_container.custom_minimum_size.x < 50:
+							if scan is Waypoint:
+								scan.active = true
 				radar_timer = 0
+			
 		if Input.is_action_just_released("radar"):
 			radar_timer = 0.0
 

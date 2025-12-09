@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene load_steps=52 format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
@@ -21,8 +21,6 @@ uv1_scale = Vector3(1.01, 1.635, 1)
 uv1_offset = Vector3(-0.015, -0.65, 0)
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_8lpy1"]
-
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_bhf8s"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ibfwu"]
 
@@ -47,8 +45,15 @@ animation = &"open hatch"
 animation = &"open hatch"
 play_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gewgh"]
+animation = &"Antenna"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ctasq"]
 animation = &"push door button"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cb3dh"]
+filter_enabled = true
+filters = ["armature for sub/Skeleton3D:Bone.013", "armature for sub/Skeleton3D:Bone.014"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_erfuo"]
 filter_enabled = true
@@ -85,7 +90,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_erfuo"]
-graph_offset = Vector2(58.54828, 201.05402)
+graph_offset = Vector2(-334.37064, 185.64088)
 nodes/output/position = Vector2(820, 260)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ctasq")
 nodes/Animation/position = Vector2(-360, 260)
@@ -113,9 +118,11 @@ nodes/hatch/position = Vector2(240, 560)
 "nodes/Animation 7/position" = Vector2(60, 740)
 "nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_8lpy1")
 "nodes/Add2 2/position" = Vector2(450.7766, 262.51382)
-"nodes/Add2 3/node" = SubResource("AnimationNodeAdd2_bhf8s")
-"nodes/Add2 3/position" = Vector2(660, 240)
-node_connections = [&"output", 0, &"Add2 3", &"Transition", 0, &"Animation 3", &"Transition", 1, &"Animation 2", &"Transition 2", 0, &"Animation 4", &"Transition 2", 1, &"Animation 5", &"Add2", 0, &"Transition 2", &"Add2", 1, &"OneShot", &"OneShot", 0, &"Transition", &"OneShot", 1, &"Animation", &"hatch", 0, &"Animation 6", &"hatch", 1, &"Animation 7", &"Add2 2", 0, &"Add2", &"Add2 2", 1, &"hatch", &"Add2 3", 0, &"Add2 2"]
+"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_gewgh")
+"nodes/Animation 8/position" = Vector2(480, 520)
+"nodes/OneShot 2/node" = SubResource("AnimationNodeOneShot_cb3dh")
+"nodes/OneShot 2/position" = Vector2(660, 260)
+node_connections = [&"output", 0, &"OneShot 2", &"Transition", 0, &"Animation 3", &"Transition", 1, &"Animation 2", &"Transition 2", 0, &"Animation 4", &"Transition 2", 1, &"Animation 5", &"Add2", 0, &"Transition 2", &"Add2", 1, &"OneShot", &"OneShot", 0, &"Transition", &"OneShot", 1, &"Animation", &"hatch", 0, &"Animation 6", &"hatch", 1, &"Animation 7", &"Add2 2", 0, &"Add2", &"Add2 2", 1, &"hatch", &"OneShot 2", 0, &"Add2 2", &"OneShot 2", 1, &"Animation 8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ibfwu"]
 size = Vector3(2.1894531, 2.5976563, 0.15332031)
@@ -241,16 +248,16 @@ bones/1/rotation = Quaternion(0.64519745, 0.28770146, 0.64621603, 0.28870934)
 bones/2/rotation = Quaternion(0.00022049728, 0.00016993903, 0.44541484, 0.89532435)
 bones/3/rotation = Quaternion(-0.0014797564, 6.871847e-05, 0.6647642, 0.7470518)
 bones/10/rotation = Quaternion(0.5609854, 0.4304593, -0.43045965, 0.56098557)
-bones/14/rotation = Quaternion(-0.43045914, -0.56098527, 0.5609857, -0.43045965)
-bones/16/rotation = Quaternion(-0.27059758, -0.6532814, 0.6532817, -0.2705983)
-bones/18/rotation = Quaternion(-0.09229545, -0.7010573, 0.7010575, -0.0922964)
-bones/20/rotation = Quaternion(-0.092296496, 0.7010575, -0.7010573, -0.09229538)
-bones/22/rotation = Quaternion(-0.27059853, 0.6532818, -0.6532813, -0.27059734)
+bones/14/rotation = Quaternion(-0.43045923, -0.56098527, 0.5609857, -0.43045962)
+bones/16/rotation = Quaternion(-0.2705977, -0.6532814, 0.6532817, -0.2705983)
+bones/18/rotation = Quaternion(-0.09229547, -0.7010572, 0.7010576, -0.092296414)
+bones/20/rotation = Quaternion(-0.09229648, 0.7010575, -0.7010573, -0.092295334)
+bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(0.0077744713, -0.31927595, 0.004723102, 0.9476181)
-bones/41/rotation = Quaternion(0.38629934, -1.8380504e-05, 2.220678e-05, 0.9223735)
+bones/40/rotation = Quaternion(-0.00052643084, -0.31069386, -0.0020037857, 0.95050776)
+bones/41/rotation = Quaternion(0.3853427, 0.06480303, 0.027170133, 0.9200942)
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0"]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
@@ -289,31 +296,31 @@ collision_layer = 8
 collision_layer = 8
 
 [node name="entrance_003 -col" parent="diver/armature for sub/Skeleton3D" index="8"]
-transform = Transform3D(1, 3.8212647e-08, -4.47033e-08, 3.8212647e-08, 1, 2.7109081e-08, -4.47033e-08, 2.7109081e-08, 1.0000001, -8.940697e-08, 0.65902716, -3.7078938)
+transform = Transform3D(1, 1.8722426e-07, -5.960459e-08, -1.232151e-07, 1, -1.1475828e-07, 1.490131e-08, 2.0592302e-07, 1.0000001, -5.9604645e-08, 0.6590271, -3.7078938)
 
 [node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_003 -col/entrance_003 " index="0"]
 collision_layer = 8
 
 [node name="entrance_002 -col" parent="diver/armature for sub/Skeleton3D" index="9"]
-transform = Transform3D(0.9999999, 6.807659e-08, -1.4901102e-07, 8.4721705e-09, 0.99999994, -1.0051116e-07, -2.9801626e-08, 8.471488e-09, 1, -3.2782555e-07, 0.6590269, -3.7078931)
+transform = Transform3D(1, 2.170882e-07, -2.6822042e-07, -1.8118874e-07, 1, -1.215846e-07, 8.9407564e-08, 1.2768095e-07, 1, -2.682209e-07, 0.6590269, -3.7078931)
 
 [node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_002 -col/entrance_002 " index="0"]
 collision_layer = 8
 
 [node name="entrance_001 -col" parent="diver/armature for sub/Skeleton3D" index="10"]
-transform = Transform3D(1.0000001, 4.0120085e-08, 4.636291e-13, -6.215703e-08, 1, 1.08479526e-07, -4.4703004e-08, 1.2390632e-07, 1.0000001, -0.09999986, 0.65902704, -3.3346884)
+transform = Transform3D(1.0000001, 8.482357e-08, -2.9801875e-08, -1.115377e-07, 1, 4.654917e-07, -1.4900202e-08, -2.337215e-07, 1.0000001, -0.09999986, 0.65902704, -3.3346884)
 
 [node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_001 -col/entrance_001 " index="0"]
 collision_layer = 8
 
 [node name="entrance -col" parent="diver/armature for sub/Skeleton3D" index="11"]
-transform = Transform3D(1.0000001, -5.229765e-08, 4.470275e-08, 6.488062e-08, 1, 6.416994e-08, 4.470278e-08, 7.959676e-08, 1.0000001, 0.09999992, 0.65902704, -3.3346884)
+transform = Transform3D(1.0000001, -9.7001134e-08, -1.4901914e-08, 1.0806093e-07, 1, 5.259983e-08, 1.04307425e-07, 7.9596845e-08, 1.0000001, 0.09999992, 0.65902704, -3.3346884)
 
 [node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance -col/entrance " index="0"]
 collision_layer = 8
 
 [node name="entrance_011 -col" parent="diver/armature for sub/Skeleton3D" index="12"]
-transform = Transform3D(1, 1.27083695e-08, 2.9800532e-08, 1.27083695e-08, 1, 8.1812914e-08, 2.9800532e-08, 8.18128e-08, 1, 1.1920929e-07, 0.6590269, -3.7078934)
+transform = Transform3D(1, 1.6171998e-07, 8.940539e-08, -1.3480576e-07, 1, 1.4503325e-07, -1.6413537e-12, -3.7396603e-08, 1, 8.940697e-08, 0.659027, -3.7078934)
 
 [node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_011 -col/entrance_011 " index="0"]
 collision_layer = 8
@@ -362,22 +369,22 @@ transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371
 shape = SubResource("CylinderShape3D_0vtxn")
 
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(0.79384124, 0.43542516, 0.424524, 0.00017089574, -0.6982466, 0.71585685, 0.6081248, -0.5682043, -0.55437136, 0.05397764, 4.5253515, 0.14323324)
+transform = Transform3D(0.8558377, 0.41400334, 0.31006888, 0.09253669, -0.7123431, 0.69570357, 0.5088993, -0.5667168, -0.64796066, 0.030917063, 4.5219345, 0.11691591)
 
 [node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(0.79384124, 0.43542516, 0.42452407, 0.00017089723, -0.69824684, 0.71585685, 0.6081248, -0.5682042, -0.55437136, 0.05397784, 4.5253506, 0.14323299)
+transform = Transform3D(0.8558377, 0.41400337, 0.3100689, 0.092536695, -0.71234334, 0.6957035, 0.5088994, -0.56671673, -0.6479608, 0.030917246, 4.521934, 0.11691567)
 
 [node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(-0.42452425, 0.43542504, 0.79384136, -0.715857, -0.6982466, 0.00017076731, 0.55437165, -0.56820434, 0.6081248, 0.14490631, 4.349699, 0.4386661)
+transform = Transform3D(-0.31006908, 0.41400328, 0.8558378, -0.69570386, -0.7123432, 0.09253657, 0.647961, -0.56671673, 0.50889933, 0.16629687, 4.374677, 0.41083765)
 
 [node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(-0.42452422, 0.43542552, 0.7938415, -0.71585673, -0.69824684, 0.0001707375, 0.5543713, -0.56820434, 0.60812515, 0.14490637, 4.349698, 0.4386667)
+transform = Transform3D(-0.31006908, 0.4140037, 0.8558381, -0.69570357, -0.71234345, 0.0925366, 0.64796066, -0.5667168, 0.5088996, 0.16629708, 4.3746767, 0.41083825)
 
 [node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(0.16064316, 0.08811345, 0.08590747, 3.458868e-05, -0.14129849, 0.14486209, 0.12306127, -0.11498285, -0.11218361, -0.0020062292, 4.258857, 0.21638888)
+transform = Transform3D(0.17318891, 0.08377849, 0.06274612, 0.018725906, -0.14415108, 0.14078383, 0.10298181, -0.11468183, -0.13112251, 0.0015565057, 4.258888, 0.21412437)
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.16064313, 0.08811345, 0.08590745, 3.4588993e-05, -0.14129846, 0.14486207, 0.12306125, -0.11498285, -0.11218359, -0.0020065538, 4.2588563, 0.2163893)
+transform = Transform3D(0.1628359, 0.08346736, 0.08641733, -0.0014617152, -0.14416708, 0.14199999, 0.12013583, -0.114888385, -0.11540502, 0.0015561711, 4.2588873, 0.2141248)
 
 [node name="map button_001" parent="diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8lpy1")
@@ -399,7 +406,9 @@ parameters/hatch/current_state = "close"
 parameters/hatch/transition_request = ""
 parameters/hatch/current_index = 1
 "parameters/Add2 2/add_amount" = 1.0
-"parameters/Add2 3/add_amount" = 0.5
+"parameters/OneShot 2/active" = true
+"parameters/OneShot 2/internal_active" = true
+"parameters/OneShot 2/request" = 0
 
 [node name="Interactable" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4845965e-07, 2.0035195, 1.1950138)

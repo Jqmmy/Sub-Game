@@ -92,8 +92,8 @@ func _process(delta: float) -> void:
 			if radar_timer >= 3.0:
 				var scans = get_tree().get_nodes_in_group("scanable")
 				var camera_view = get_viewport().get_camera_3d()
-				const SCAN_LINE = preload("uid://durd25idaxpyb")
-				player.head.add_child(SCAN_LINE.instantiate())
+				var SCAN_LINE = preload("res://Prefabs/submarine fabs/scan_line.tscn").instantiate()
+				player.head.add_child(SCAN_LINE)
 				for scan in scans:
 					var scan_screen_pos = camera_view.unproject_position(scan.global_position)
 					if not camera_view.is_position_in_frustum(scan.global_position):

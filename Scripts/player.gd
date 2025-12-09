@@ -4,7 +4,7 @@ extends CharacterBody3D
 var current_speed = NORMAL_SPEED
 const WATER_SPEED = 1.25
 const NORMAL_SPEED = 4
-const WATER_BOOST = 5
+const WATER_BOOST = 3
 const JUMP_VELOCITY = 4.5
 var radar_is_up:bool = false
 

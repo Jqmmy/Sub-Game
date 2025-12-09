@@ -1,8 +1,12 @@
 class_name Waypoint extends Node3D
 
+@export var use_last_scan_position:bool = false
+var last_scan_position:Vector3
+
 @export var active:bool = false:
 	set(value):
 		active = value
+		last_scan_position = global_position
 		if active:
 			color_rect.show()
 		else:
@@ -14,10 +18,15 @@ class_name Waypoint extends Node3D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if active:
+		var scan_pos:Vector3
+		if use_last_scan_position:
+			scan_pos = last_scan_position
+		else:
+			scan_pos = global_position
 		var window = get_window()
-		var screen_pos = get_viewport().get_camera_3d().unproject_position(global_position)
-		var is_behind = get_viewport().get_camera_3d().is_position_behind(global_position)
-		var is_in_frustrum = get_viewport().get_camera_3d().is_position_in_frustum(global_position)
+		var screen_pos = get_viewport().get_camera_3d().unproject_position(scan_pos)
+		var is_behind = get_viewport().get_camera_3d().is_position_behind(scan_pos)
+		var is_in_frustrum = get_viewport().get_camera_3d().is_position_in_frustum(scan_pos)
 		if is_in_frustrum:
 			color_rect.position = screen_pos
 			return

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ew71ttol5l2h"]
 
-[ext_resource type="Script" uid="uid://cggtah5tfqvqq" path="res://sub_viewport_container.gd" id="1_4qsq4"]
+[ext_resource type="Script" uid="uid://cggtah5tfqvqq" path="res://Scripts/sub_viewport_container.gd" id="1_4qsq4"]
 [ext_resource type="Texture2D" uid="uid://cuavlu46yt2sb" path="res://Assets/Textures/Crosshair.png" id="2_hnbe5"]
 
 [node name="Control" type="Control"]

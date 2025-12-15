@@ -3,7 +3,7 @@ extends RigidBody3D
 @export var seat_pos:Node3D
 @onready var control: Control = $Control
 @onready var node_3d: Node3D = $Node3D
-@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animationtree: AnimationTree = $"button animationtree"
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var atractor: Area3D = $Atractor
 @onready var radar_container: HBoxContainer = $"Control/radar container"
@@ -29,7 +29,7 @@ var parked:bool = true:
 		else:
 			gravity_scale = 1
 
-var radar_timer:float
+var radar_timer:float = 0
 var current_speed = 3.0
 var rotation_speed = 2.5
 var last_rotation_dir:float :
@@ -40,11 +40,13 @@ var last_rotation_dir:float :
 			last_rotation_dir = value
 var front_accel = 3.0
 var up_accel = 1.5
+#var SCAN_LINE:PackedScene = preload("res://Prefabs/submarine fabs/scan_line.tscn")
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	animationtree.set("parameters/fan blend/blend_position", 0.5)
 	if parked:
 		gravity_scale = 0
 	else:
@@ -53,25 +55,9 @@ func _ready() -> void:
 	radar_container.modulate = Color(1,1,1,0)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _input(_event: InputEvent) -> void:
 	if driving:
-		if !get_tree().root.has_focus():
-			get_tree().root.grab_focus()
-			
-		var player:Player = get_tree().get_first_node_in_group("player")
-	
-		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
-		var look_margin:float = 0.02
-		if axis.x > look_margin or axis.x < -look_margin:
-			player.head.rotate_y(-axis.x * Settings.sens * 4)
-		if axis.y > look_margin or axis.y < -look_margin:
-			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
-		
-		#set up rotation clamps here at some point
-		
 		var radar_change_speed:float = 50.0
-		
 		
 		if Input.is_action_pressed("long radar"):
 			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()
@@ -88,12 +74,11 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("radar"):
 			radar_container.modulate = Color(1,1,1,1)
 			radar_fade_timer.start()
-			radar_timer += delta
 			if radar_timer >= 3.0:
 				var scans = get_tree().get_nodes_in_group("scanable")
 				var camera_view = get_viewport().get_camera_3d()
-				var SCAN_LINE = preload("res://Prefabs/submarine fabs/scan_line.tscn").instantiate()
-				player.head.add_child(SCAN_LINE)
+				
+				#player.head.add_child(SCAN_LINE.instantiate())
 				for scan in scans:
 					var scan_screen_pos = camera_view.unproject_position(scan.global_position)
 					if not camera_view.is_position_in_frustum(scan.global_position):
@@ -107,6 +92,25 @@ func _process(delta: float) -> void:
 			
 		if Input.is_action_just_released("radar"):
 			radar_timer = 0.0
+
+
+func _process(delta: float) -> void:
+	if driving:
+		if !get_tree().root.has_focus():
+			get_tree().root.grab_focus()
+			
+		var player:Player = get_tree().get_first_node_in_group("player")
+	
+		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
+		var look_margin:float = 0.02
+		if axis.x > look_margin or axis.x < -look_margin:
+			player.head.rotate_y(-axis.x * Settings.sens * 4)
+		if axis.y > look_margin or axis.y < -look_margin:
+			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
+		#set up rotation clamps here at some point
+		
+		
+		radar_timer += delta
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -152,31 +156,31 @@ func _physics_process(delta: float) -> void:
 		apply_torque(Vector3(0, -axis * rotation_speed, 0))
 		apply_central_force(direction * current_speed)
 		
-		var control_stick_normal_dir:float = (input_dir - -1) / (1 - -1)
-		var control_look_normal_dir:float = (axis - -1) / (1 - -1)
-		animation_tree.set("parameters/blend_amount/blend_amount", control_stick_normal_dir)
-		animation_tree.set("parameters/Blend2 2/blend_amount", control_look_normal_dir)
-		
-		var up_down_fan_direction:float
-		if float_booster == 1:
-			up_down_fan_direction = -0.5
-		elif float_booster == -1:
-			up_down_fan_direction = 0.5
+		animationtree.set("parameters/forward backward/blend_position", -input_dir)
+		animationtree.set("parameters/left right/blend_position", axis)
 		
 		if input_dir:
-			var tween = get_tree().create_tween()
-			tween.set_ease(Tween.EASE_IN)
 			if input_dir > 0:
-				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", up_down_fan_direction + 1.5, 0.5)
+				if float_booster == 1.0:
+					animationtree["parameters/fan blend/blend_position"] = 0.125
+				elif float_booster == -1.0:
+					animationtree["parameters/fan blend/blend_position"] = 0.375
+				else:
+					animationtree["parameters/fan blend/blend_position"] = 0.75
+				
 			elif input_dir < 0:
-				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -(up_down_fan_direction + 0.5), 0.5)
-		elif float_booster != 0:
-			var tween = get_tree().create_tween()
-			if float_booster == 1:
-				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", 0.5, 0.5)
-			elif float_booster == -1:
-				tween.tween_property(animation_tree, "parameters/fan blend/blend_amount", -1.5, 0.5)
-	
+				if float_booster == 1.0:
+					animationtree["parameters/fan blend/blend_position"] = 0.875
+				elif float_booster == -1.0:
+					animationtree["parameters/fan blend/blend_position"] = 0.625
+				else:
+					animationtree["parameters/fan blend/blend_position"] = 0.25
+					print(animationtree["parameters/fan blend/blend_position"])
+			
+			elif float_booster == 1.0:
+				animationtree["parameters/fan blend/blend_position"] = 0.0
+			elif float_booster == -1.0:
+				animationtree["parameters/fan blend/blend_position"] = 0.5
 	
 	if not driving:
 		if shape_cast_3d.is_colliding():

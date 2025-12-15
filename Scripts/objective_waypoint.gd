@@ -15,22 +15,23 @@ var last_scan_position:Vector3
 
 @onready var color_rect: ColorRect = $ColorRect
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if active:
 		var scan_pos:Vector3
 		if use_last_scan_position:
 			scan_pos = last_scan_position
 		else:
 			scan_pos = global_position
-		var window = get_window()
+		
 		var screen_pos = get_viewport().get_camera_3d().unproject_position(scan_pos)
-		var is_behind = get_viewport().get_camera_3d().is_position_behind(scan_pos)
 		var is_in_frustrum = get_viewport().get_camera_3d().is_position_in_frustum(scan_pos)
 		if is_in_frustrum:
 			color_rect.position = screen_pos
 			return
-		elif not is_behind:
+		
+		var window = get_window()
+		var is_behind = get_viewport().get_camera_3d().is_position_behind(scan_pos)
+		if not is_behind:
 			color_rect.position.y = screen_pos.y
 			color_rect.position.x = screen_pos.x
 			color_rect.position.x = clampf(color_rect.position.x, 0, window.size.x - 40)

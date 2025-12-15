@@ -3,7 +3,7 @@ extends Area3D
 @export var active:bool = false
 @export var atractor_speed:float = 10
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !active:
 		return
 	if has_overlapping_bodies():

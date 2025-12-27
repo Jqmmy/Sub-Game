@@ -15,6 +15,9 @@ extends RigidBody3D
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var ship_animation_tree: AnimationTree = $diver/AnimationTree
+@onready var map_cam: Camera3D = $"map/map cam"
+@onready var sub_viewport: SubViewport = $map/SubViewport
+
 @export_node_path("SubViewport") var viewport:NodePath
 
 var driving:bool = false
@@ -28,6 +31,7 @@ var parked:bool = true:
 			gravity_scale = 0
 		else:
 			gravity_scale = 1
+var using_map:bool = false
 
 var radar_timer:float = 0
 var current_speed = 3.0
@@ -55,7 +59,9 @@ func _ready() -> void:
 	radar_container.modulate = Color(1,1,1,0)
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	if using_map:
+		sub_viewport.push_input(event, true)
 	if driving:
 		var radar_change_speed:float = 50.0
 		
@@ -254,3 +260,12 @@ func _on_area_3d_2_body_exited(body: Node3D) -> void:
 func _on_radar_fade_timer_timeout() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(radar_container, "modulate", Color(1.0, 1.0, 1.0, 0.0), 1.0)
+
+
+func _on_map_interacted() -> void:
+	var player = get_tree().get_first_node_in_group("player") as Player
+	map_cam.make_current()
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	using_map = true
+	

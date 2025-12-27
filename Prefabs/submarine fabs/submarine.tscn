@@ -1,11 +1,22 @@
-[gd_scene load_steps=59 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene load_steps=63 format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="3_0vtxn"]
 [ext_resource type="Script" uid="uid://ccu48ib8fb103" path="res://Scripts/Inside.gd" id="4_dws13"]
 [ext_resource type="PackedScene" uid="uid://5xnlpfobcd64" path="res://Prefabs/submarine fabs/ship_depth_ui.tscn" id="5_0vtxn"]
+[ext_resource type="PackedScene" uid="uid://ew71ttol5l2h" path="res://Scenes/test drawing.tscn" id="6_cb3dh"]
 [ext_resource type="Script" uid="uid://cdl17nh4u20m3" path="res://Scripts/atractor.gd" id="6_ibfwu"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cb3dh"]
+viewport_path = NodePath("map/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icesl"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_cb3dh")
+uv1_scale = Vector3(1, 2.035, 1)
+uv1_offset = Vector3(0, -0.525, 0)
+uv1_triplanar_sharpness = 2.639011
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0vtxn"]
 height = 0.1484375
@@ -340,7 +351,7 @@ height = 0.36914063
 radius = 1.1176758
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8qaoj"]
-height = 4.865494
+height = 4.9493484
 radius = 1.0625
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ibfwu"]
@@ -358,6 +369,9 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibfwu"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_0vtxn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2qsgv"]
+size = Vector3(1.2451172, 0.09765625, 2.399414)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tyhre"]
 size = Vector3(0.6669922, 0.87646484, 0.3274479)
@@ -382,6 +396,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="sub" parent="diver" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4682245e-05, 2.0845084, 1.3890762)
+surface_material_override/1 = SubResource("StandardMaterial3D_icesl")
 
 [node name="Circle" parent="diver/fan arms" index="0"]
 transform = Transform3D(1.1121775, 0, 0, 0, 1.1121775, 0, 0, 0, 1.1121775, 1.2995204, -0.38751578, -0.008727074)
@@ -408,8 +423,8 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(0.0074575776, 0.6525879, 0.008586257, 0.75762767)
-bones/41/rotation = Quaternion(0.21381947, 0.768154, 0.32172728, 0.5105998)
+bones/40/rotation = Quaternion(0.0056595765, 0.5307779, 0.0065859416, 0.8474665)
+bones/41/rotation = Quaternion(0.38629937, -1.8391616e-05, 2.2211332e-05, 0.9223736)
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0"]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
@@ -521,22 +536,22 @@ transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371
 shape = SubResource("CylinderShape3D_0vtxn")
 
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(-0.6999041, -0.7040912, 0.11995584, 0.6496902, -0.6973795, -0.30259475, 0.29670915, -0.1338532, 0.9455401, 0.115278706, 4.265428, 0.47580025)
+transform = Transform3D(0.4398676, -0.62914604, -0.64085186, 0.013411453, -0.7089123, 0.7051686, -0.8979622, -0.31877565, -0.30338985, -0.08817276, 4.523909, 0.1782523)
 
 [node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(-0.69990414, -0.7040913, 0.11995584, 0.64969033, -0.6973797, -0.30259478, 0.29670918, -0.13385335, 0.9455401, 0.11527834, 4.265427, 0.4758001)
+transform = Transform3D(0.43986762, -0.62914604, -0.6408519, 0.013411457, -0.70891255, 0.7051686, -0.8979624, -0.31877565, -0.30338985, -0.088173054, 4.5239086, 0.17825218)
 
 [node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(-0.11995587, -0.7040912, -0.6999043, 0.3025949, -0.69737965, 0.6496903, -0.9455405, -0.13385326, 0.29670912, -0.08710534, 4.5088778, 0.31401306)
+transform = Transform3D(0.6408522, -0.62914616, 0.43986768, -0.70516896, -0.7089125, 0.013411313, 0.30339006, -0.31877562, -0.89796245, 0.18693331, 4.3543324, 0.030053377)
 
 [node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(-0.11995568, -0.70409167, -0.69990456, 0.30259466, -0.69737977, 0.6496907, -0.94554013, -0.13385318, 0.29670918, -0.08710583, 4.5088787, 0.3140124)
+transform = Transform3D(0.6408518, -0.6291462, 0.43986794, -0.7051686, -0.7089126, 0.013411313, 0.3033901, -0.3187759, -0.8979627, 0.18693386, 4.354332, 0.030053213)
 
 [node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(-0.14163388, -0.14248121, 0.024274472, 0.13147254, -0.14112301, -0.061233643, 0.06004262, -0.027086793, 0.1913412, 9.28515e-05, 4.258838, 0.21851815)
+transform = Transform3D(0.08901244, -0.12731513, -0.12968396, 0.002713973, -0.14345682, 0.1426992, -0.18171331, -0.064508036, -0.061394535, -0.00027766745, 4.2588596, 0.21734923)
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.030728409, -0.14028856, -0.14256637, 0.0038437403, -0.1437982, 0.14232911, -0.19997817, -0.024320493, -0.0191709, 9.345205e-05, 4.2588377, 0.2185183)
+transform = Transform3D(0.089012414, -0.12731516, -0.12968393, 0.0027139722, -0.14345679, 0.14269921, -0.18171325, -0.06450804, -0.06139451, -0.00027717592, 4.258859, 0.21734945)
 
 [node name="map button_001" parent="diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8lpy1")
@@ -655,7 +670,7 @@ gravity_space_override = 3
 script = ExtResource("4_dws13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.4871831)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.44525576)
 shape = SubResource("CylinderShape3D_8qaoj")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
@@ -687,6 +702,26 @@ size = Vector2i(800, 500)
 
 [node name="Ship depth UI" parent="SubViewport" instance=ExtResource("5_0vtxn")]
 
+[node name="map" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82188296, 2.279518, 2.723402)
+script = ExtResource("3_0vtxn")
+hover_text = "Use Map"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.18274236, -0.055257797, 0.37378716)
+shape = SubResource("BoxShape3D_2qsgv")
+
+[node name="map cam" type="Camera3D" parent="map"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.6444657, -0.055477858, 0.37601042)
+
+[node name="SubViewport" type="SubViewport" parent="map"]
+size = Vector2i(512, 256)
+
+[node name="Control" parent="map/SubViewport" node_paths=PackedStringArray("collision_object", "cam_look_point") instance=ExtResource("6_cb3dh")]
+collision_object = NodePath("../..")
+cam_look_point = NodePath("../../..")
+
 [node name="entrance area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6863565, 4.9961834)
 collision_mask = 4
@@ -716,8 +751,10 @@ shape = SubResource("CylinderShape3D_bhf8s")
 [connection signal="interacted" from="diver/armature for sub/Skeleton3D/Cylinder_001/button" to="." method="_on_button_interacted"]
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
 [connection signal="timeout" from="radar fade timer" to="." method="_on_radar_fade_timer_timeout"]
+[connection signal="interacted" from="map" to="." method="_on_map_interacted"]
 [connection signal="body_entered" from="entrance area" to="." method="_on_entrance_area_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
 [connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_2_body_exited"]
 
 [editable path="diver"]
+[editable path="map/SubViewport/Control"]

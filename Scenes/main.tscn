@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=56 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="1_jjgbg"]
@@ -8,21 +8,20 @@
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/submarine fabs/objective_waypoint.tscn" id="7_6bp64"]
-[ext_resource type="PackedScene" uid="uid://cagrfw40y8ip7" path="res://Prefabs/fish.tscn" id="9_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://dnm38uk7jynrg" path="res://Assets/blend files/Map.blend" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://cynew66wedwti" path="res://Assets/blend files/serpant.blend" id="11_d1ilt"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bp64"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d1ilt"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_344ge"]
-sky_material = SubResource("ProceduralSkyMaterial_6bp64")
+[sub_resource type="Sky" id="Sky_6iyac"]
+sky_material = SubResource("ProceduralSkyMaterial_d1ilt")
 
-[sub_resource type="Environment" id="Environment_ynf5e"]
+[sub_resource type="Environment" id="Environment_fdnlq"]
 background_mode = 2
-sky = SubResource("Sky_344ge")
-tonemap_mode = 1
+sky = SubResource("Sky_6iyac")
+tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21xkr"]
@@ -251,6 +250,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4yf0q")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_d1ilt"]
+viewport_path = NodePath("Submarine/map/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iyac"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_d1ilt")
+uv1_scale = Vector3(1.01, 2.1, 1)
+uv1_offset = Vector3(-0.005, -0.55, 0)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kry3j"]
 render_priority = 0
 shader = ExtResource("4_21xkr")
@@ -353,11 +361,16 @@ size = Vector3(500, 300, 750)
 script = ExtResource("1_8gbba")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ynf5e")
+environment = SubResource("Environment_fdnlq")
+
+[node name="Node3D" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 0.1
 shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.45837, 0, 9.434265)
@@ -417,6 +430,9 @@ skeleton = NodePath("")
 [node name="Submarine" parent="." instance=ExtResource("5_kry3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 2.4597511, 5.4115734)
 
+[node name="sub" parent="Submarine/diver" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_6iyac")
+
 [node name="floor glass" parent="Submarine/diver" index="2"]
 surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
 
@@ -428,26 +444,26 @@ surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
 transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
 
 [node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
-bones/40/rotation = Quaternion(0.0065948404, 0.51330644, 0.007271619, 0.85814935)
-bones/41/rotation = Quaternion(0.31072685, 0.5479538, 0.22951263, 0.74197006)
+bones/40/rotation = Quaternion(0.007841558, -0.40827912, 0.00441543, 0.9128128)
+bones/41/rotation = Quaternion(0.38629937, -1.8380828e-05, 2.220691e-05, 0.9223736)
 
 [node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(-0.45217416, -0.6154192, -0.6455981, 0.6881989, -0.70117223, 0.18638393, -0.56737995, -0.3600221, 0.7405831, -0.09114219, 4.3906317, 0.44995284)
+transform = Transform3D(0.6638125, 0.53447163, 0.5231561, -0.002158884, -0.698129, 0.7159684, 0.74789554, -0.47639832, -0.462273, 0.067131005, 4.5253663, 0.15549894)
 
 [node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(-0.45217416, -0.6154192, -0.6455982, 0.6881989, -0.70117235, 0.18638387, -0.56737995, -0.3600223, 0.7405831, -0.091142446, 4.3906317, 0.44995254)
+transform = Transform3D(0.6638125, 0.5344716, 0.5231561, -0.0021588819, -0.69812924, 0.71596825, 0.7478956, -0.4763983, -0.46227303, 0.06713123, 4.525366, 0.15549874)
 
 [node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(0.6455985, -0.6154192, -0.45217428, -0.18638398, -0.7011723, 0.68819886, -0.74058336, -0.36002207, -0.5673802, -0.039550215, 4.521106, 0.12327671)
+transform = Transform3D(-0.52315646, 0.5344716, 0.66381276, -0.71596855, -0.69812906, -0.002159059, 0.46227318, -0.47639844, 0.7478956, 0.10001087, 4.349098, 0.46250218)
 
 [node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(0.6455983, -0.6154196, -0.4521743, -0.186384, -0.70117235, 0.6881992, -0.740583, -0.36002237, -0.5673804, -0.039549977, 4.521106, 0.12327579)
+transform = Transform3D(-0.5231563, 0.534472, 0.6638129, -0.7159683, -0.6981293, -0.0021590292, 0.46227288, -0.47639838, 0.747896, 0.10001081, 4.3490973, 0.46250278)
 
 [node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(-0.091502786, -0.12453737, -0.13064444, 0.13926524, -0.1418905, 0.037716977, -0.11481608, -0.07285475, 0.14986575, -0.0003872221, 4.258851, 0.2177833)
+transform = Transform3D(0.13433035, 0.108156666, 0.10586684, -0.0004368699, -0.14127469, 0.14488463, 0.15134555, -0.09640483, -0.09354642, -0.0021143768, 4.2588573, 0.21618994)
 
 [node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.09637753, -0.12458457, -0.12704463, 0.003133941, -0.14327252, 0.14287561, -0.17790963, -0.07001398, -0.06630604, -0.0003867423, 4.2588506, 0.21778363)
+transform = Transform3D(0.13433032, 0.10815668, 0.105866805, -0.0004368696, -0.14127466, 0.14488465, 0.1513455, -0.09640484, -0.09354639, -0.0021147772, 4.258857, 0.2161903)
 
 [node name="map button_001" parent="Submarine/diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ynf5e")
@@ -505,17 +521,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.858616, 2.2408152, -3.205
 [node name="Objective waypoint" parent="." instance=ExtResource("7_6bp64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.484236, 0.13374999, -27.992727)
 
-[node name="GPUParticles3D" parent="." instance=ExtResource("9_d1ilt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7730007, 7.807453, -11.991304)
-
 [node name="Map" parent="." instance=ExtResource("10_hptm8")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -148.4407, 0, 105.313156)
 
 [node name="serpant" parent="." instance=ExtResource("11_d1ilt")]
-transform = Transform3D(-0.123549506, 0, -0.9923384, 0, 1, 0, 0.9923384, 0, -0.123549506, 42.47644, 4.8535337, 1.7225227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.336155, 4.8535337, -46.228462)
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/head/Camera3D/face mask"]
 [editable path="CharacterBody3D/charecter"]
 [editable path="Submarine"]
 [editable path="Submarine/diver"]
+[editable path="Submarine/map/SubViewport/Control"]

@@ -1,30 +1,21 @@
-class_name Radar
-extends Node
+@tool
+extends Control
 
-var closest_object:Node3D
+@export var arc_width:float = 1.571:
+	set(value):
+		arc_width = value
+		queue_redraw()
+@export var arc_position:float = 0:
+	set(value):
+		arc_position = value - 1.5707963267948966
+		queue_redraw()
 
-func _ready() -> void:
-	print(scan_closest_object(Vector3(0,0,0)))
+ 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		queue_redraw()
 
-func scan_closest_object(scan_position:Vector3) -> Vector3:
-	var scanable_objects = get_tree().get_nodes_in_group("scanable")
-	var close_object_distance
-	for object in scanable_objects:
-		if object is Node3D:
-			var object_distance = object.global_position.distance_squared_to(scan_position)
-			if scanable_objects.find(object) == 0:
-				closest_object = object
-				close_object_distance = closest_object.global_position.distance_squared_to(scan_position)
-			elif object_distance < close_object_distance:
-				closest_object = object
-	
-	return closest_object.global_position
-
-func get_scannable_objects() -> Array[Vector3]:
-	var scanable_objects = get_tree().get_nodes_in_group("scanable")
-	var object_positions:Array[Vector3]
-	for object in scanable_objects:
-		if object is Node3D:
-			object_positions.append(object.global_position)
-			
-	return object_positions
+func _draw() -> void:
+	draw_circle(size/2, 100, Color.WHITE, true)
+	draw_circle(size/2, 100, Color.GRAY, false, 10.0, false)
+	draw_arc(size/2, 100, arc_position - arc_width, arc_position + arc_width, 50,  Color.RED, 10.0)

@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 	if using_map:
 		sub_viewport.push_input(event, true)
 	if driving:
-		var radar_change_speed:float = 50.0
+		var radar_change_speed:float = 500.0
 		
 		if Input.is_action_pressed("long radar"):
 			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://dnu0i17s3hiy1" path="res://Assets/blend files/charecter.blend" id="2_5wxv7"]
 [ext_resource type="PackedScene" uid="uid://c2dqhqkbj57sy" path="res://Prefabs/game_hud.tscn" id="2_knrd4"]
-[ext_resource type="Script" uid="uid://k7ikraa4f2gd" path="res://Scripts/Radar.gd" id="3_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://bvnwhjvlfis5t" path="res://Assets/blend files/face mask.blend" id="4_2nftw"]
+[ext_resource type="Script" uid="uid://b10jw5gwb4mnt" path="res://Scripts/WristRadar.gd" id="4_knrd4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5wxv7"]
 radius = 0.3
@@ -117,6 +117,7 @@ shape = SubResource("CapsuleShape3D_5wxv7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.575, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
+cull_mask = 1048573
 fov = 80.0
 
 [node name="light" type="SpotLight3D" parent="head/Camera3D"]
@@ -138,7 +139,7 @@ collide_with_areas = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Radar" type="Node" parent="."]
-script = ExtResource("3_y5hcb")
+script = ExtResource("4_knrd4")
 
 [node name="wrist UI" type="SubViewport" parent="Radar"]
 size = Vector2i(256, 128)

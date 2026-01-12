@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2e2kkuq36jrw"]
+
+[ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_ekhe2"]
+[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="2_4wdbe"]
+
+[node name="Main World" type="Node3D"]
+
+[node name="ship" parent="." instance=ExtResource("1_ekhe2")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 0, 0)
+
+[node name="Submarine" parent="." instance=ExtResource("2_4wdbe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4241786, 11.301579)

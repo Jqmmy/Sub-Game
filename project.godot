@@ -160,6 +160,8 @@ pan={
 
 [layer_names]
 
+3d_render/layer_1="Normal"
+3d_render/layer_2="Map"
 3d_physics/layer_1="floors&walls"
 3d_physics/layer_2="submarine"
 3d_physics/layer_3="player"

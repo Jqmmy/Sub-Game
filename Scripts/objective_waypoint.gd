@@ -9,11 +9,15 @@ var last_scan_position:Vector3
 		last_scan_position = global_position
 		if active:
 			color_rect.show()
+			label_3d.show()
+			
 		else:
 			color_rect.hide()
+			label_3d.hide()
 @export var edge_padding:float = 20
 
 @onready var color_rect: ColorRect = $ColorRect
+@onready var label_3d: Label3D = $Label3D
 
 func _process(_delta: float) -> void:
 	if active:

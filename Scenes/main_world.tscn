@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2e2kkuq36jrw"]
+[gd_scene load_steps=7 format=3 uid="uid://d2e2kkuq36jrw"]
 
-[ext_resource type="Script" uid="uid://b2dci5huq566d" path="res://Scripts/Post Process/GameVisuals.gd" id="1_4wdbe"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_ekhe2"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="2_4wdbe"]
 
@@ -15,23 +14,7 @@ sky_material = SubResource("ProceduralSkyMaterial_lefxv")
 sky = SubResource("Sky_uq1df")
 adjustment_enabled = true
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_4wdbe"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = false
-effect_callback_type = 2
-access_resolved_color = false
-access_resolved_depth = false
-needs_motion_vectors = false
-needs_normal_roughness = false
-needs_separate_specular = false
-script = ExtResource("1_4wdbe")
-edge_sharpness = 0.03
-edge_dampness = 0.5
-metadata/_custom_type_script = "uid://b2dci5huq566d"
-
 [sub_resource type="Compositor" id="Compositor_lefxv"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4wdbe")])
 
 [node name="Main World" type="Node3D"]
 

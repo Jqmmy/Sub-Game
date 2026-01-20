@@ -9,8 +9,8 @@ layout(rgba16f, binding = 0, set = 1) uniform writeonly image2D out_tex;
 
 layout(push_constant, std430) uniform Params {
     vec2 screen_size;
-	float edgeSharpness;
-	float edgeDampness;
+	float edge_min;
+	float edge_max;
 } p;
 
 void main() {
@@ -50,18 +50,22 @@ void main() {
 		ivec2 samplePixel = pixel + offsets[i];
 		
 		vec3 col = imageLoad(screen_tex, samplePixel).rgb;
+		col = pow(col, vec3(2.2));
 		
-		//float lum = dot(col, vec3(0.299, 0.587, 0.114));
+		float lum = dot(col, vec3(0.299, 0.587, 0.114));
 		
-		gx += col.x * kernalX[i];
-		gy += col.y * kernalY[i];
+		gx += lum * kernalX[i];
+		gy += lum * kernalY[i];
 	}
 	
 	float edgeStrength = length(vec2(gx, gy));
-	
-	float edge = smoothstep(edgeStrength, p.edgeSharpness, p.edgeDampness);
-	
-	
+	edgeStrength = edgeStrength / 32.0;
+	edgeStrength = clamp(edgeStrength, 0.0, 1.0);
+
+	edgeStrength = max(edgeStrength - p.edge_min, 0.0);
+
+	float edge = smoothstep(0.0, p.edge_max - p.edge_min, edgeStrength);
+
 	vec4 outColor = vec4(vec3(edge), 1.0) ;
 	
 	

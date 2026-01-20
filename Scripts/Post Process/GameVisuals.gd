@@ -2,8 +2,8 @@
 extends CompositorEffect
 class_name SobelFilter
 
-@export_range(0.0, 3, 0.001) var edge_sharpness:float = 0.3
-@export_range(0.0, 3, 0.001) var edge_dampness:float = 0.3
+@export_range(0.0, 3, 0.001) var edge_min:float = 0.02
+@export_range(0.0, 3, 0.001) var edge_max:float = 0.2
 
 var rd:RenderingDevice
 var shader:RID
@@ -32,8 +32,8 @@ func _render_callback(effect_callback_type: int, render_data: RenderData) -> voi
 	var push_constants:PackedFloat32Array = PackedFloat32Array()
 	push_constants.append(size.x)
 	push_constants.append(size.y)
-	push_constants.append(edge_sharpness)
-	push_constants.append(edge_dampness)
+	push_constants.append(edge_min)
+	push_constants.append(edge_max)
 	
 	for view in scene_buffers.get_view_count():
 		var screen_tex:RID = scene_buffers.get_color_layer(view)

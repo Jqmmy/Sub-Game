@@ -1,9 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2e2kkuq36jrw"]
+[gd_scene load_steps=9 format=3 uid="uid://d2e2kkuq36jrw"]
 
+[ext_resource type="Script" uid="uid://b2dci5huq566d" path="res://Scripts/Post Process/GameVisuals.gd" id="1_4wdbe"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_ekhe2"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="2_4wdbe"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_uq1df"]
+sky_material = SubResource("ProceduralSkyMaterial_lefxv")
+
+[sub_resource type="Environment" id="Environment_1tp12"]
+sky = SubResource("Sky_uq1df")
+adjustment_enabled = true
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_4wdbe"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 2
+access_resolved_color = false
+access_resolved_depth = false
+needs_motion_vectors = false
+needs_normal_roughness = false
+needs_separate_specular = false
+script = ExtResource("1_4wdbe")
+edge_sharpness = 0.03
+edge_dampness = 0.5
+metadata/_custom_type_script = "uid://b2dci5huq566d"
+
+[sub_resource type="Compositor" id="Compositor_lefxv"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4wdbe")])
+
 [node name="Main World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1tp12")
+compositor = SubResource("Compositor_lefxv")
 
 [node name="ship" parent="." instance=ExtResource("1_ekhe2")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 0, 0)

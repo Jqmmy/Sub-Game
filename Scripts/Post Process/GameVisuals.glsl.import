@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://c8u6dc36qf8f"
+path="res://.godot/imported/GameVisuals.glsl-759ede4642ed1d1bf0d520cb88e731fa.res"
+
+[deps]
+
+source_file="res://Scripts/Post Process/GameVisuals.glsl"
+dest_files=["res://.godot/imported/GameVisuals.glsl-759ede4642ed1d1bf0d520cb88e731fa.res"]
+
+[params]
+

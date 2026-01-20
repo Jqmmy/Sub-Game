@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c6t4chv5ly3lu"]
+
+[resource]
+diffuse_mode = 3
+disable_specular_occlusion = true
+albedo_color = Color(0.66656864, 0.6665687, 0.66656864, 1)
+roughness = 0.01
+proximity_fade_distance = 0.01
+stencil_flags = 2

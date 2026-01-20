@@ -6,6 +6,7 @@ extends SubViewportContainer
 @export var pan_speed:float = 0.25
 
 @onready var camera_3d: Camera3D = $SubViewport2/Camera3D
+@onready var map_mesh: MeshInstance3D = $"map mesh"
 
 var cam_offset:Vector3
 
@@ -18,11 +19,12 @@ func _ready() -> void:
 	collision_object.mouse_entered.connect(on_mouse_entered)
 	collision_object.mouse_exited.connect(on_mouse_exited)
 	
-	fog_image = Image.create_empty(map_size.x, map_size.y, false, Image.FORMAT_L8)
+	fog_image = Image.create_empty(map_size.x, map_size.y, true, Image.FORMAT_LA8)
 	fog_image.fill(Color.BLACK)
 	
 	fog_texture = ImageTexture.create_from_image(fog_image)
 	
+	map_mesh.mesh.surface_get_material(0).albedo_texture = fog_texture
 
 func _input(event: InputEvent) -> void:
 	var mouse_relative:Vector2
@@ -39,7 +41,6 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	camera_3d.global_position.x = cam_look_point.global_position.x + cam_offset.x
-	camera_3d.global_position.y = cam_look_point.global_position.y + 50
 	camera_3d.global_position.z = cam_look_point.global_position.z + cam_offset.z
 
 func on_mouse_entered():
@@ -52,11 +53,22 @@ func on_mouse_exited():
 func world_to_fog(world_pos:Vector2) -> Vector2i:
 	var uv = world_pos / world_size
 	return Vector2i(
-		int(uv.x * map_size.x), 
-		int(uv.y * map_size.y)
+		int(uv.x * map_size.x) + map_size.x/2, 
+		int(uv.y * map_size.y) + map_size.y/2
 		)
 
 func update_fog(world_pos:Vector2, radius:float):
 	var fog_pos = world_to_fog(world_pos)
 	
+	for x in range(-radius, radius):
+		for y in range(-radius, radius):
+			if x * x + y * y <= radius * radius:
+				var px = fog_pos.x + x
+				var py = fog_pos.y + y
+				if px < 0 or py < 0 or px >= map_size.x or py >= map_size.y:
+					continue
+				
+				fog_image.set_pixel(px, py, Color(1.0, 1.0, 1.0, 0.0))
+	
+	fog_texture.update(fog_image)
 	

@@ -17,6 +17,7 @@ extends RigidBody3D
 @onready var ship_animation_tree: AnimationTree = $diver/AnimationTree
 @onready var map_cam: Camera3D = $"map/map cam"
 @onready var sub_viewport: SubViewport = $map/SubViewport
+@onready var map: SubViewportContainer = $map/SubViewport/map
 
 @export_node_path("SubViewport") var viewport:NodePath
 
@@ -191,6 +192,7 @@ func _physics_process(delta: float) -> void:
 	if not driving:
 		if shape_cast_3d.is_colliding():
 			apply_central_force(Vector3(0,2.5,0))
+			
 
 
 func _on_interactable_interacted() -> void:
@@ -269,3 +271,8 @@ func _on_map_interacted() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	using_map = true
 	
+
+
+func _on_update_map_timer_timeout() -> void:
+	if Vector2(linear_velocity.x, linear_velocity.z) > Vector2.ZERO:
+		map.update_fog(Vector2(global_position.x, global_position.z), 30)

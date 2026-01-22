@@ -8,66 +8,39 @@ layout(rgba16f, binding = 0, set = 1) uniform writeonly image2D out_tex;
 
 
 layout(push_constant, std430) uniform Params {
-    vec2 screen_size;
+    vec3 edge_color;
 	float edge_min;
 	float edge_max;
 } p;
 
+mat3 sx = mat3(
+	1.0, 2.0, 1.0,
+	0.0, 0.0, 0.0,
+	-1.0, -2.0, -1.0
+);
+mat3 sy = mat3(
+	1.0, 0.0, -1.0,
+	2.0, 0.0, -2.0,
+	1.0, 0.0, -1.0
+);
+
 void main() {
 	ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+	vec3 diffuse = imageLoad(screen_tex, pixel).rgb;
+	mat3 I;
 	
-	ivec2 size = ivec2(p.screen_size);
-	
-	if (pixel.x <= 0 || pixel.y <= 0 ||
-		pixel.x >= size.x - 1 || pixel.y >= size.y - 1) {
-		vec4 c = imageLoad(screen_tex, pixel);
-		imageStore(out_tex, pixel, c);
-		return;
-	}
-	
-	float kernalX[9] = float[](
-		-1, 0, 1,
-		-2, 0, 2,
-		-1, 0, 1
-	);
-	float kernalY[9] = float[](
-		-1, -2, -1,
-		0, 0, 0,
-		1, 2, 1
-	);
-	
-	ivec2 offsets[9] = ivec2[](
-		ivec2(-1,  1), ivec2(0,  1), ivec2(1,  1),
-		ivec2(-1,  0), ivec2(0,  0), ivec2(1,  0),
-		ivec2(-1, -1), ivec2(0, -1), ivec2(1, -1)
-    );
+	for (int i=0; i<3; i++) {
+		for (int j=0; j<3; j++) {
+			vec3 col = imageLoad(screen_tex, pixel + ivec2(i-1, j-1)).rgb;
+			I[i][j] = length(col);
+		};
+	};
 
-	float gx = 0.0;
-	float gy = 0.0;
-	
-	
-	for (int i = 0; i < 9; i++) {
-		ivec2 samplePixel = pixel + offsets[i];
-		
-		vec3 col = imageLoad(screen_tex, samplePixel).rgb;
-		col = pow(col, vec3(2.2));
-		
-		float lum = dot(col, vec3(0.299, 0.587, 0.114));
-		
-		gx += lum * kernalX[i];
-		gy += lum * kernalY[i];
-	}
-	
-	float edgeStrength = length(vec2(gx, gy));
-	edgeStrength = edgeStrength / 32.0;
-	edgeStrength = clamp(edgeStrength, 0.0, 1.0);
+	float gx = dot(sx[0], I[0]) + dot(sx[1], I[1]) + dot(sx[2], I[2]);
+	float gy = dot(sy[0], I[0]) + dot(sy[1], I[1]) + dot(sy[2], I[2]);
 
-	edgeStrength = max(edgeStrength - p.edge_min, 0.0);
-
-	float edge = smoothstep(0.0, p.edge_max - p.edge_min, edgeStrength);
-
-	vec4 outColor = vec4(vec3(edge), 1.0) ;
-	
-	
-	imageStore(out_tex, pixel, outColor);
+	float out_color = sqrt(pow(gx, 2.0) + pow(gy, 2.0));
+	out_color = smoothstep(p.edge_min, p.edge_max, out_color);
+	vec3 edgeColor = vec3(p.edge_color.r, p.edge_color.g, p.edge_color.b);
+	imageStore(out_tex, pixel, vec4(mix(diffuse, edgeColor, out_color), 1.0));
 }

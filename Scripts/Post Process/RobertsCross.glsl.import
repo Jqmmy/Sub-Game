@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://b5jahtbsyosl2"
+path="res://.godot/imported/RobertsCross.glsl-36e5dd6dbaf91acbe714960bb128ef93.res"
+
+[deps]
+
+source_file="res://Scripts/Post Process/RobertsCross.glsl"
+dest_files=["res://.godot/imported/RobertsCross.glsl-36e5dd6dbaf91acbe714960bb128ef93.res"]
+
+[params]
+

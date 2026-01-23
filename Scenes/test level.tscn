@@ -1,7 +1,7 @@
-[gd_scene load_steps=58 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=59 format=4 uid="uid://61cvkp3cyet7"]
 
 [ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_lgose"]
-[ext_resource type="Script" uid="uid://b2dci5huq566d" path="res://Scripts/Post Process/GameVisuals.gd" id="2_lgose"]
+[ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="2_lgose"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="2_y8lat"]
 [ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="3_spywk"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="4_twes1"]
@@ -26,23 +26,30 @@ fog_mode = 1
 fog_density = 1.0
 adjustment_enabled = true
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_lgose"]
+[sub_resource type="CompositorEffect" id="CompositorEffect_y8lat"]
 resource_local_to_scene = false
 resource_name = ""
 enabled = true
-effect_callback_type = 2
+effect_callback_type = 3
 access_resolved_color = false
 access_resolved_depth = false
 needs_motion_vectors = false
 needs_normal_roughness = false
-needs_separate_specular = false
 script = ExtResource("2_lgose")
-edge_sharpness = 0.03
-edge_dampness = 0.5
-metadata/_custom_type_script = "uid://b2dci5huq566d"
+metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_lgose"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_lgose")
+metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 
 [sub_resource type="Compositor" id="Compositor_spywk"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_lgose")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_y8lat"), SubResource("CompositorEffect_lgose")])
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21xkr"]
 size = Vector3(500, 0, 750)
@@ -465,26 +472,26 @@ surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
 transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
 
 [node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
-bones/40/rotation = Quaternion(0.0025860758, -0.0056464337, 0.0017936968, 0.9999792)
-bones/41/rotation = Quaternion(0.38629943, -1.8446588e-05, 2.2370505e-05, 0.9223734)
+bones/40/rotation = Quaternion(-0.0011461133, -0.44356853, -0.0030488307, 0.8962346)
+bones/41/rotation = Quaternion(0.100934744, 0.8903128, 0.37287983, 0.24107254)
 
 [node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(0.9998864, 0.010493071, 0.010793632, -0.00021093251, -0.70718277, 0.70703036, 0.015051994, -0.7069526, -0.7071003, 0.001519097, 4.524202, 0.119645394)
+transform = Transform3D(-0.23565127, 0.57244575, -0.7853493, 0.36488637, -0.6968688, -0.6174392, -0.90073615, -0.43206382, -0.044659615, -0.2670891, 4.185098, 0.25471798)
 
 [node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(0.99988645, 0.010493072, 0.01079363, -0.00021093106, -0.70718294, 0.7070303, 0.015051994, -0.7069525, -0.70710033, 0.0015190991, 4.5242014, 0.11964506)
+transform = Transform3D(-0.23565128, 0.57244587, -0.78534925, 0.36488637, -0.6968687, -0.6174393, -0.90073615, -0.43206382, -0.044659644, -0.26708874, 4.1850977, 0.25471777)
 
 [node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(-0.010793681, 0.01049307, 0.9998866, -0.70703065, -0.70718277, -0.00021106005, 0.70710063, -0.7069526, 0.015051872, 0.25053617, 4.350718, 0.30483803)
+transform = Transform3D(0.78534967, 0.57244575, -0.23565117, 0.61743945, -0.6968688, 0.3648864, 0.04465969, -0.43206373, -0.90073645, -0.13258883, 4.435829, 0.041537076)
 
 [node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(-0.01079386, 0.010493308, 0.99988693, -0.7070303, -0.70718306, -0.00021108985, 0.7071004, -0.7069529, 0.01505211, 0.25053662, 4.3507175, 0.30483848)
+transform = Transform3D(0.78534937, 0.57244587, -0.23565127, 0.61743915, -0.69686896, 0.36488664, 0.044659838, -0.43206415, -0.9007367, -0.13258818, 4.4358296, 0.041536674)
 
 [node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(0.20233889, 0.0021234099, 0.0021842234, -4.2678614e-05, -0.14310682, 0.14307594, 0.0030459617, -0.14306022, -0.14309011, 2.6217593e-05, 4.2588854, 0.21509282)
+transform = Transform3D(-0.047686838, 0.11584118, -0.15892471, 0.0738391, -0.14101963, -0.12494614, -0.18227464, -0.087433234, -0.009037413, 0.002019538, 4.258885, 0.21420453)
 
 [node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.20233881, 0.0021233377, 0.0021842227, -4.2728865e-05, -0.14310682, 0.14307591, 0.0030459096, -0.14306019, -0.14309011, 2.6210735e-05, 4.258885, 0.21509336)
+transform = Transform3D(0.122114256, 0.11222908, 0.115944035, -0.0016552802, -0.14452296, 0.14163563, 0.16135566, -0.08641777, -0.086293675, 0.0020189993, 4.2588844, 0.21420488)
 
 [node name="map button_001" parent="Submarine/diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ynf5e")

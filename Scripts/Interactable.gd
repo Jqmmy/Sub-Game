@@ -9,10 +9,7 @@ signal interacted
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	body_entered.connect(func(body):
-		if body.is_in_group("player"):
-			interacted.emit()
-			)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

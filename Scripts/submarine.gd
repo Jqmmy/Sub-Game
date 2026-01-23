@@ -23,6 +23,7 @@ extends RigidBody3D
 
 var driving:bool = false
 var exiting:bool = true
+var times_in_seat:int = -1
 var hatch_open:bool = false
 var parked:bool = true:
 	
@@ -212,12 +213,15 @@ func _on_interactable_interacted() -> void:
 func seat_animation_finished(anim_name:String):
 	var player = get_tree().get_first_node_in_group("player") as Player
 	if anim_name == "get in seat":
-		if exiting:
+		times_in_seat += 1
+		if exiting and times_in_seat > 0:
+			
 			player.process_mode = Node.PROCESS_MODE_PAUSABLE
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player.reparent(get_parent())
 			player.global_position = node_3d.global_position
-		else:
+		elif times_in_seat > 0:
+			print("yeah")
 			driving = true
 			player.skeleton_ik_3d.start()
 			player.right_arm_ik.start()

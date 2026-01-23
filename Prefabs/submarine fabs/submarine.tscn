@@ -101,7 +101,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_erfuo"]
-graph_offset = Vector2(-199.18658, 194.98795)
+graph_offset = Vector2(-375.5, 144.48978)
 nodes/output/position = Vector2(820, 260)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ctasq")
 nodes/Animation/position = Vector2(-360, 260)
@@ -110,15 +110,15 @@ nodes/Animation/position = Vector2(-360, 260)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_fyv3g")
 "nodes/Animation 3/position" = Vector2(-380, -80)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_likqu")
-"nodes/Animation 4/position" = Vector2(-340, 480)
+"nodes/Animation 4/position" = Vector2(-320, 448)
 nodes/Transition/node = SubResource("AnimationNodeTransition_2uwnt")
 nodes/Transition/position = Vector2(-200, 0)
 "nodes/Transition 2/node" = SubResource("AnimationNodeTransition_jgsrw")
-"nodes/Transition 2/position" = Vector2(-140, 460)
+"nodes/Transition 2/position" = Vector2(-144, 448)
 "nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_tdvbg")
-"nodes/Animation 5/position" = Vector2(-340, 640)
+"nodes/Animation 5/position" = Vector2(-320, 608)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_ibfwu")
-nodes/Add2/position = Vector2(260, 260)
+nodes/Add2/position = Vector2(256, 256)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_erfuo")
 nodes/OneShot/position = Vector2(0, 40)
 nodes/hatch/node = SubResource("AnimationNodeTransition_ef8ud")
@@ -423,8 +423,8 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(0.0010708346, -0.14354368, -1.460412e-05, 0.9896434)
-bones/41/rotation = Quaternion(0.38629943, -1.8440418e-05, 2.2367996e-05, 0.9223734)
+bones/40/rotation = Quaternion(0.007896378, -0.594861, 0.0037109668, 0.80378133)
+bones/41/rotation = Quaternion(0.38629934, -1.8383718e-05, 2.2208094e-05, 0.9223735)
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0"]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
@@ -536,22 +536,22 @@ transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371
 shape = SubResource("CylinderShape3D_0vtxn")
 
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(0.9577066, 0.20001483, 0.20686126, -0.0040937853, -0.7093592, 0.7048347, 0.28771648, -0.6758719, -0.6785393, 0.029425483, 4.5239067, 0.12259965)
+transform = Transform3D(0.28870216, 0.6834649, 0.67046714, -0.0072425017, -0.69870704, 0.7153708, 0.9573914, -0.21138503, -0.19676828, 0.086633086, 4.5252852, 0.19091058)
 
 [node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(0.9577067, 0.20001481, 0.20686127, -0.0040937834, -0.7093595, 0.7048347, 0.2877165, -0.67587185, -0.6785393, 0.029425569, 4.523906, 0.12259936)
+transform = Transform3D(0.2887022, 0.6834649, 0.67046714, -0.0072425, -0.6987073, 0.7153707, 0.9573913, -0.21138501, -0.1967683, 0.08663338, 4.525285, 0.19091047)
 
 [node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(-0.20686142, 0.20001477, 0.9577067, -0.704835, -0.7093593, -0.004093945, 0.6785397, -0.67587197, 0.28771648, 0.21755776, 4.3500085, 0.36911145)
+transform = Transform3D(-0.6704675, 0.6834649, 0.2887023, -0.715371, -0.6987071, -0.00724262, 0.19676836, -0.21138522, 0.9573915, -0.012746163, 4.3478904, 0.4825564)
 
 [node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(-0.20686151, 0.20001513, 0.9577071, -0.7048347, -0.7093595, -0.004093915, 0.6785393, -0.6758722, 0.28771678, 0.21755806, 4.3500075, 0.36911198)
+transform = Transform3D(-0.6704673, 0.6834652, 0.28870222, -0.7153708, -0.69870734, -0.00724265, 0.1967681, -0.21138492, 0.95739186, -0.012746458, 4.3478894, 0.48255694)
 
 [node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(0.19380328, 0.04047538, 0.041860834, -0.00082841987, -0.14354727, 0.14263164, 0.058222856, -0.13677067, -0.13731048, 0.0006850885, 4.2588887, 0.21449521)
+transform = Transform3D(0.0584223, 0.13830721, 0.13567698, -0.0014656002, -0.14139166, 0.14476372, 0.19373949, -0.04277625, -0.03981839, -0.0022911583, 4.258859, 0.21571021)
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.19380325, 0.04047531, 0.041860834, -0.00082847, -0.14354728, 0.1426316, 0.058222793, -0.13677068, -0.13731048, 0.0006849315, 4.2588882, 0.21449573)
+transform = Transform3D(0.05842229, 0.13830721, 0.13567695, -0.0014655995, -0.14139163, 0.14476371, 0.19373943, -0.042776253, -0.03981839, -0.002291672, 4.2588587, 0.21571036)
 
 [node name="map button_001" parent="diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8lpy1")

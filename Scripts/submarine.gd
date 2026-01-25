@@ -269,6 +269,7 @@ func _on_radar_fade_timer_timeout() -> void:
 
 
 func _on_map_interacted() -> void:
+	print("yes")
 	var player = get_tree().get_first_node_in_group("player") as Player
 	map_cam.make_current()
 	player.process_mode = Node.PROCESS_MODE_DISABLED

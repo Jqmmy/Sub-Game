@@ -39,10 +39,20 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
+"Glass": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/materials/Glass.tres",
+"use_external/path": "uid://d3jnmorbhubx1"
+},
 "Regular": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://Assets/materials/regular.tres",
 "use_external/path": "uid://c6t4chv5ly3lu"
+},
+"Regular2": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/materials/regular2.tres",
+"use_external/path": "uid://cpee4v54xlcrk"
 }
 }
 }

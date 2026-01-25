@@ -9,6 +9,8 @@ func _ready() -> void:
 
 func scan_closest_object(scan_position:Vector3) -> Vector3:
 	var scanable_objects = get_tree().get_nodes_in_group("scanable")
+	if scanable_objects.is_empty():
+		return Vector3.ZERO
 	var close_object_distance
 	for object in scanable_objects:
 		if object is Node3D:

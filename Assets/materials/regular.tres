@@ -2,7 +2,7 @@
 
 [resource]
 diffuse_mode = 3
+specular_mode = 1
 disable_specular_occlusion = true
-roughness = 0.0
 proximity_fade_distance = 0.01
 stencil_flags = 2

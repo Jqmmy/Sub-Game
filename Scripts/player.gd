@@ -11,10 +11,10 @@ var radar_is_up:bool = false
 var ray_cast_is_hovering:bool = false
 var last_raycast_hover_target:Interactable
 
-var sens:float = 0.05
 @export var camera_3d:Camera3D
 @export var head:Node3D
 @export var skeleton:Skeleton3D
+@export var gem_hold_spot:Marker3D
 @onready var light: SpotLight3D = $head/Camera3D/light
 @onready var radar:WristRadar = $Radar
 @onready var looking_direction: Marker3D = $"head/looking direction"
@@ -31,26 +31,6 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(_delta: float) -> void:
-	if !get_tree().root.has_focus():
-		get_tree().root.grab_focus()
-	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
-	var look_margin:float = 0.1
-	if look_vector.x > look_margin or look_vector.x < -look_margin:
-		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
-			head.rotate_y(look_vector.x * sens)
-		else:
-			rotate_y(look_vector.x * sens)
-			head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
-	else:
-		if head.rotation.y >= 0.5:
-			head.rotation.y = 0.49
-		elif head.rotation.y <= -0.5:
-			head.rotation.y = -0.49
-		
-	if look_vector.y > look_margin or look_vector.y < -look_margin:
-		camera_3d.rotate_x(look_vector.y * sens)
-		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
-		
 	if radar_is_up:
 		var distance_to_gem = global_position.distance_squared_to(radar.scan_closest_object(global_position))
 		if distance_to_gem > 1000:
@@ -59,28 +39,67 @@ func _process(_delta: float) -> void:
 			radar_target_dist_label.text = str(int(distance_to_gem)) + "M"
 	
 	#hovering logic
-	var collider = ray_cast_3d.get_collider()
 	if ray_cast_3d.is_colliding():
-		
-		
-		if  collider is Interactable:
-			if not ray_cast_is_hovering:
+		var collider:CollisionObject3D = ray_cast_3d.get_collider()
+		match collider:
+			Interactable:
 				ray_cast_is_hovering = true
 				collider.hovering = true
 				last_raycast_hover_target = collider
-		elif ray_cast_is_hovering:
-			ray_cast_is_hovering = false
-			last_raycast_hover_target.hovering = false
+				if collider.is_in_group("gem"):
+					collider.interacted.connect(
+					func():
+						if collider.get_parent() is Gem:
+							var gem = collider.get_parent()
+							gem.reparent(gem_hold_spot))
+			_ when collider != Interactable:
+				ray_cast_is_hovering = false
+				last_raycast_hover_target.hovering = false
+			
 	elif ray_cast_is_hovering:
 		ray_cast_is_hovering = false
 		last_raycast_hover_target.hovering = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	#var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
+	#var look_margin:float = 0.1
+	#if look_vector.x > look_margin or look_vector.x < -look_margin:
+		#if head.rotation.y < 0.5 and head.rotation.y > -0.5:
+			#head.rotate_y(look_vector.x * sens)
+		#else:
+			#rotate_y(look_vector.x * sens)
+			#head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
+	#else:
+		#if head.rotation.y >= 0.5:
+			#head.rotation.y = 0.49
+		#elif head.rotation.y <= -0.5:
+			#head.rotation.y = -0.49
+		#
+	#if look_vector.y > look_margin or look_vector.y < -look_margin:
+		#camera_3d.rotate_x(look_vector.y * sens)
+		#camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+	
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * Settings.sens)
+		rotate_y(-event.relative.x * Settings.sens)
+		head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
+		
 		camera_3d.rotate_x(-event.relative.y * Settings.sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+		#if head.rotation.y < 0.5 or head.rotation.y > -0.5:
+			#head.rotate_y(-event.relative.x * Settings.sens)
+			#print(head.rotation.y)
+		#else:
+			#rotate_y(-event.relative.x * sens)
+			#head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
+		#
+		#camera_3d.rotate_x(-event.relative.y * Settings.sens)
+		#camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+	#else:
+		#if head.rotation.y >= 0.5:
+			#head.rotation.y = 0.49
+		#elif head.rotation.y <= -0.5:
+			#head.rotation.y = -0.49
 	
 	if Input.is_action_just_pressed("turn off lights"):
 		if light.light_energy == 0:

@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2e2kkuq36jrw"]
+[gd_scene load_steps=16 format=3 uid="uid://d2e2kkuq36jrw"]
 
 [ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="1_4wdbe"]
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_ekhe2"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="2_4wdbe"]
+[ext_resource type="PackedScene" uid="uid://hqp1mnmed638" path="res://Prefabs/gem.tscn" id="4_uq1df"]
+[ext_resource type="PackedScene" uid="uid://dacjp1j0ba6bi" path="res://Assets/blend files/gems.blend" id="5_1tp12"]
+[ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="6_1tp12"]
+[ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="7_42jam"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,15 +17,23 @@ sky_material = SubResource("ProceduralSkyMaterial_lefxv")
 
 [sub_resource type="Environment" id="Environment_1tp12"]
 sky = SubResource("Sky_uq1df")
+ambient_light_source = 2
+ambient_light_color = Color(0.7176762, 0.80870986, 0.9743032, 1)
+reflected_light_source = 1
+ssr_max_steps = 128
+ssr_fade_in = 0.07764475
+ssr_depth_tolerance = 0.21
+ssao_sharpness = 1.0
+sdfgi_enabled = true
+sdfgi_min_cell_size = 0.1
+sdfgi_y_scale = 2
 adjustment_enabled = true
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_4wdbe"]
 resource_local_to_scene = false
 resource_name = ""
 enabled = true
-effect_callback_type = 3
-access_resolved_color = false
-access_resolved_depth = false
+effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_4wdbe")
@@ -31,9 +43,7 @@ metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 resource_local_to_scene = false
 resource_name = ""
 enabled = true
-effect_callback_type = 3
-access_resolved_color = false
-access_resolved_depth = false
+effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_4wdbe")
@@ -42,12 +52,29 @@ metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 [sub_resource type="Compositor" id="Compositor_lefxv"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4wdbe"), SubResource("CompositorEffect_lefxv")])
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_42jam"]
+render_priority = 0
+shader = ExtResource("6_1tp12")
+shader_parameter/Refraction_Strength = 0.05
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Emission_Power = 1.0
+shader_parameter/Specular_Power = 1.0
+shader_parameter/Roughness_Power = 0.1
+shader_parameter/Rim_Power = 0.1
+shader_parameter/Blur = 0.0
+shader_parameter/Taint = Color(0.52534366, 0.4051612, 0.9686708, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42jam"]
+size = Vector3(6.3554688, 0.001, 5.829834)
+
 [node name="Main World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_max_distance = 1.0
+directional_shadow_mode = 0
+directional_shadow_max_distance = 18.5
+sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1tp12")
@@ -56,5 +83,31 @@ compositor = SubResource("Compositor_lefxv")
 [node name="ship" parent="." instance=ExtResource("1_ekhe2")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 0, 0)
 
+[node name="player" parent="." instance=ExtResource("7_42jam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.550516, 4.8044567, -0.9574542)
+
 [node name="Submarine" parent="." instance=ExtResource("2_4wdbe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4241786, 11.301579)
+
+[node name="gem" parent="." instance=ExtResource("4_uq1df")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075104296, 2.3304968, 19.428173)
+metadata/_edit_group_ = true
+
+[node name="gems" parent="gem" instance=ExtResource("5_1tp12")]
+
+[node name="Icosphere" parent="gem/gems" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_42jam")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8950584, 6.178161, -1.2223488)
+shadow_enabled = true
+omni_range = 4.7751594
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8119206, 4.574679, -0.9407078)
+shape = SubResource("BoxShape3D_42jam")
+
+[editable path="gem/gems"]

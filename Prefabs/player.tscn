@@ -97,13 +97,14 @@ nodes/Add2/position = Vector2(-140, -140)
 "nodes/Animation 6/position" = Vector2(-380, -40)
 node_connections = [&"output", 0, &"Transition", &"head turn", 0, &"Animation", &"head turn", 1, &"Animation 2", &"Transition", 0, &"Add2", &"Transition", 1, &"Animation 5", &"Transition", 2, &"Animation 3", &"Add2", 0, &"Animation 4", &"Add2", 1, &"Animation 6"]
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d", "head", "skeleton", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d", "head", "skeleton", "gem_hold_spot", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_4flbx")
 camera_3d = NodePath("head/Camera3D")
 head = NodePath("head")
 skeleton = NodePath("charecter/Armature/Skeleton3D")
+gem_hold_spot = NodePath("head/Gem holding")
 skeleton_ik_3d = NodePath("charecter/Armature/Skeleton3D/left arm IK")
 right_arm_ik = NodePath("charecter/Armature/Skeleton3D/right arm IK")
 
@@ -137,6 +138,9 @@ collide_with_areas = true
 
 [node name="looking direction" type="Marker3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Gem holding" type="Marker3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32310176, -0.5053575, -0.6698794)
 
 [node name="Radar" type="Node" parent="."]
 script = ExtResource("4_knrd4")

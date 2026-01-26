@@ -1,15 +1,17 @@
-[gd_scene load_steps=59 format=4 uid="uid://61cvkp3cyet7"]
+[gd_scene load_steps=62 format=4 uid="uid://61cvkp3cyet7"]
 
-[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_lgose"]
-[ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="2_lgose"]
-[ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="2_y8lat"]
-[ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="3_spywk"]
-[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="4_twes1"]
-[ext_resource type="Shader" uid="uid://bjhvf7mov0ody" path="res://Assets/materials/pulse.gdshader" id="5_uef0m"]
-[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/submarine fabs/objective_waypoint.tscn" id="6_48c03"]
-[ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="7_nuvcx"]
-[ext_resource type="PackedScene" uid="uid://dnm38uk7jynrg" path="res://Assets/blend files/Map.blend" id="9_ykqvb"]
-[ext_resource type="PackedScene" uid="uid://cynew66wedwti" path="res://Assets/blend files/serpant.blend" id="10_jmmhy"]
+[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="1_etnpl"]
+[ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="2_w82t1"]
+[ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="3_l3r2j"]
+[ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="4_mo73o"]
+[ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="5_48oh6"]
+[ext_resource type="Shader" uid="uid://bjhvf7mov0ody" path="res://Assets/materials/pulse.gdshader" id="6_h5fwa"]
+[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/submarine fabs/objective_waypoint.tscn" id="7_smwye"]
+[ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_lclcb"]
+[ext_resource type="PackedScene" uid="uid://dnm38uk7jynrg" path="res://Assets/blend files/Map.blend" id="9_b8p3n"]
+[ext_resource type="PackedScene" uid="uid://cynew66wedwti" path="res://Assets/blend files/serpant.blend" id="10_3vvyu"]
+[ext_resource type="PackedScene" uid="uid://hqp1mnmed638" path="res://Prefabs/gem.tscn" id="11_wulem"]
+[ext_resource type="PackedScene" uid="uid://dacjp1j0ba6bi" path="res://Assets/blend files/gems.blend" id="12_n1xp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lgose"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,7 +37,7 @@ access_resolved_color = false
 access_resolved_depth = false
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("2_lgose")
+script = ExtResource("2_w82t1")
 metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_lgose"]
@@ -45,7 +47,7 @@ enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("2_lgose")
+script = ExtResource("2_w82t1")
 metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 
 [sub_resource type="Compositor" id="Compositor_spywk"]
@@ -63,7 +65,7 @@ albedo_texture = SubResource("ViewportTexture_kry3j")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 render_priority = 1
-shader = ExtResource("3_spywk")
+shader = ExtResource("4_mo73o")
 shader_parameter/Refraction_Strength = 0.1
 shader_parameter/Fresnel_Power = 0.5
 shader_parameter/Emission_Power = 1.0
@@ -235,7 +237,7 @@ shadow_mesh = SubResource("ArrayMesh_eu6i8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_344ge"]
 render_priority = 1
-shader = ExtResource("3_spywk")
+shader = ExtResource("4_mo73o")
 shader_parameter/Refraction_Strength = 0.05
 shader_parameter/Fresnel_Power = 1.0
 shader_parameter/Emission_Power = 1.0
@@ -288,7 +290,7 @@ uv1_offset = Vector3(-0.005, -0.55, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kry3j"]
 render_priority = 0
-shader = ExtResource("3_spywk")
+shader = ExtResource("4_mo73o")
 shader_parameter/Refraction_Strength = 0.05
 shader_parameter/Fresnel_Power = 1.0
 shader_parameter/Emission_Power = 1.0
@@ -300,7 +302,7 @@ shader_parameter/Taint = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_21xkr"]
 render_priority = 0
-shader = ExtResource("3_spywk")
+shader = ExtResource("4_mo73o")
 shader_parameter/Refraction_Strength = 0.0
 shader_parameter/Fresnel_Power = 1.0
 shader_parameter/Emission_Power = 1.0
@@ -336,7 +338,7 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fdnlq"]
 render_priority = 0
-shader = ExtResource("5_uef0m")
+shader = ExtResource("6_h5fwa")
 shader_parameter/albedo = Color(0.5618547, 0.048138715, 0, 1)
 shader_parameter/texture_albedo = SubResource("GradientTexture2D_6iyac")
 shader_parameter/roughness = 0.0
@@ -366,7 +368,7 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h1bgf"]
 render_priority = 0
-shader = ExtResource("5_uef0m")
+shader = ExtResource("6_h5fwa")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = SubResource("GradientTexture2D_k12tt")
 shader_parameter/roughness = 0.0
@@ -384,8 +386,20 @@ size = Vector3(3.755, 7.375, 5.945)
 [sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
 size = Vector3(500, 300, 750)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81ou7"]
+render_priority = 0
+shader = ExtResource("4_mo73o")
+shader_parameter/Refraction_Strength = 0.05
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Emission_Power = 1.0
+shader_parameter/Specular_Power = 1.0
+shader_parameter/Roughness_Power = 0.1
+shader_parameter/Rim_Power = 0.1
+shader_parameter/Blur = 0.0
+shader_parameter/Taint = Color(0.52534366, 0.4051612, 0.9686708, 1)
+
 [node name="test world" type="Node3D"]
-script = ExtResource("1_lgose")
+script = ExtResource("1_etnpl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_spywk")
@@ -407,8 +421,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.45837, 0, 9.434265)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 119.6055)
 shape = SubResource("BoxShape3D_21xkr")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_y8lat")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 3.072644, 20.994734)
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_l3r2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 3.208434, 20.994734)
 
 [node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_21xkr")
@@ -455,7 +469,7 @@ material_override = SubResource("ShaderMaterial_344ge")
 mesh = SubResource("ArrayMesh_602nx")
 skeleton = NodePath("")
 
-[node name="Submarine" parent="." instance=ExtResource("4_twes1")]
+[node name="Submarine" parent="." instance=ExtResource("5_48oh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 2.4597511, 18.03343)
 
 [node name="sub" parent="Submarine/diver" index="0"]
@@ -472,26 +486,26 @@ surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
 transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
 
 [node name="Skeleton3D" parent="Submarine/diver/armature for sub" index="0"]
-bones/40/rotation = Quaternion(-0.0011461133, -0.44356853, -0.0030488307, 0.8962346)
-bones/41/rotation = Quaternion(0.100934744, 0.8903128, 0.37287983, 0.24107254)
+bones/40/rotation = Quaternion(-0.0011440881, -0.44335702, -0.0030463259, 0.8963393)
+bones/41/rotation = Quaternion(0.12429555, 0.8732999, 0.36575657, 0.29685026)
 
 [node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(-0.23565127, 0.57244575, -0.7853493, 0.36488637, -0.6968688, -0.6174392, -0.90073615, -0.43206382, -0.044659615, -0.2670891, 4.185098, 0.25471798)
+transform = Transform3D(-0.13419616, 0.5725546, -0.80880916, 0.43868935, -0.6975323, -0.56656843, -0.88856214, -0.43084735, -0.15756738, -0.27308783, 4.198155, 0.22576971)
 
 [node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(-0.23565128, 0.57244587, -0.78534925, 0.36488637, -0.6968687, -0.6174393, -0.90073615, -0.43206382, -0.044659644, -0.26708874, 4.1850977, 0.25471777)
+transform = Transform3D(-0.1341962, 0.5725547, -0.8088091, 0.43868938, -0.69753236, -0.56656855, -0.8885621, -0.43084735, -0.15756741, -0.2730874, 4.1981544, 0.22576952)
 
 [node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(0.78534967, 0.57244575, -0.23565117, 0.61743945, -0.6968688, 0.3648864, 0.04465969, -0.43206373, -0.90073645, -0.13258883, 4.435829, 0.041537076)
+transform = Transform3D(0.8088095, 0.5725546, -0.13419609, 0.56656873, -0.69753236, 0.43868935, 0.15756752, -0.4308472, -0.8885623, -0.10715392, 4.4547095, 0.043978453)
 
 [node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(0.78534937, 0.57244587, -0.23565127, 0.61743915, -0.69686896, 0.36488664, 0.044659838, -0.43206415, -0.9007367, -0.13258818, 4.4358296, 0.041536674)
+transform = Transform3D(0.80880916, 0.5725547, -0.1341961, 0.56656843, -0.6975325, 0.4386897, 0.1575676, -0.43084764, -0.8885627, -0.107153215, 4.45471, 0.043978125)
 
 [node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(-0.047686838, 0.11584118, -0.15892471, 0.0738391, -0.14101963, -0.12494614, -0.18227464, -0.087433234, -0.009037413, 0.002019538, 4.258885, 0.21420453)
+transform = Transform3D(-0.027156191, 0.115863204, -0.16367209, 0.088774, -0.14115392, -0.114651844, -0.17981109, -0.087187074, -0.03188564, 0.0020183295, 4.258885, 0.2142045)
 
 [node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.122114256, 0.11222908, 0.115944035, -0.0016552802, -0.14452296, 0.14163563, 0.16135566, -0.08641777, -0.086293675, 0.0020189993, 4.2588844, 0.21420488)
+transform = Transform3D(0.12219042, 0.11218922, 0.11590239, -0.0016549674, -0.144522, 0.14163662, 0.161298, -0.08647116, -0.086347975, 0.002017789, 4.2588844, 0.21420486)
 
 [node name="map button_001" parent="Submarine/diver" index="20"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ynf5e")
@@ -500,10 +514,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ynf5e")
 offset_top = -50.0
 offset_bottom = 50.0
 
-[node name="button IK target" parent="Submarine" index="13"]
+[node name="button IK target" parent="Submarine" index="15"]
 transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)
 
-[node name="MeshInstance3D" parent="Submarine" index="16"]
+[node name="MeshInstance3D" parent="Submarine" index="18"]
 surface_material_override/0 = SubResource("StandardMaterial3D_344ge")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
@@ -515,10 +529,10 @@ mesh = SubResource("CylinderMesh_jkdf5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055217743, 3.6042378, -17.229092)
 mesh = SubResource("SphereMesh_kry3j")
 
-[node name="Objective waypoint2" parent="MeshInstance3D9" instance=ExtResource("6_48c03")]
+[node name="Objective waypoint2" parent="MeshInstance3D9" instance=ExtResource("7_smwye")]
 use_last_scan_position = true
 
-[node name="Objective waypoint" parent="." instance=ExtResource("6_48c03")]
+[node name="Objective waypoint" parent="." instance=ExtResource("7_smwye")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.495736, 3.768523, -1.6535902)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
@@ -539,20 +553,42 @@ linear_damp_space_override = 3
 linear_damp = 0.5
 angular_damp_space_override = 3
 angular_damp = 0.5
-script = ExtResource("7_nuvcx")
+script = ExtResource("8_lclcb")
 metadata/_custom_type_script = "uid://cv1xvvvoq56j8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ocean"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
 shape = SubResource("BoxShape3D_kry3j")
 
-[node name="Map" parent="." instance=ExtResource("9_ykqvb")]
+[node name="Map" parent="." instance=ExtResource("9_b8p3n")]
 
-[node name="serpant" parent="." instance=ExtResource("10_jmmhy")]
+[node name="serpant" parent="." instance=ExtResource("10_3vvyu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.336155, 4.8535337, -46.228462)
+
+[node name="gem" parent="." instance=ExtResource("11_wulem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6141775, 3.5266395, 22.042467)
+metadata/_edit_group_ = true
+
+[node name="gems" parent="gem" instance=ExtResource("12_n1xp2")]
+
+[node name="Icosphere" parent="gem/gems" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_81ou7")
+
+[node name="gem2" parent="." instance=ExtResource("11_wulem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6141775, 3.5266395, 21.546589)
+metadata/_edit_group_ = true
+
+[node name="gems" parent="gem2" instance=ExtResource("12_n1xp2")]
+
+[node name="Icosphere" parent="gem2/gems" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_81ou7")
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/head/Camera3D/face mask"]
 [editable path="CharacterBody3D/charecter"]
 [editable path="Submarine"]
 [editable path="Submarine/diver"]
+[editable path="gem/gems"]
+[editable path="gem2/gems"]

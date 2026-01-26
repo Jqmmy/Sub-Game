@@ -27,6 +27,9 @@ ssao_sharpness = 1.0
 sdfgi_enabled = true
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_4wdbe"]
@@ -90,7 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.550516, 4.8044567, -0.95745
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4241786, 11.301579)
 
 [node name="gem" parent="." instance=ExtResource("4_uq1df")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075104296, 2.3304968, 19.428173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 3.1412659, 19.163872)
 metadata/_edit_group_ = true
 
 [node name="gems" parent="gem" instance=ExtResource("5_1tp12")]
@@ -105,6 +108,7 @@ shadow_enabled = true
 omni_range = 4.7751594
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8119206, 4.574679, -0.9407078)

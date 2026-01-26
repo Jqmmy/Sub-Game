@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://hqp1mnmed638"]
+[gd_scene load_steps=5 format=3 uid="uid://hqp1mnmed638"]
 
 [ext_resource type="Script" uid="uid://c5i2oe8vpxkit" path="res://Scripts/gem.gd" id="1_va7jc"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="2_nmhil"]
@@ -6,7 +6,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6h50"]
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_va7jc"]
+size = Vector3(0.51, 0.51, 0.51)
+
 [node name="gem" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_va7jc")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -18,4 +23,4 @@ hover_text = "Pick up"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="gem interactable"]
-shape = SubResource("BoxShape3D_d6h50")
+shape = SubResource("BoxShape3D_va7jc")

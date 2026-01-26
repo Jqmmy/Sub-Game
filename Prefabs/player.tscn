@@ -104,7 +104,7 @@ script = ExtResource("1_4flbx")
 camera_3d = NodePath("head/Camera3D")
 head = NodePath("head")
 skeleton = NodePath("charecter/Armature/Skeleton3D")
-gem_hold_spot = NodePath("head/Gem holding")
+gem_hold_spot = NodePath("head/Camera3D/Gem holding")
 skeleton_ik_3d = NodePath("charecter/Armature/Skeleton3D/left arm IK")
 right_arm_ik = NodePath("charecter/Armature/Skeleton3D/right arm IK")
 
@@ -136,11 +136,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_juxdh")
 target_position = Vector3(0, 0, -2)
 collide_with_areas = true
 
+[node name="Gem holding" type="Marker3D" parent="head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32310176, -0.5053575, -0.6698794)
+
 [node name="looking direction" type="Marker3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="Gem holding" type="Marker3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32310176, -0.5053575, -0.6698794)
 
 [node name="Radar" type="Node" parent="."]
 script = ExtResource("4_knrd4")

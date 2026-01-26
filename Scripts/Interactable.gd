@@ -7,17 +7,11 @@ var hovering:bool = false:
 
 signal interacted
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if hovering:
 		if Input.is_action_just_pressed("interact"):
 			interacted.emit()
-		
 
 func set_hovering(value:bool):
 	hovering = value

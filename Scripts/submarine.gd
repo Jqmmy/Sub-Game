@@ -281,3 +281,15 @@ func _on_map_interacted() -> void:
 func _on_update_map_timer_timeout() -> void:
 	if Vector2(linear_velocity.x, linear_velocity.z) > Vector2.ZERO:
 		map.update_fog(Vector2(global_position.x, global_position.z), 30)
+
+
+func _on_net_interactable_interacted() -> void:
+	var player:Player = get_tree().get_first_node_in_group("player")
+	if player.is_holding_gem:
+		var gem = player.gem_hold_spot.get_child(0)
+		if gem is Gem:
+			gem.reparent(self)
+			gem.global_position = $"net Interactable".global_position
+			player.is_holding_gem = false
+	else:
+		pass

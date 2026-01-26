@@ -7,6 +7,7 @@ const NORMAL_SPEED = 4
 const WATER_BOOST = 3
 const JUMP_VELOCITY = 4.5
 var radar_is_up:bool = false
+var is_holding_gem:bool = false
 
 var ray_cast_is_hovering:bool = false
 var last_raycast_hover_target:Interactable
@@ -42,7 +43,7 @@ func _process(_delta: float) -> void:
 	if ray_cast_3d.is_colliding():
 		var collider:CollisionObject3D = ray_cast_3d.get_collider()
 		match collider:
-			Interactable:
+			_ when collider is Interactable:
 				ray_cast_is_hovering = true
 				collider.hovering = true
 				last_raycast_hover_target = collider
@@ -50,9 +51,12 @@ func _process(_delta: float) -> void:
 					collider.interacted.connect(
 					func():
 						if collider.get_parent() is Gem:
-							var gem = collider.get_parent()
-							gem.reparent(gem_hold_spot))
-			_ when collider != Interactable:
+							if not is_holding_gem:
+								var gem = collider.get_parent()
+								gem.reparent(gem_hold_spot)
+								gem.global_transform = gem_hold_spot.global_transform
+								is_holding_gem = true)
+			_ when collider != Interactable and last_raycast_hover_target:
 				ray_cast_is_hovering = false
 				last_raycast_hover_target.hovering = false
 			

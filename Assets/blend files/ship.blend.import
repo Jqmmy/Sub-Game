@@ -54,6 +54,11 @@ _subresources={
 "use_external/fallback_path": "res://Assets/materials/regular2.tres",
 "use_external/path": "uid://cpee4v54xlcrk"
 }
+},
+"nodes": {
+"PATH:Cube": {
+"generate/physics": true
+}
 }
 }
 blender/nodes/visible=0

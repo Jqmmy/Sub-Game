@@ -44,6 +44,8 @@ func _process(_delta: float) -> void:
 		var collider:CollisionObject3D = ray_cast_3d.get_collider()
 		match collider:
 			_ when collider is Interactable:
+				if collider != last_raycast_hover_target and last_raycast_hover_target:
+					last_raycast_hover_target.hovering = false
 				ray_cast_is_hovering = true
 				collider.hovering = true
 				last_raycast_hover_target = collider

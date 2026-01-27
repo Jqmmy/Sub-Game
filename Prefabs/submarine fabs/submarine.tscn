@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://ch6xrrfybrktg"]
+[gd_scene format=3 uid="uid://ch6xrrfybrktg"]
 
 [ext_resource type="Script" uid="uid://bx410be4loq5w" path="res://Scripts/submarine.gd" id="1_8qaoj"]
 [ext_resource type="PackedScene" uid="uid://dnimfm4kewck7" path="res://Assets/blend files/diver.blend" id="2_dws13"]
@@ -22,12 +22,12 @@ uv1_triplanar_sharpness = 2.639011
 height = 0.1484375
 radius = 0.096191406
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ibfwu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2qsgv"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lpy1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgt3x"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_ibfwu")
+albedo_texture = SubResource("ViewportTexture_2qsgv")
 uv1_scale = Vector3(1.01, 1.635, 1)
 uv1_offset = Vector3(-0.015, -0.65, 0)
 
@@ -360,7 +360,7 @@ height = 4.9493484
 radius = 1.0625
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ibfwu"]
-height = 2.8595295
+height = 2.2103465
 radius = 0.4658203
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dws13"]
@@ -385,7 +385,7 @@ radius = 0.75
 height = 0.11621094
 radius = 0.4086914
 
-[node name="Submarine" type="RigidBody3D" node_paths=PackedStringArray("seat_pos") groups=["submarine"]]
+[node name="Submarine" type="RigidBody3D" unique_id=1525268326 node_paths=PackedStringArray("seat_pos") groups=["submarine"]]
 collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -393,7 +393,7 @@ script = ExtResource("1_8qaoj")
 seat_pos = NodePath("diver/armature for sub/Skeleton3D/chair/seat pos")
 viewport = NodePath("SubViewport")
 
-[node name="diver" parent="." instance=ExtResource("2_dws13")]
+[node name="diver" parent="." unique_id=762776719 instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
 
 [node name="sub" parent="diver" index="0"]
@@ -407,9 +407,9 @@ transform = Transform3D(1.1121775, 0, 0, 0, 1.1121775, 0, 0, 0, 1.1121775, 1.299
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365, 1.656, 1.617967)
 
 [node name="Cube_014" parent="diver/joystick right and left base" index="0"]
-transform = Transform3D(0.94551855, 0.32556817, 0, -0.32556817, 0.94551855, 0, 0, 0, 1, 0, 0.00073444843, 0)
+transform = Transform3D(0.94551855, 0.32556814, 0, -0.32556814, 0.94551855, 0, 0, 0, 1, 0, 0.00073444843, 0)
 
-[node name="control IK" type="Marker3D" parent="diver/joystick right and left base/Cube_014" index="2"]
+[node name="control IK" type="Marker3D" parent="diver/joystick right and left base/Cube_014" index="2" unique_id=139756949]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0.046, 0.099, -0.065)
 
 [node name="Skeleton3D" parent="diver/armature for sub" index="0"]
@@ -425,13 +425,13 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(0.006109732, 0.5366868, 0.0069784443, 0.8437306)
-bones/41/rotation = Quaternion(0.38629937, -1.838827e-05, 2.2209959e-05, 0.9223735)
+bones/40/rotation = Quaternion(0.008442711, -0.0017663315, 0.0065807896, 0.9999412)
+bones/41/rotation = Quaternion(0.38629934, -1.8386225e-05, 2.2209122e-05, 0.9223735)
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0"]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
 
-[node name="seat pos" type="Node3D" parent="diver/armature for sub/Skeleton3D/chair" index="1"]
+[node name="seat pos" type="Node3D" parent="diver/armature for sub/Skeleton3D/chair" index="1" unique_id=962616881]
 transform = Transform3D(-2.4702575, 1.0307874e-07, 6.919256e-08, 6.2968596e-08, 1.4997495, 1.0928615e-07, -1.040533e-07, 1.263433e-07, -2.4702582, 1.3216446e-07, -1.439811, 0.14930776)
 
 [node name="chair pedal base" parent="diver/armature for sub/Skeleton3D" index="1"]
@@ -527,38 +527,38 @@ collision_layer = 8
 [node name="Cylinder_001" parent="diver/armature for sub/Skeleton3D/Cylinder_001" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -3.5527137e-15, 1, 0, 0, 0)
 
-[node name="button" type="Area3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001" index="1"]
+[node name="button" type="Area3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001" index="1" unique_id=1600675576]
 transform = Transform3D(-0.9920737, -4.7073456e-14, -0.12565726, 0.12565726, -4.3711378e-08, -0.9920737, -5.4926526e-09, -1, 4.3364913e-08, 0, 0, 0)
 script = ExtResource("3_0vtxn")
 hover_text = "Open door"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001/button"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001/button" unique_id=1652789332]
 transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.018554688)
 shape = SubResource("CylinderShape3D_0vtxn")
 
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21"]
-transform = Transform3D(0.42726496, -0.63333243, -0.6452395, 0.014573886, -0.70874375, 0.7053151, -0.9040086, -0.31076017, -0.2935913, -0.08880155, 4.523922, 0.18002898)
+transform = Transform3D(0.99992937, 0.011768764, -0.0015289047, 0.009318168, -0.6987942, 0.71526164, 0.007349359, -0.7152255, -0.69885457, -0.0036670913, 4.5252523, 0.12505361)
 
 [node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22"]
-transform = Transform3D(0.42726502, -0.6333324, -0.6452396, 0.014573889, -0.70874393, 0.705315, -0.90400875, -0.31076017, -0.29359132, -0.08880182, 4.523921, 0.18002886)
+transform = Transform3D(0.9999294, 0.011768767, -0.0015289066, 0.009318171, -0.6987944, 0.71526164, 0.007349358, -0.71522546, -0.6988546, -0.0036670873, 4.525252, 0.12505335)
 
 [node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23"]
-transform = Transform3D(0.6452399, -0.6333325, 0.427265, -0.7053153, -0.7087437, 0.014573753, 0.29359147, -0.3107601, -0.9040089, 0.1842555, 4.3546004, 0.027803749)
+transform = Transform3D(0.0015288554, 0.011768669, 0.9999295, -0.71526194, -0.69879425, 0.009318024, 0.69885486, -0.7152256, 0.0073493123, 0.24844564, 4.3520555, 0.3062842)
 
 [node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24"]
-transform = Transform3D(0.6452395, -0.6333326, 0.4272653, -0.705315, -0.70874405, 0.014573753, 0.29359153, -0.31076047, -0.90400916, 0.18425608, 4.3545995, 0.02780357)
+transform = Transform3D(0.0015286757, 0.011768967, 0.9999299, -0.7152616, -0.6987945, 0.009318054, 0.6988547, -0.7152258, 0.0073494613, 0.24844605, 4.352055, 0.3062846)
 
 [node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25"]
-transform = Transform3D(0.08646215, -0.1281623, -0.13057186, 0.002949205, -0.14342271, 0.14272884, -0.18293688, -0.06288601, -0.05941168, -0.00029011373, 4.2588553, 0.2175893)
+transform = Transform3D(0.20234758, 0.0023815613, -0.00030938757, 0.001885648, -0.1414093, 0.14474164, 0.001487242, -0.14473434, -0.1414215, -0.0018633099, 4.258844, 0.21740375)
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26"]
-transform = Transform3D(0.08646213, -0.1281623, -0.13057184, 0.0029492043, -0.1434227, 0.1427288, -0.18293682, -0.062886, -0.059411667, -0.00028961885, 4.258855, 0.21758953)
+transform = Transform3D(0.20234752, 0.002381559, -0.0003093902, 0.0018856478, -0.14140928, 0.14474162, 0.0014872383, -0.14473435, -0.14142148, -0.0018633076, 4.2588434, 0.21740429)
 
 [node name="map button_001" parent="diver" index="20"]
-surface_material_override/0 = SubResource("StandardMaterial3D_8lpy1")
+surface_material_override/0 = SubResource("StandardMaterial3D_fgt3x")
 
-[node name="AnimationTree" type="AnimationTree" parent="diver"]
+[node name="AnimationTree" type="AnimationTree" parent="diver" unique_id=1093322183]
 tree_root = SubResource("AnimationNodeBlendTree_erfuo")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Transition/current_state = "close"
@@ -579,12 +579,10 @@ parameters/hatch/current_index = 1
 "parameters/OneShot 2/internal_active" = true
 "parameters/OneShot 2/request" = 0
 
-[node name="button animation player" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_k7j3v")
-}
+[node name="button animation player" type="AnimationPlayer" parent="." unique_id=1207530423]
+libraries/ = SubResource("AnimationLibrary_k7j3v")
 
-[node name="button animationtree" type="AnimationTree" parent="."]
+[node name="button animationtree" type="AnimationTree" parent="." unique_id=1896077015]
 tree_root = SubResource("AnimationNodeBlendTree_0vtxn")
 anim_player = NodePath("../button animation player")
 "parameters/forward backward/blend_position" = 0.0
@@ -593,79 +591,79 @@ parameters/Add2/add_amount = 1.0
 "parameters/fan blend/blend_position" = 0.274
 "parameters/Add2 2/add_amount" = 1.0
 
-[node name="net Interactable" type="Area3D" parent="."]
+[node name="net Interactable" type="Area3D" parent="." unique_id=975665732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9634836, 1.612297, 3.0511587)
 script = ExtResource("3_0vtxn")
 hover_text = "Store Object"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="net Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="net Interactable" unique_id=1608517815]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06903076, 0.015625, 0)
 shape = SubResource("BoxShape3D_cb3dh")
 
-[node name="Interactable" type="Area3D" parent="."]
+[node name="Interactable" type="Area3D" parent="." unique_id=1440020422]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4845965e-07, 2.0035195, 1.1950138)
 collision_mask = 4
 script = ExtResource("3_0vtxn")
 hover_text = "Enter Cockpit"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1821728852]
 shape = SubResource("BoxShape3D_ibfwu")
 
-[node name="map" type="Area3D" parent="."]
+[node name="map" type="Area3D" parent="." unique_id=769051857]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82188296, 2.279518, 2.723402)
 script = ExtResource("3_0vtxn")
 hover_text = "Use Map"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="update map timer" type="Timer" parent="map"]
+[node name="update map timer" type="Timer" parent="map" unique_id=1664270581]
 wait_time = 0.5
 autostart = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="map"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map" unique_id=2033064099]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.18274236, -0.055257797, 0.37378716)
 shape = SubResource("BoxShape3D_2qsgv")
 
-[node name="map cam" type="Camera3D" parent="map"]
+[node name="map cam" type="Camera3D" parent="map" unique_id=583174610]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.6444657, -0.055477858, 0.37601042)
 cull_mask = 1048573
 
-[node name="SubViewport" type="SubViewport" parent="map"]
+[node name="SubViewport" type="SubViewport" parent="map" unique_id=323922651]
 size = Vector2i(512, 256)
 
-[node name="map" parent="map/SubViewport" node_paths=PackedStringArray("collision_object", "cam_look_point") instance=ExtResource("6_cb3dh")]
+[node name="map" parent="map/SubViewport" unique_id=347542446 node_paths=PackedStringArray("collision_object", "cam_look_point") instance=ExtResource("6_cb3dh")]
 collision_object = NodePath("../..")
 cam_look_point = NodePath("../../..")
 
-[node name="IK target" type="Node3D" parent="."]
+[node name="IK target" type="Node3D" parent="." unique_id=349800629]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0.043, 0.113, -0.078)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=102037020]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 1.16279836e-07, 1.9628918, 1.8115007)
 shape = SubResource("CapsuleShape3D_8lpy1")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2060227835]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.7826986, 1.5363228, 1.4892662)
 shape = SubResource("CylinderShape3D_fyv3g")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1016801167]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.7830002, 1.536, 1.4888518)
 shape = SubResource("CylinderShape3D_fyv3g")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1149195110]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.3779592e-07, 0, 1.2862492)
 collision_layer = 8
 
-[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=662552863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0042112586, 2.1823382, -1.4984901)
 shape = SubResource("ConcavePolygonShape3D_bhf8s")
 
-[node name="radar fade timer" type="Timer" parent="."]
+[node name="radar fade timer" type="Timer" parent="." unique_id=1090725408]
 wait_time = 2.5
 one_shot = true
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1760935703]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -674,7 +672,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="radar container" type="HBoxContainer" parent="Control"]
+[node name="radar container" type="HBoxContainer" parent="Control" unique_id=618123083]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -689,79 +687,79 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="radar left" type="ColorRect" parent="Control/radar container"]
+[node name="radar left" type="ColorRect" parent="Control/radar container" unique_id=1455472231]
 custom_minimum_size = Vector2(5, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="radar right" type="ColorRect" parent="Control/radar container"]
+[node name="radar right" type="ColorRect" parent="Control/radar container" unique_id=172503112]
 custom_minimum_size = Vector2(5, 100)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=556375920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.053449, 1.5773609)
 collision_mask = 4
 priority = 1
 gravity_space_override = 3
 script = ExtResource("4_dws13")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1741089685]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.44525576)
 shape = SubResource("CylinderShape3D_8qaoj")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6109171, 3.3809206)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=2038296017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28632557, 3.3809206)
 shape = SubResource("CylinderShape3D_ibfwu")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2142958339]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4726582, 1.8800523)
 omni_range = 2.807
 
-[node name="button IK target" type="Node3D" parent="."]
+[node name="button IK target" type="Node3D" parent="." unique_id=631042782]
 transform = Transform3D(1, 0, 0, 0, 0.087155804, 0.9961947, 0, -0.9961947, 0.087155804, 0.376, 1.739, -0.301)
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=2073196757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50729907, 4.506975)
 shape = SubResource("CylinderShape3D_dws13")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1080539977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8189431, 2.6175067)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=151809719]
 transform = Transform3D(0.1, 0, 0, 0, 0.18793853, -0.06840403, 0, 0.06840403, 0.18793853, -0.58889765, 1.7118536, -0.5658875)
 mesh = SubResource("PlaneMesh_8lpy1")
 skeleton = NodePath("../SubViewport")
 surface_material_override/0 = SubResource("StandardMaterial3D_ibfwu")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=338577850]
 size = Vector2i(800, 500)
 
-[node name="Ship depth UI" parent="SubViewport" instance=ExtResource("5_0vtxn")]
+[node name="Ship depth UI" parent="SubViewport" unique_id=1383220457 instance=ExtResource("5_0vtxn")]
 
-[node name="entrance area" type="Area3D" parent="."]
+[node name="entrance area" type="Area3D" parent="." unique_id=1944972807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6863565, 4.9961834)
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="entrance area"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="entrance area" unique_id=982779188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.460407, 0.27095938)
 shape = SubResource("BoxShape3D_tyhre")
 
-[node name="Atractor" type="Area3D" parent="."]
+[node name="Atractor" type="Area3D" parent="." unique_id=1565572393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7321565, 4.980033)
 collision_mask = 4
 script = ExtResource("6_ibfwu")
 atractor_speed = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Atractor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Atractor" unique_id=2141527998]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8655925, 0)
 shape = SubResource("CylinderShape3D_8lpy1")
 
-[node name="Area3D2" type="Area3D" parent="."]
+[node name="Area3D2" type="Area3D" parent="." unique_id=37684803]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2734592, 5.004118)
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1369402313]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09168172, 0)
 shape = SubResource("CylinderShape3D_bhf8s")
 

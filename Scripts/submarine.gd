@@ -34,6 +34,7 @@ var parked:bool = true:
 		else:
 			gravity_scale = 1
 var using_map:bool = false
+var in_water:bool = false
 
 var radar_timer:float = 0
 var current_speed = 3.0
@@ -190,7 +191,7 @@ func _physics_process(delta: float) -> void:
 			elif float_booster == -1.0:
 				animationtree["parameters/fan blend/blend_position"] = 0.5
 	
-	if not driving:
+	if not driving and in_water:
 		if shape_cast_3d.is_colliding():
 			apply_central_force(Vector3(0,2.5,0))
 			
@@ -289,7 +290,7 @@ func _on_net_interactable_interacted() -> void:
 		var gem = player.gem_hold_spot.get_child(0)
 		if gem is Gem:
 			gem.reparent(self)
-			gem.global_position = $"net Interactable".global_position
+			gem.global_position = $"net Interactable".global_position 
 			player.is_holding_gem = false
 	else:
 		pass

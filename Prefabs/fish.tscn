@@ -6,6 +6,9 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_03hcv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sid3i"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
 billboard_mode = 1
 billboard_keep_scale = true
 

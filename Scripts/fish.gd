@@ -6,6 +6,7 @@ var velocity:Vector3
 var speed:float  = 0.1
 var movv:float = 1.1
 var target_influence:float = 0.1
+@export var predators:Array[Node3D]
 
 func _physics_process(delta: float) -> void:
 	
@@ -38,6 +39,13 @@ func _physics_process(delta: float) -> void:
 		var point_direction:Vector3
 		point_direction = target_point.direction_to(global_position) * target_influence
 		velocity += point_direction
+	
+	for pred in predators:
+		pass 
+		#code for avoiding stuff should be checking if close and 
+		#add a vector in the opposite direction
+	
+	
 	
 	velocity = velocity.normalized() * speed
 	

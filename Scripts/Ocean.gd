@@ -7,12 +7,12 @@ func _ready() -> void:
 	body_entered.connect(func(body): 
 		if body is Player:
 			body.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
-			body.current_speed = body.WATER_SPEED)
+			body.current_speed = body.WATER_SPEED
+		if body.is_in_group("submarine"):
+			body.in_water = true)
 	body_exited.connect(func(body):
 		if body is Player:
 			body.motion_mode =CharacterBody3D.MOTION_MODE_GROUNDED
-			body.current_speed = body.NORMAL_SPEED)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+			body.current_speed = body.NORMAL_SPEED
+			if body.is_in_group("submarine"):
+				body.in_water = false)

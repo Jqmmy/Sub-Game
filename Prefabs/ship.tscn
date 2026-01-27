@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cugedhnsj2gwj"]
+
+[ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_7nyfi"]
+[ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="2_88h6h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ba1si"]
+size = Vector3(0.19433594, 0.068359375, 0.26757813)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cm1ru"]
+height = 0.12597656
+radius = 0.20605469
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ww3j"]
+size = Vector3(0.69311523, 2.4736938, 1.6933594)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xyywq"]
+size = Vector3(0.9696045, 0.06616211, 1.3001709)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_88h6h"]
+size = Vector3(0.5178833, 2.4936829, 1.2392578)
+
+[node name="ship" type="Node3D" unique_id=183951493]
+
+[node name="ship" parent="." unique_id=1119723655 instance=ExtResource("1_7nyfi")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, -1.1213827, 0)
+
+[node name="Move Forward" type="Area3D" parent="." unique_id=108491951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31257927, 4.1033006, 8.238229)
+script = ExtResource("2_88h6h")
+hover_text = "Move Forward"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Move Forward" unique_id=534666215]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.04377219, 0.01867277, 0.0049167965)
+shape = SubResource("BoxShape3D_ba1si")
+
+[node name="Move Backward" type="Area3D" parent="." unique_id=1054682443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26880708, 3.9589815, 7.9608355)
+script = ExtResource("2_88h6h")
+hover_text = "Move Backward"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Move Backward" unique_id=1534474693]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, -0.004219257, -0.007307967)
+shape = SubResource("BoxShape3D_ba1si")
+
+[node name="Lower Sub" type="Area3D" parent="." unique_id=903539353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16767603, 4.007926, 8.095652)
+script = ExtResource("2_88h6h")
+hover_text = "Lower Submarine"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lower Sub" unique_id=1787037430]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.008596098, -0.008578154)
+shape = SubResource("CylinderShape3D_cm1ru")
+
+[node name="Use Door" type="Area3D" parent="." unique_id=552697879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5671406, 4.3415236, -1.9349202)
+script = ExtResource("2_88h6h")
+hover_text = "Use Door"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Use Door" unique_id=57269743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49960327, 0.06651372)
+shape = SubResource("BoxShape3D_0ww3j")
+
+[node name="map interactable" type="Area3D" parent="." unique_id=1162215242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8081336, 4.4680305, -1.2092199)
+script = ExtResource("2_88h6h")
+hover_text = "Use Map"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map interactable" unique_id=77836185]
+transform = Transform3D(0.9840376, 0, -0.17796072, 0, 1, 0, 0.17796072, 0, 0.9840376, -0.009241343, -0.04151392, -0.06111121)
+shape = SubResource("BoxShape3D_xyywq")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=2033227162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.673986, 0, 11.131465)
+script = ExtResource("2_88h6h")
+hover_text = "Get Back On Ship"
+metadata/_custom_type_script = "uid://xo27f5p84mpt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=598216653]
+transform = Transform3D(0.99467945, 0.10301823, 0, -0.10301823, 0.99467945, 0, 0, 0, 1, 0.11248255, -0.3281417, -0.029444695)
+shape = SubResource("BoxShape3D_88h6h")

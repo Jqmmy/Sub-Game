@@ -2096,6 +2096,13 @@ _subresources={
 "slices/amount": 0
 }
 },
+"materials": {
+"glass": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/materials/Glass.tres",
+"use_external/path": "uid://d3jnmorbhubx1"
+}
+},
 "nodes": {
 "PATH:AnimationPlayer": {
 "import_tracks/position": 0,
@@ -2114,6 +2121,7 @@ blender/meshes/colors=false
 blender/meshes/uvs=true
 blender/meshes/normals=true
 blender/meshes/export_geometry_nodes_instances=false
+blender/meshes/gpu_instances=false
 blender/meshes/tangents=true
 blender/meshes/skins=2
 blender/meshes/export_bones_deforming_mesh_only=false

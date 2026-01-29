@@ -73,23 +73,26 @@ size = Vector3(800, 1300, 800)
 [node name="Main World" type="Node3D" unique_id=1363505768]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1694242934]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8160367, -0.50056285, 0.28900003, 2.7805946e-08, 0.49999994, 0.86602545, -0.5780001, 0.70670855, -0.40801835, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_mode = 1
-directional_shadow_split_1 = 0.3
+directional_shadow_split_1 = 0.08
+directional_shadow_max_distance = 200.0
+directional_shadow_pancake_size = 0.0
 sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=455259912]
 environment = SubResource("Environment_1tp12")
 compositor = SubResource("Compositor_lefxv")
 
-[node name="ship" parent="." unique_id=183951493 instance=ExtResource("2_k5cj5")]
+[node name="ship" parent="." unique_id=183951493 node_paths=PackedStringArray("submarine") instance=ExtResource("2_k5cj5")]
+submarine = NodePath("../Submarine")
 
 [node name="player" parent="." unique_id=513241315 instance=ExtResource("7_42jam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.550516, 3.683074, -0.9574542)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 3.3955348, -3.3419368)
 
-[node name="Submarine" parent="." unique_id=865085948 instance=ExtResource("2_4wdbe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.302796, 25.719229)
+[node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("2_4wdbe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.303, 12)
 
 [node name="gem" parent="." unique_id=2000569373 instance=ExtResource("4_uq1df")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 2.0198832, 19.163872)

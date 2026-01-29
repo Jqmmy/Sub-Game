@@ -180,3 +180,7 @@ pan={
 3d_physics/layer_3="player"
 3d_physics/layer_4="submarine inside"
 3d_physics/layer_5="fish"
+
+[rendering]
+
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cugedhnsj2gwj"]
 
 [ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="1_7nyfi"]
+[ext_resource type="Script" uid="uid://kpp1crplowmm" path="res://Scripts/ship.gd" id="1_ba1si"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="2_88h6h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ba1si"]
@@ -19,15 +20,86 @@ size = Vector3(0.9696045, 0.06616211, 1.3001709)
 [sub_resource type="BoxShape3D" id="BoxShape3D_88h6h"]
 size = Vector3(0.5178833, 2.4936829, 1.2392578)
 
-[node name="ship" type="Node3D" unique_id=183951493]
+[sub_resource type="Animation" id="Animation_ba1si"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship/door hinges:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ship/door hinges/handle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[node name="ship" parent="." unique_id=1119723655 instance=ExtResource("1_7nyfi")]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, -1.1213827, 0)
+[sub_resource type="Animation" id="Animation_cm1ru"]
+resource_name = "open close door"
+length = 1.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship/door hinges:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -2.8631256, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ship/door hinges/handle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.4835298, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ww3j"]
+_data = {
+&"RESET": SubResource("Animation_ba1si"),
+&"open close door": SubResource("Animation_cm1ru")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm1ru"]
+size = Vector3(3.0351563, 0.4784851, 1.8026047)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5gpt"]
+size = Vector3(3.027771, 0.50839233, 1.2182922)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xytvu"]
+size = Vector3(0.37430573, 0.40176392, 1.602417)
+
+[node name="ship" type="Node3D" unique_id=183951493 node_paths=PackedStringArray("submarine_attatchment", "deck_door")]
+script = ExtResource("1_ba1si")
+submarine_attatchment = NodePath("ship/submarine attatchment")
+deck_door = NodePath("ship/door hinges")
 
 [node name="Move Forward" type="Area3D" parent="." unique_id=108491951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31257927, 4.1033006, 8.238229)
 script = ExtResource("2_88h6h")
 hover_text = "Move Forward"
+holdable = true
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Move Forward" unique_id=534666215]
@@ -38,6 +110,7 @@ shape = SubResource("BoxShape3D_ba1si")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26880708, 3.9589815, 7.9608355)
 script = ExtResource("2_88h6h")
 hover_text = "Move Backward"
+holdable = true
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Move Backward" unique_id=1534474693]
@@ -83,3 +156,57 @@ metadata/_custom_type_script = "uid://xo27f5p84mpt"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=598216653]
 transform = Transform3D(0.99467945, 0.10301823, 0, -0.10301823, 0.99467945, 0, 0, 0, 1, 0.11248255, -0.3281417, -0.029444695)
 shape = SubResource("BoxShape3D_88h6h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=166357757]
+libraries/ = SubResource("AnimationLibrary_0ww3j")
+
+[node name="ship" parent="." unique_id=440494425 instance=ExtResource("1_7nyfi")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, -1.1213827, 0)
+
+[node name="submarine attatchment" parent="ship" index="20" unique_id=160500741]
+transform = Transform3D(0.99999976, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 0.99999976, 0.21999255, 8.713526, -13.557766)
+
+[node name="handle" parent="ship/door hinges" parent_id_path=PackedInt32Array(440494425, 1980385138) index="4" unique_id=1247556936]
+transform = Transform3D(1.427786, 0, 0, 0, 1.0938681, 0, 0, 0, 1.427786, 0.030584574, -0.2510438, 1.5075457)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2093863925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3486385, 2.0665884, 9.010391)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=696665170]
+transform = Transform3D(1, 0, 0, 0, 0.7329467, -0.68028593, 0, 0.68028593, 0.7329467, 0.25854492, -0.74471295, 0.65257645)
+shape = SubResource("BoxShape3D_cm1ru")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1766047696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7250896, 2.0665884, 9.010391)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D2" unique_id=237739099]
+transform = Transform3D(1, 0, 0, 0, 0.7329467, -0.68028593, 0, 0.68028593, 0.7329467, 0.103963375, -0.74209964, 0.6497612)
+shape = SubResource("BoxShape3D_cm1ru")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=2013287990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6216807, 2.5489972, 8.305995)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1707383221]
+transform = Transform3D(1, 0, 0, 0, 0.7986354, -0.6018149, 0, 0.6018149, 0.7986354, 0.027008057, -0.2239778, -0.14339447)
+shape = SubResource("BoxShape3D_y5gpt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=1358505449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.741543, 2.5489972, 8.305995)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4" unique_id=57467544]
+transform = Transform3D(1, 0, 0, 0, 0.7986354, -0.6018149, 0, 0.6018149, 0.7986354, -0.15018511, -0.21842241, -0.1364764)
+shape = SubResource("BoxShape3D_y5gpt")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="." unique_id=962417241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5302572, 3.7250779, -1.7618921)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5" unique_id=2114845613]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 0.025563955, -0.29077125, -0.03668213)
+shape = SubResource("BoxShape3D_xytvu")
+
+[connection signal="interacted" from="Move Forward" to="." method="_on_move_forward_interacted"]
+[connection signal="interacted" from="Move Backward" to="." method="_on_move_backward_interacted"]
+[connection signal="interacted" from="Lower Sub" to="." method="_on_lower_sub_interacted"]
+[connection signal="interacted" from="Use Door" to="." method="_on_use_door_interacted"]
+
+[editable path="ship"]

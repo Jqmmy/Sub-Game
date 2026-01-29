@@ -5,7 +5,7 @@ var hovering:bool = false:
 	set = set_hovering
 ##text displayed when hovering object
 @export_multiline var hover_text:String
-
+@export var holdable:bool = false
 @export var enabled:bool = true:
 	set(value):
 		enabled = value
@@ -19,6 +19,8 @@ signal interacted
 func _physics_process(_delta: float) -> void:
 	if hovering and enabled:
 		if Input.is_action_just_pressed("interact"):
+			interacted.emit()
+		if holdable and Input.is_action_pressed("interact"):
 			interacted.emit()
 
 func set_hovering(value:bool):

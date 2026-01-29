@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://qg2ty2uh3qkc"]
+[gd_scene format=3 uid="uid://qg2ty2uh3qkc"]
 
 [ext_resource type="Script" uid="uid://b2gp21vwxpq3q" path="res://Scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://dnu0i17s3hiy1" path="res://Assets/blend files/charecter.blend" id="2_5wxv7"]
@@ -97,7 +97,7 @@ nodes/Add2/position = Vector2(-140, -140)
 "nodes/Animation 6/position" = Vector2(-380, -40)
 node_connections = [&"output", 0, &"Transition", &"head turn", 0, &"Animation", &"head turn", 1, &"Animation 2", &"Transition", 0, &"Add2", &"Transition", 1, &"Animation 5", &"Transition", 2, &"Animation 3", &"Add2", 0, &"Animation 4", &"Add2", 1, &"Animation 6"]
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera_3d", "head", "skeleton", "gem_hold_spot", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1252446106 node_paths=PackedStringArray("camera_3d", "head", "skeleton", "gem_hold_spot", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_4flbx")
@@ -108,73 +108,81 @@ gem_hold_spot = NodePath("head/Camera3D/Gem holding")
 skeleton_ik_3d = NodePath("charecter/Armature/Skeleton3D/left arm IK")
 right_arm_ik = NodePath("charecter/Armature/Skeleton3D/right arm IK")
 
-[node name="game hud" parent="." instance=ExtResource("2_knrd4")]
+[node name="game hud" parent="." unique_id=1530883497 instance=ExtResource("2_knrd4")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1670405471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87538993, 0)
 shape = SubResource("CapsuleShape3D_5wxv7")
 
-[node name="head" type="Node3D" parent="."]
+[node name="head" type="Node3D" parent="." unique_id=428558243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.575, 0)
 
-[node name="Camera3D" type="Camera3D" parent="head"]
+[node name="Camera3D" type="Camera3D" parent="head" unique_id=240245589]
 cull_mask = 1048573
 fov = 80.0
 
-[node name="light" type="SpotLight3D" parent="head/Camera3D"]
+[node name="light" type="SpotLight3D" parent="head/Camera3D" unique_id=1234205473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12903579, 0.11631167, -0.1840871)
 spot_range = 6.64233
 spot_angle = 34.493515
 
-[node name="face mask" parent="head/Camera3D" instance=ExtResource("4_2nftw")]
+[node name="face mask" parent="head/Camera3D" unique_id=1157816240 instance=ExtResource("4_2nftw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.881784e-16, -0.018743634, -0.07668258)
+visible = false
 
 [node name="Circle_002" parent="head/Camera3D/face mask" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_juxdh")
 
-[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D" unique_id=1068395875]
 target_position = Vector3(0, 0, -2)
 collide_with_areas = true
 
-[node name="Gem holding" type="Marker3D" parent="head/Camera3D"]
+[node name="Gem holding" type="Marker3D" parent="head/Camera3D" unique_id=1687144919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32310176, -0.5053575, -0.6698794)
 
-[node name="looking direction" type="Marker3D" parent="head"]
+[node name="looking direction" type="Marker3D" parent="head" unique_id=1889052025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Radar" type="Node" parent="."]
+[node name="Radar" type="Node" parent="." unique_id=1918198491]
 script = ExtResource("4_knrd4")
 
-[node name="wrist UI" type="SubViewport" parent="Radar"]
+[node name="wrist UI" type="SubViewport" parent="Radar" unique_id=797899734]
 size = Vector2i(256, 128)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Radar/wrist UI"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Radar/wrist UI" unique_id=715325201]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 122.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="Radar/wrist UI/VBoxContainer"]
+[node name="Label" type="Label" parent="Radar/wrist UI/VBoxContainer" unique_id=1956295330]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Nearest target"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Radar/wrist UI/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Radar/wrist UI/VBoxContainer" unique_id=851936731]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="radar target dist" type="Label" parent="Radar/wrist UI/VBoxContainer/HBoxContainer"]
+[node name="radar target dist" type="Label" parent="Radar/wrist UI/VBoxContainer/HBoxContainer" unique_id=1269874486]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "10"
 
-[node name="charecter" parent="." instance=ExtResource("2_5wxv7")]
+[node name="charecter" parent="." unique_id=1496868856 instance=ExtResource("2_5wxv7")]
 process_mode = 3
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0.05)
 
 [node name="Skeleton3D" parent="charecter/Armature" index="1"]
 bones/1/position = Vector3(-2.775558e-17, -1.031744e-32, 0.7631609)
+bones/3/position = Vector3(1.9767082e-17, 0.20309073, 4.7128396e-24)
+bones/3/rotation = Quaternion(-0.032675475, 1.1524719e-15, -4.933859e-09, 0.999466)
+bones/4/position = Vector3(3.149955e-08, 0.19469583, -0.12755561)
+bones/4/scale = Vector3(1, 0.99999976, 0.9999998)
+bones/5/position = Vector3(0.06989478, 0.11855841, 0.18473695)
+bones/5/rotation = Quaternion(0.024748601, -0.67504257, 0.42277956, 0.6041212)
+bones/5/scale = Vector3(0.99999994, 0.99999994, 0.9999998)
 bones/7/rotation = Quaternion(0.5756228, 0.40425515, 0.5816829, -0.40851107)
 bones/8/rotation = Quaternion(0.13539974, -0.011196219, 0.02456455, 0.9904232)
 bones/9/rotation = Quaternion(0.0068797413, -0.022963993, -0.042339325, 0.99881566)
@@ -239,15 +247,16 @@ bones/82/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
 bones/83/rotation = Quaternion(0.70710695, 0, -0.7071066, 0)
 
 [node name="head" parent="charecter/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 3.9334622e-17, 4.2632564e-14, -3.9334625e-17, 0.99999994, -1.5777218e-30, -4.2632564e-14, 3e-45, 1, -1.2434904e-17, 1.3164566, 4.2620675e-32)
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.9999998, 0, 1.316, -0.14)
+override_pose = true
 
 [node name="handle" parent="charecter/Armature/Skeleton3D/head" index="0"]
-visible = false
+transform = Transform3D(0.9892723, -0.06348905, 0.09959817, 0.10740204, 0.5906522, 4.6027424e-10, -0.099022076, 0.006354992, 0.9950277, 0.2169145, 0.26133144, -0.0039928555)
 
 [node name="forarm_l" parent="charecter/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.032276463, 0.997678, 0.059976388, 0.053258464, -0.058205687, 0.9968828, 0.9980589, 0.03537009, -0.05125614, 0.45870245, 1.2177099, -0.011446439)
+transform = Transform3D(-0.032276463, 0.997678, 0.059976388, 0.11833401, -0.05577119, 0.9914062, 0.9924491, 0.03909634, -0.11625914, 0.45870245, 1.2167751, -0.017147504)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="charecter/Armature/Skeleton3D/forarm_l" index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="charecter/Armature/Skeleton3D/forarm_l" index="1" unique_id=801507463]
 transform = Transform3D(-0.0011884018, -7.2313764e-05, 0.021984685, 0.031960353, 0.0006932877, 0.00081908517, -0.0010598057, 0.020988423, 4.8690476e-05, -0.0139416605, 0.17028299, 0.044341445)
 mesh = SubResource("PlaneMesh_y5hcb")
 surface_material_override/0 = SubResource("StandardMaterial3D_2nftw")
@@ -255,41 +264,38 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2nftw")
 [node name="torso" parent="charecter/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 2.5670716e-32)
 
-[node name="body_001" parent="charecter/Armature/Skeleton3D" index="5"]
-visible = false
-
-[node name="left arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="6"]
+[node name="left arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="6" unique_id=647345245]
 root_bone = &"arm.l"
 tip_bone = &"hand.l"
 
-[node name="right arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="7"]
+[node name="right arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="7" unique_id=1547824911]
 root_bone = &"arm.r"
 tip_bone = &"hand.r"
 
-[node name="tube r IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="8"]
+[node name="tube r IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="8" unique_id=413620926]
 root_bone = &"breath tube.004.r"
 tip_bone = &"breath tube.010.r"
 target_node = NodePath("../ModifierBoneTarget3D")
 
-[node name="tube l IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="9"]
+[node name="tube l IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="9" unique_id=1966417823]
 root_bone = &"breath tube.004.l"
 tip_bone = &"breath tube.010.l"
 target_node = NodePath("../ModifierBoneTarget3D2")
 
-[node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.2688502, 0.5442329, 0.7946885, -0.8108371, 0.3174383, -0.49170718, -0.51986796, -0.77655864, 0.3559409, -0.069894776, 1.435015, 0.18473695)
+[node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="10" unique_id=1838868501]
+transform = Transform3D(-0.2688502, 0.5442329, 0.7946885, -0.8430612, 0.26603866, -0.46740845, -0.4657971, -0.7956341, 0.38729712, -0.069894776, 1.4463714, 0.036598682)
 bone_name = "breath tube.r"
 bone = 6
 
-[node name="ModifierBoneTarget3D2" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.2688502, -0.5442329, -0.7946885, 0.8108371, 0.3174383, -0.49170718, 0.51986796, -0.77655864, 0.3559409, 0.069894776, 1.435015, 0.18473695)
+[node name="ModifierBoneTarget3D2" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="11" unique_id=1905346136]
+transform = Transform3D(-0.26885006, -0.54423285, -0.7946885, 0.53102744, 0.6045918, -0.59369844, 0.8035726, -0.5816174, 0.12645814, 0.06989478, 1.4463714, 0.036598682)
 bone_name = "breath tube.l"
 bone = 5
 
 [node name="breath pipes" parent="charecter/Armature/Skeleton3D" index="12"]
 visible = false
 
-[node name="AnimationTree" type="AnimationTree" parent="charecter"]
+[node name="AnimationTree" type="AnimationTree" parent="charecter" unique_id=576463377]
 tree_root = SubResource("AnimationNodeBlendTree_hck1p")
 anim_player = NodePath("../AnimationPlayer")
 "parameters/head turn/blend_amount" = 0.5

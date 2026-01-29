@@ -26,10 +26,9 @@ var exiting:bool = true
 var times_in_seat:int = -1
 var hatch_open:bool = false
 var parked:bool = true:
-	
 	set(value):
 		parked = value
-		if parked:
+		if parked and in_water:
 			gravity_scale = 0
 		else:
 			gravity_scale = 1
@@ -47,17 +46,14 @@ var last_rotation_dir:float :
 			last_rotation_dir = value
 var front_accel = 3.0
 var up_accel = 1.5
-#var SCAN_LINE:PackedScene = preload("res://Prefabs/submarine fabs/scan_line.tscn")
 
+var SCAN_LINE:PackedScene = preload("res://Prefabs/submarine fabs/scan_line.tscn")
+@onready var player:Player = get_tree().get_first_node_in_group("player")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animationtree.set("parameters/fan blend/blend_position", 0.5)
-	if parked:
-		gravity_scale = 0
-	else:
-		gravity_scale = 1
 	ship_animation_tree.animation_finished.connect(seat_animation_finished)
 	radar_container.modulate = Color(1,1,1,0)
 
@@ -87,7 +83,7 @@ func _input(event: InputEvent) -> void:
 				var scans = get_tree().get_nodes_in_group("scanable")
 				var camera_view = get_viewport().get_camera_3d()
 				
-				#player.head.add_child(SCAN_LINE.instantiate())
+				player.head.add_child(SCAN_LINE.instantiate())
 				for scan in scans:
 					var scan_screen_pos = camera_view.unproject_position(scan.global_position)
 					if not camera_view.is_position_in_frustum(scan.global_position):
@@ -108,7 +104,7 @@ func _process(delta: float) -> void:
 		if !get_tree().root.has_focus():
 			get_tree().root.grab_focus()
 			
-		var player:Player = get_tree().get_first_node_in_group("player")
+		
 	
 		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
 		var look_margin:float = 0.02

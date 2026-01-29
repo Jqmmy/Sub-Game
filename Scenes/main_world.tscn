@@ -8,6 +8,8 @@
 [ext_resource type="Shader" uid="uid://ba28r6qvmy05f" path="res://Assets/materials/Gem.gdshader" id="6_1tp12"]
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="7_42jam"]
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_k5cj5"]
+[ext_resource type="Shader" uid="uid://bmy0acqr8xc3" path="res://Assets/materials/water.gdshader" id="9_lyqml"]
+[ext_resource type="PackedScene" uid="uid://doycogrdtqul5" path="res://Assets/light.glb" id="10_oxewe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,7 +26,6 @@ ssr_max_steps = 128
 ssr_fade_in = 0.07764475
 ssr_depth_tolerance = 0.21
 ssao_sharpness = 1.0
-sdfgi_enabled = true
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 2
 volumetric_fog_enabled = true
@@ -70,6 +71,63 @@ shader_parameter/Taint = Color(0.52534366, 0.4051612, 0.9686708, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lyqml"]
 size = Vector3(800, 1300, 800)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxewe"]
+noise_type = 2
+fractal_octaves = 2
+fractal_gain = 0.805
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kyray"]
+noise = SubResource("FastNoiseLite_oxewe")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l2j04"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_26rrv"]
+noise = SubResource("FastNoiseLite_l2j04")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6f08l"]
+render_priority = 0
+shader = ExtResource("9_lyqml")
+shader_parameter/color_shallow = Color(0.05095318, 0.4130778, 0.6000303, 1)
+shader_parameter/color_deep = Color(0.22212285, 0.4975826, 0.6557966, 1)
+shader_parameter/transparency = 0.499999988824
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.25
+shader_parameter/max_visible_depth = 20.000000298024
+shader_parameter/wave_a = SubResource("NoiseTexture2D_kyray")
+shader_parameter/wave_b = SubResource("NoiseTexture2D_26rrv")
+shader_parameter/wave_move_direction_a = Vector2(-1, 0)
+shader_parameter/wave_move_direction_b = Vector2(0, 1)
+shader_parameter/wave_noise_scale_a = 15.0
+shader_parameter/wave_noise_scale_b = 15.0
+shader_parameter/wave_time_scale_a = 0.03
+shader_parameter/wave_time_scale_b = 0.03
+shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave_normal_flatness = 40.000000596048
+shader_parameter/surface_normals_move_direction_a = Vector2(-1, 0.2)
+shader_parameter/surface_normals_move_direction_b = Vector2(0.2, 1)
+shader_parameter/surface_texture_roughness = 0.48999998904752
+shader_parameter/surface_texture_scale = 0.10000000475
+shader_parameter/surface_texture_time_scale = 0.06000000285
+shader_parameter/ssr_resolution = 1.0
+shader_parameter/ssr_max_travel = 30.000000447036
+shader_parameter/ssr_max_diff = 4.0000000596048
+shader_parameter/ssr_mix_strength = 0.6999999843536
+shader_parameter/ssr_screen_border_fadeout = 0.30000000447036
+shader_parameter/refraction_intensity = 0.3999999910592
+shader_parameter/border_color = Color(0.9764706, 1, 1, 1)
+shader_parameter/border_scale = 2.0
+shader_parameter/border_near = 0.5
+shader_parameter/border_far = 300.0
+shader_parameter/cut_out_x = 0.0
+shader_parameter/cut_out_z = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oxewe"]
+material = SubResource("ShaderMaterial_6f08l")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
 [node name="Main World" type="Node3D" unique_id=1363505768]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1694242934]
@@ -85,17 +143,18 @@ sky_mode = 1
 environment = SubResource("Environment_1tp12")
 compositor = SubResource("Compositor_lefxv")
 
+[node name="player" parent="." unique_id=513241315 instance=ExtResource("7_42jam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 5.11234, -3.3419368)
+
 [node name="ship" parent="." unique_id=183951493 node_paths=PackedStringArray("submarine") instance=ExtResource("2_k5cj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7168055, 0)
 submarine = NodePath("../Submarine")
 
-[node name="player" parent="." unique_id=513241315 instance=ExtResource("7_42jam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 3.3955348, -3.3419368)
-
-[node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("2_4wdbe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.303, 12)
+[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=1206136310]
+transform = Transform3D(0.99999964, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 0.99999964, 0.21999252, 8.713526, -13.557764)
 
 [node name="gem" parent="." unique_id=2000569373 instance=ExtResource("4_uq1df")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 2.0198832, 19.163872)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 3.7366886, 19.163872)
 metadata/_edit_group_ = true
 
 [node name="gems" parent="gem" unique_id=772816771 instance=ExtResource("5_1tp12")]
@@ -111,6 +170,12 @@ omni_range = 4.7751594
 
 [node name="Ocean" type="Area3D" parent="." unique_id=1668603512]
 collision_mask = 6
+gravity_space_override = 1
+gravity = 0.0
+linear_damp_space_override = 3
+linear_damp = 0.5
+angular_damp_space_override = 3
+angular_damp = 0.5
 script = ExtResource("8_k5cj5")
 metadata/_custom_type_script = "uid://cv1xvvvoq56j8"
 
@@ -118,4 +183,33 @@ metadata/_custom_type_script = "uid://cv1xvvvoq56j8"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -651.44434, 0)
 shape = SubResource("BoxShape3D_lyqml")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=403511355]
+mesh = SubResource("PlaneMesh_oxewe")
+
+[node name="light" parent="." unique_id=1125803484 instance=ExtResource("10_oxewe")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.842039, 6.90281, 2.3786495)
+
+[node name="Roundcube_002" parent="light" index="0" unique_id=1926731362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="light" unique_id=493109125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006901741, 0)
+
+[node name="light2" parent="." unique_id=2137990925 instance=ExtResource("10_oxewe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8104231, 6.90281, 2.3786495)
+
+[node name="Roundcube_002" parent="light2" index="0" unique_id=1926731362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="light2" unique_id=364052644]
+
+[node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("2_4wdbe")]
+unique_name_in_owner = true
+transform = Transform3D(0.99999946, 0, -2.842171e-14, 0, 1, 0, 2.842171e-14, 0, 0.99999946, 12.119037, -5.2425547, 9.248703)
+mass = 500.0
+
+[editable path="ship"]
+[editable path="ship/ship"]
 [editable path="gem/gems"]
+[editable path="light"]
+[editable path="light2"]

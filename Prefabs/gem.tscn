@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hqp1mnmed638"]
+[gd_scene format=3 uid="uid://hqp1mnmed638"]
 
 [ext_resource type="Script" uid="uid://c5i2oe8vpxkit" path="res://Scripts/gem.gd" id="1_va7jc"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="2_nmhil"]
+[ext_resource type="PackedScene" uid="uid://04y8r0jb4wq2" path="res://Prefabs/submarine fabs/objective_waypoint.tscn" id="3_nmhil"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_va7jc"]
 size = Vector3(0.51, 0.51, 0.51)
@@ -9,18 +10,21 @@ size = Vector3(0.51, 0.51, 0.51)
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6h50"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="gem" type="RigidBody3D"]
+[node name="gem" type="RigidBody3D" unique_id=621894714]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_va7jc")
 
-[node name="gem interactable" type="Area3D" parent="." groups=["gem"]]
+[node name="gem interactable" type="Area3D" parent="." unique_id=213336659 groups=["gem"]]
 script = ExtResource("2_nmhil")
 hover_text = "Pick up"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="gem interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="gem interactable" unique_id=1973255909]
 shape = SubResource("BoxShape3D_va7jc")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=407041304]
 shape = SubResource("BoxShape3D_d6h50")
+
+[node name="Objective waypoint" parent="." unique_id=1940372961 instance=ExtResource("3_nmhil")]
+use_last_scan_position = true

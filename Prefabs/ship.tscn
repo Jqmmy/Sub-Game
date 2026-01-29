@@ -90,6 +90,9 @@ size = Vector3(3.027771, 0.50839233, 1.2182922)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xytvu"]
 size = Vector3(0.37430573, 0.40176392, 1.602417)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_akyvt"]
+size = Vector3(3.8098145, 0.5496826, 0.8670044)
+
 [node name="ship" type="Node3D" unique_id=183951493 node_paths=PackedStringArray("submarine_attatchment", "deck_door")]
 script = ExtResource("1_ba1si")
 submarine_attatchment = NodePath("ship/submarine attatchment")
@@ -147,27 +150,33 @@ metadata/_custom_type_script = "uid://xo27f5p84mpt"
 transform = Transform3D(0.9840376, 0, -0.17796072, 0, 1, 0, 0.17796072, 0, 0.9840376, -0.009241343, -0.04151392, -0.06111121)
 shape = SubResource("BoxShape3D_xyywq")
 
-[node name="Interactable" type="Area3D" parent="." unique_id=2033227162]
+[node name="ladder interact" type="Area3D" parent="." unique_id=2033227162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.673986, 0, 11.131465)
 script = ExtResource("2_88h6h")
 hover_text = "Get Back On Ship"
 metadata/_custom_type_script = "uid://xo27f5p84mpt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=598216653]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ladder interact" unique_id=598216653]
 transform = Transform3D(0.99467945, 0.10301823, 0, -0.10301823, 0.99467945, 0, 0, 0, 1, 0.11248255, -0.3281417, -0.029444695)
 shape = SubResource("BoxShape3D_88h6h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=166357757]
 libraries/ = SubResource("AnimationLibrary_0ww3j")
 
-[node name="ship" parent="." unique_id=440494425 instance=ExtResource("1_7nyfi")]
+[node name="back on ship point" type="Marker3D" parent="." unique_id=1679595699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9572754, 1.1435966, 11.162983)
+
+[node name="ship" parent="." unique_id=1344346977 instance=ExtResource("1_7nyfi")]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, -1.1213827, 0)
 
-[node name="submarine attatchment" parent="ship" index="20" unique_id=160500741]
+[node name="submarine attatchment" parent="ship" index="20" unique_id=239086936]
 transform = Transform3D(0.99999976, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 0.99999976, 0.21999255, 8.713526, -13.557766)
 
-[node name="handle" parent="ship/door hinges" parent_id_path=PackedInt32Array(440494425, 1980385138) index="4" unique_id=1247556936]
+[node name="handle" parent="ship/door hinges" parent_id_path=PackedInt32Array(1344346977, 1936575793) index="4" unique_id=1097714953]
 transform = Transform3D(1.427786, 0, 0, 0, 1.0938681, 0, 0, 0, 1.427786, 0.030584574, -0.2510438, 1.5075457)
+
+[node name="Plane_004" parent="ship" index="63" unique_id=1042716833]
+transform = Transform3D(4.5881375e-08, 0.9763428, 1.4483697, -0.59039897, 7.5497894e-08, 1.2393318e-07, 1.0270531e-09, -0.2162278, 6.539887, -6.4507933, 2.6062791, -11.806726)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2093863925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3486385, 2.0665884, 9.010391)
@@ -204,9 +213,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5302572, 3.7250779, -1.7618
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, 0.025563955, -0.29077125, -0.03668213)
 shape = SubResource("BoxShape3D_xytvu")
 
+[node name="StaticBody3D6" type="StaticBody3D" parent="." unique_id=945326396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.706761, 3.151682, 0.14655817)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6" unique_id=203117332]
+transform = Transform3D(0.9991294, 0.032205533, -0.026518943, -0.04171871, 0.77129656, -0.6351073, 0, 0.63566065, 0.7719686, -0.15239763, -0.26594973, 0.0157312)
+shape = SubResource("BoxShape3D_akyvt")
+
 [connection signal="interacted" from="Move Forward" to="." method="_on_move_forward_interacted"]
 [connection signal="interacted" from="Move Backward" to="." method="_on_move_backward_interacted"]
 [connection signal="interacted" from="Lower Sub" to="." method="_on_lower_sub_interacted"]
 [connection signal="interacted" from="Use Door" to="." method="_on_use_door_interacted"]
+[connection signal="interacted" from="ladder interact" to="." method="_on_ladder_interact_interacted"]
 
 [editable path="ship"]

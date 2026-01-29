@@ -9,7 +9,9 @@ func _ready() -> void:
 			body.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
 			body.current_speed = body.WATER_SPEED
 		if body.is_in_group("submarine"):
-			body.in_water = true)
+			body.in_water = true
+			body.gravity_scale = 0
+			print(body.gravity_scale))
 	body_exited.connect(func(body):
 		if body is Player:
 			body.motion_mode =CharacterBody3D.MOTION_MODE_GROUNDED

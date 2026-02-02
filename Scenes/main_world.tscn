@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://qg2ty2uh3qkc" path="res://Prefabs/player.tscn" id="7_42jam"]
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_k5cj5"]
 [ext_resource type="Shader" uid="uid://bmy0acqr8xc3" path="res://Assets/materials/water.gdshader" id="9_lyqml"]
-[ext_resource type="PackedScene" uid="uid://doycogrdtqul5" path="res://Assets/light.glb" id="10_oxewe"]
+[ext_resource type="PackedScene" uid="uid://fkhyvu5mwgl" path="res://Assets/blend files/rock formation area.blend" id="10_oxewe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,9 +26,11 @@ ssr_max_steps = 128
 ssr_fade_in = 0.07764475
 ssr_depth_tolerance = 0.21
 ssao_sharpness = 1.0
+sdfgi_enabled = true
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 2
-volumetric_fog_enabled = true
+fog_enabled = true
+fog_density = 0.0665
 volumetric_fog_density = 0.1
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
@@ -148,10 +150,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 5.11234, -3.341936
 
 [node name="ship" parent="." unique_id=183951493 node_paths=PackedStringArray("submarine") instance=ExtResource("2_k5cj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7168055, 0)
-submarine = NodePath("../Submarine")
+submarine = NodePath("ship/submarine attatchment/Submarine")
 
-[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=1206136310]
+[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=714225256]
 transform = Transform3D(0.99999964, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 0.99999964, 0.21999252, 8.713526, -13.557764)
+
+[node name="Submarine" parent="ship/ship/submarine attatchment" index="0" unique_id=1525268326 instance=ExtResource("2_4wdbe")]
+unique_name_in_owner = true
+transform = Transform3D(-0.9999998, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -0.9999998, -0.21999153, -5.274336, 1.560029)
 
 [node name="gem" parent="." unique_id=2000569373 instance=ExtResource("4_uq1df")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 3.7366886, 19.163872)
@@ -170,8 +176,8 @@ omni_range = 4.7751594
 
 [node name="Ocean" type="Area3D" parent="." unique_id=1668603512]
 collision_mask = 6
-gravity_space_override = 1
-gravity = 0.0
+gravity_space_override = 3
+gravity = 0.25
 linear_damp_space_override = 3
 linear_damp = 0.5
 angular_damp_space_override = 3
@@ -184,32 +190,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -651.44434, 0)
 shape = SubResource("BoxShape3D_lyqml")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=403511355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6891588, 0)
 mesh = SubResource("PlaneMesh_oxewe")
 
-[node name="light" parent="." unique_id=1125803484 instance=ExtResource("10_oxewe")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.842039, 6.90281, 2.3786495)
-
-[node name="Roundcube_002" parent="light" index="0" unique_id=1926731362]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="light" unique_id=493109125]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006901741, 0)
-
-[node name="light2" parent="." unique_id=2137990925 instance=ExtResource("10_oxewe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8104231, 6.90281, 2.3786495)
-
-[node name="Roundcube_002" parent="light2" index="0" unique_id=1926731362]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="light2" unique_id=364052644]
-
-[node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("2_4wdbe")]
-unique_name_in_owner = true
-transform = Transform3D(0.99999946, 0, -2.842171e-14, 0, 1, 0, 2.842171e-14, 0, 0.99999946, 12.119037, -5.2425547, 9.248703)
-mass = 500.0
+[node name="rock formation area" parent="." unique_id=1878182716 instance=ExtResource("10_oxewe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.173023, -154.25421, -30.005108)
 
 [editable path="ship"]
 [editable path="ship/ship"]
 [editable path="gem/gems"]
-[editable path="light"]
-[editable path="light2"]

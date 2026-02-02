@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode depth_draw_always;
+render_mode depth_draw_always, cull_disabled;
 
 const float EPSILON = 1e-5;
 

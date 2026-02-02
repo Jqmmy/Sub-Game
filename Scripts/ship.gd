@@ -38,6 +38,7 @@ func _on_lower_sub_interacted() -> void:
 	if submarine_attatchment.position.z < -27.0:
 		submarine.reparent(get_parent_node_3d())
 		submarine.gravity_scale = 1.0
+		submarine.open_hatch()
 	else:
 		pass #add error SFX
 

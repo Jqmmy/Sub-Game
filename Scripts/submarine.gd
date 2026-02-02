@@ -144,7 +144,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	ship_depth_ui.radar.arc_position = fposmod(rotation.y, TAU)
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
-	
 	if driving and not parked:
 		
 		var float_booster:float
@@ -290,3 +289,7 @@ func _on_net_interactable_interacted() -> void:
 			player.is_holding_gem = false
 	else:
 		pass
+
+func open_hatch() -> void:
+	atractor.active = true
+	ship_animation_tree["parameters/hatch/transition_request"] = "open"

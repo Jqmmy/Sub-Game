@@ -413,7 +413,7 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1813918458]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.4842248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.700954, 13.003136, -8.218407)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=240725924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.45837, 0, 9.434265)
@@ -473,42 +473,45 @@ skeleton = NodePath("")
 [node name="Submarine" parent="." unique_id=115754777 instance=ExtResource("5_48oh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 2.4597511, 18.03343)
 
-[node name="sub" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="0" unique_id=766223269]
+[node name="sub" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="0" unique_id=777128712]
 surface_material_override/1 = SubResource("StandardMaterial3D_48c03")
 
-[node name="floor glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="2" unique_id=162079845]
+[node name="floor glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="2" unique_id=59407111]
 surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
 
-[node name="glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="3" unique_id=98876512]
+[node name="glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="3" unique_id=2035573309]
 visible = false
 surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
 
-[node name="control IK" parent="Submarine/diver/joystick right and left base/Cube_014" parent_id_path=PackedInt32Array(115754777, 1650106097, 297143236) index="2" unique_id=139756949]
+[node name="Cube_014" parent="Submarine/diver/joystick right and left base" parent_id_path=PackedInt32Array(115754777, 1650106097, 1445440855) index="0" unique_id=1143344026]
+transform = Transform3D(0.94551855, 0.32556817, 0, -0.32556817, 0.94551855, 0, 0, 0, 1, 0, 0.00073444843, 0)
+
+[node name="control IK" parent="Submarine/diver/joystick right and left base/Cube_014" index="2" unique_id=139756949]
 transform = Transform3D(1.0563285e-08, 4.4351907e-08, 1.0000001, 0.99267334, 0.120829836, -1.5844925e-08, -0.12082984, 0.9926732, -4.2750592e-08, 0.046, 0.099, -0.065)
 
-[node name="Skeleton3D" parent="Submarine/diver/armature for sub" parent_id_path=PackedInt32Array(115754777, 1650106097, 238600886) index="0" unique_id=2111447304]
-bones/40/rotation = Quaternion(0.0022831913, -0.035413317, 0.0014225959, 0.9993692)
-bones/41/rotation = Quaternion(0.38629943, -1.8444602e-05, 2.2369697e-05, 0.9223734)
+[node name="Skeleton3D" parent="Submarine/diver/armature for sub" parent_id_path=PackedInt32Array(115754777, 1650106097, 1474340243) index="0" unique_id=2001525324]
+bones/40/rotation = Quaternion(0.007058464, 0.5861095, 0.007967785, 0.81016195)
+bones/41/rotation = Quaternion(0.25344685, 0.6960531, 0.29153377, 0.60521317)
 
-[node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21" unique_id=1335460421]
-transform = Transform3D(0.99721783, 0.051901918, 0.053499956, -0.0010853772, -0.7075579, 0.70665413, 0.074531056, -0.7047463, -0.705533, 0.0075592673, 4.524152, 0.11964416)
+[node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21" unique_id=1162380844]
+transform = Transform3D(-0.7054516, -0.67062527, -0.22934549, 0.70468557, -0.6982991, -0.12568149, -0.07586655, -0.25027886, 0.9651964, 0.02188535, 4.310674, 0.49445975)
 
-[node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22" unique_id=266445998]
-transform = Transform3D(0.99721795, 0.05190192, 0.053499963, -0.001085375, -0.7075583, 0.70665413, 0.074531056, -0.7047462, -0.70553315, 0.0075592874, 4.524152, 0.11964385)
+[node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22" unique_id=2106413627]
+transform = Transform3D(-0.70545167, -0.67062527, -0.22934556, 0.7046856, -0.6982993, -0.12568161, -0.07586656, -0.25027898, 0.9651964, 0.021885004, 4.3106737, 0.49445954)
 
-[node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23" unique_id=365205131]
-transform = Transform3D(-0.053500034, 0.051901788, 0.997218, -0.7066543, -0.7075579, -0.0010854304, 0.7055334, -0.70474625, 0.07453099, 0.2449556, 4.3505445, 0.31940874)
+[node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23" unique_id=108468132]
+transform = Transform3D(0.22934566, -0.67062515, -0.7054519, 0.1256816, -0.6982992, 0.70468557, -0.9651968, -0.2502788, -0.075866655, -0.09443703, 4.5235868, 0.23457582)
 
-[node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24" unique_id=228692624]
-transform = Transform3D(-0.053500187, 0.051902175, 0.9972184, -0.70665413, -0.7075582, -0.0010855496, 0.7055331, -0.7047466, 0.07453117, 0.24495599, 4.350544, 0.31940922)
+[node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24" unique_id=146499959]
+transform = Transform3D(0.2293457, -0.6706256, -0.70545197, 0.12568143, -0.69829935, 0.70468605, -0.9651964, -0.2502789, -0.07586679, -0.094437264, 4.523587, 0.23457497)
 
-[node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25" unique_id=1531314393]
-transform = Transform3D(0.20179887, 0.01050298, 0.010826354, -0.00021963276, -0.14318275, 0.1429998, 0.015082256, -0.14261375, -0.14277297, 0.00014690455, 4.2588863, 0.21495683)
+[node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25" unique_id=311529673]
+transform = Transform3D(-0.1427565, -0.13570896, -0.04641079, 0.1426015, -0.1413091, -0.02543316, -0.015352498, -0.050646894, 0.1953189, -0.0001753968, 4.2588444, 0.21817672)
 
-[node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26" unique_id=841794970]
-transform = Transform3D(0.20179881, 0.010502908, 0.010826354, -0.00021968293, -0.14318274, 0.14299978, 0.015082202, -0.14261375, -0.14277297, 0.00014686503, 4.258886, 0.21495737)
+[node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26" unique_id=1489743550]
+transform = Transform3D(0.06403084, -0.13451903, -0.13694876, 0.003526637, -0.14351766, 0.14262019, -0.19193202, -0.047514223, -0.043067202, -0.00017484522, 4.258844, 0.21817696)
 
-[node name="map button_001" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="20" unique_id=326487964]
+[node name="map button_001" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1650106097) index="20" unique_id=1622002100]
 surface_material_override/0 = SubResource("StandardMaterial3D_w12p2")
 
 [node name="radar container" parent="Submarine/Control" parent_id_path=PackedInt32Array(115754777, 1760935703) index="0" unique_id=618123083]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cagrfw40y8ip7"]
+[gd_scene format=3 uid="uid://cagrfw40y8ip7"]
 
 [ext_resource type="Script" uid="uid://c6wvgyrdcwqe4" path="res://Scripts/fish.gd" id="1_03hcv"]
 [ext_resource type="PackedScene" uid="uid://dmofc6ba0cwg0" path="res://Assets/blend files/fish.blend" id="2_sid3i"]
@@ -12,22 +12,23 @@ specular_mode = 2
 billboard_mode = 1
 billboard_keep_scale = true
 
-[node name="Fish" type="Area3D" groups=["fish"]]
+[node name="Fish" type="Area3D" unique_id=1352397863 groups=["fish"]]
 top_level = true
 collision_layer = 16
-collision_mask = 16
+collision_mask = 23
 script = ExtResource("1_03hcv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1047127447]
 shape = SubResource("SphereShape3D_03hcv")
 
-[node name="fish" parent="." instance=ExtResource("2_sid3i")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+[node name="fish" parent="." unique_id=1587020118 instance=ExtResource("2_sid3i")]
 
 [node name="Cube" parent="fish" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_sid3i")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 
 [editable path="fish"]

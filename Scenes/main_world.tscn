@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_k5cj5"]
 [ext_resource type="Shader" uid="uid://bmy0acqr8xc3" path="res://Assets/materials/water.gdshader" id="9_lyqml"]
 [ext_resource type="PackedScene" uid="uid://fkhyvu5mwgl" path="res://Assets/blend files/rock formation area.blend" id="10_oxewe"]
+[ext_resource type="AudioStream" uid="uid://82fj01o1n1c7" path="res://Assets/Music/WaterforJudahHesthirsty.ogg" id="11_kyray"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -133,7 +134,7 @@ subdivide_depth = 100
 [node name="Main World" type="Node3D" unique_id=1363505768]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1694242934]
-transform = Transform3D(-0.8160367, -0.50056285, 0.28900003, 2.7805946e-08, 0.49999994, 0.86602545, -0.5780001, 0.70670855, -0.40801835, 0, 0, 0)
+transform = Transform3D(-0.8160367, -0.50056285, 0.28900006, 2.7805946e-08, 0.49999994, 0.86602545, -0.5780001, 0.70670855, -0.4080183, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_split_1 = 0.08
@@ -195,6 +196,9 @@ mesh = SubResource("PlaneMesh_oxewe")
 
 [node name="rock formation area" parent="." unique_id=1878182716 instance=ExtResource("10_oxewe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.173023, -154.25421, -30.005108)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1247862262]
+stream = ExtResource("11_kyray")
 
 [editable path="ship"]
 [editable path="ship/ship"]

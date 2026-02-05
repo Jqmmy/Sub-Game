@@ -24,6 +24,7 @@ Settings="*res://Scripts/Globals/settings.gd"
 
 [display]
 
+window/size/mode=2
 window/size/initial_position_type=3
 window/stretch/mode="viewport"
 

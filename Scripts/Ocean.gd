@@ -10,7 +10,7 @@ func _ready() -> void:
 			body.current_speed = body.WATER_SPEED
 		if body.is_in_group("submarine"):
 			body.in_water = true
-			body.apply_central_impulse(Vector3(0,10,0))
+			body.linear_velocity.y = 0.0
 			)
 	body_exited.connect(func(body):
 		if body is Player:

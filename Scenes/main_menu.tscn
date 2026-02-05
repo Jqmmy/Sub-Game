@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://btbsnk4tbdk0k"]
+
+[node name="Main Menu" type="Control" unique_id=1552621549]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1317571858]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AQUANAUT" type="Label" parent="VBoxContainer" unique_id=984223615]
+layout_mode = 2
+text = "AQUANAUT"
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1154327642]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Button2")
+focus_neighbor_bottom = NodePath("../Button3")
+text = "START"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1881714739]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Button")
+focus_neighbor_bottom = NodePath("../Button2")
+text = "SETTINGS"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1558753165]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Button3")
+focus_neighbor_bottom = NodePath("../Button")
+text = "QUIT"

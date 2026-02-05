@@ -37,6 +37,15 @@ viewport_path = NodePath("Radar/wrist UI")
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_knrd4")
 
+[sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_knrd4"]
+angle = 2.0943952
+
+[sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_hck1p"]
+angle = 2.3561945
+
+[sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_juxdh"]
+angle = 2.3561945
+
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_2nftw"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y5hcb"]
@@ -97,7 +106,7 @@ nodes/Add2/position = Vector2(-140, -140)
 "nodes/Animation 6/position" = Vector2(-380, -40)
 node_connections = [&"output", 0, &"Transition", &"head turn", 0, &"Animation", &"head turn", 1, &"Animation 2", &"Transition", 0, &"Add2", &"Transition", 1, &"Animation 5", &"Transition", 2, &"Animation 3", &"Add2", 0, &"Animation 4", &"Add2", 1, &"Animation 6"]
 
-[node name="player" type="CharacterBody3D" unique_id=1252446106 node_paths=PackedStringArray("camera_3d", "head", "skeleton", "gem_hold_spot", "skeleton_ik_3d", "right_arm_ik") groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1252446106 node_paths=PackedStringArray("camera_3d", "head", "skeleton", "gem_hold_spot") groups=["player"]]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_4flbx")
@@ -105,8 +114,6 @@ camera_3d = NodePath("head/Camera3D")
 head = NodePath("head")
 skeleton = NodePath("charecter/Armature/Skeleton3D")
 gem_hold_spot = NodePath("head/Camera3D/Gem holding")
-skeleton_ik_3d = NodePath("charecter/Armature/Skeleton3D/left arm IK")
-right_arm_ik = NodePath("charecter/Armature/Skeleton3D/right arm IK")
 
 [node name="game hud" parent="." unique_id=1530883497 instance=ExtResource("2_knrd4")]
 
@@ -264,36 +271,76 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2nftw")
 [node name="torso" parent="charecter/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 2.5670716e-32)
 
-[node name="left arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="6" unique_id=647345245]
-root_bone = &"arm.l"
-tip_bone = &"hand.l"
-
-[node name="right arm IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="7" unique_id=1547824911]
-root_bone = &"arm.r"
-tip_bone = &"hand.r"
-
-[node name="tube r IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="8" unique_id=413620926]
-root_bone = &"breath tube.004.r"
-tip_bone = &"breath tube.010.r"
-target_node = NodePath("../ModifierBoneTarget3D")
-
-[node name="tube l IK" type="SkeletonIK3D" parent="charecter/Armature/Skeleton3D" index="9" unique_id=1966417823]
-root_bone = &"breath tube.004.l"
-tip_bone = &"breath tube.010.l"
-target_node = NodePath("../ModifierBoneTarget3D2")
-
-[node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="10" unique_id=1838868501]
+[node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="6" unique_id=1838868501]
 transform = Transform3D(-0.2688502, 0.5442329, 0.7946885, -0.8430612, 0.26603866, -0.46740845, -0.4657971, -0.7956341, 0.38729712, -0.069894776, 1.4463714, 0.036598682)
 bone_name = "breath tube.r"
 bone = 6
 
-[node name="ModifierBoneTarget3D2" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="11" unique_id=1905346136]
+[node name="ModifierBoneTarget3D2" type="ModifierBoneTarget3D" parent="charecter/Armature/Skeleton3D" index="7" unique_id=1905346136]
 transform = Transform3D(-0.26885006, -0.54423285, -0.7946885, 0.53102744, 0.6045918, -0.59369844, 0.8035726, -0.5816174, 0.12645814, 0.06989478, 1.4463714, 0.036598682)
 bone_name = "breath tube.l"
 bone = 5
 
-[node name="breath pipes" parent="charecter/Armature/Skeleton3D" index="12"]
+[node name="breath pipes" parent="charecter/Armature/Skeleton3D" index="8"]
 visible = false
+
+[node name="CCDIK3D" type="CCDIK3D" parent="charecter/Armature/Skeleton3D" index="9" unique_id=404014892]
+setting_count = 2
+settings/0/target_node = NodePath("")
+settings/1/target_node = NodePath("")
+settings/0/root_bone_name = "arm.l"
+settings/0/root_bone = 8
+settings/0/end_bone_name = "hand.l"
+settings/0/end_bone = 10
+settings/0/extend_end_bone = false
+settings/0/joint_count = 3
+settings/1/root_bone_name = "arm.r"
+settings/1/root_bone = 28
+settings/1/end_bone_name = "hand.r"
+settings/1/end_bone = 30
+settings/1/extend_end_bone = false
+settings/1/joint_count = 3
+settings/0/joints/0/rotation_axis = 3
+settings/0/joints/0/limitation = SubResource("JointLimitationCone3D_knrd4")
+settings/0/joints/0/limitation/right_axis = 0
+settings/0/joints/0/limitation/rotation_offset = Quaternion(0, 0, -0.4, 1)
+settings/0/joints/1/rotation_axis = 3
+settings/0/joints/1/limitation = SubResource("JointLimitationCone3D_hck1p")
+settings/0/joints/1/limitation/right_axis = 0
+settings/0/joints/1/limitation/rotation_offset = Quaternion(0, 0, -0.71, 1)
+settings/0/joints/2/rotation_axis = 3
+settings/0/joints/2/limitation = null
+settings/1/joints/0/rotation_axis = 3
+settings/1/joints/0/limitation = SubResource("JointLimitationCone3D_knrd4")
+settings/1/joints/0/limitation/right_axis = 0
+settings/1/joints/0/limitation/rotation_offset = Quaternion(0, 0, 0.4, 1)
+settings/1/joints/1/rotation_axis = 3
+settings/1/joints/1/limitation = SubResource("JointLimitationCone3D_juxdh")
+settings/1/joints/1/limitation/right_axis = 0
+settings/1/joints/1/limitation/rotation_offset = Quaternion(0, 0, 0.7, 1)
+settings/1/joints/2/rotation_axis = 3
+settings/1/joints/2/limitation = null
+
+[node name="CopyTransformModifier3D" type="CopyTransformModifier3D" parent="charecter/Armature/Skeleton3D" index="10" unique_id=1193227786]
+setting_count = 2
+settings/0/amount = 1.0
+settings/0/apply_bone_name = "hand.r"
+settings/0/apply_bone = 30
+settings/0/reference_type = 1
+settings/0/reference_node = NodePath("")
+settings/1/amount = 1.0
+settings/1/apply_bone_name = "hand.l"
+settings/1/apply_bone = 10
+settings/1/reference_type = 1
+settings/1/reference_node = NodePath("")
+settings/0/copy = 6
+settings/0/axes = 7
+settings/0/invert = 0
+settings/0/additive = false
+settings/1/copy = 6
+settings/1/axes = 7
+settings/1/invert = 0
+settings/1/additive = false
 
 [node name="AnimationTree" type="AnimationTree" parent="charecter" unique_id=576463377]
 tree_root = SubResource("AnimationNodeBlendTree_hck1p")

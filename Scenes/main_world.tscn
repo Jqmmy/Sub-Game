@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_k5cj5"]
 [ext_resource type="Shader" uid="uid://bmy0acqr8xc3" path="res://Assets/materials/water.gdshader" id="9_lyqml"]
 [ext_resource type="PackedScene" uid="uid://fkhyvu5mwgl" path="res://Assets/blend files/rock formation area.blend" id="10_oxewe"]
-[ext_resource type="AudioStream" uid="uid://82fj01o1n1c7" path="res://Assets/Music/WaterforJudahHesthirsty.ogg" id="11_kyray"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -153,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 5.11234, -3.341936
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7168055, 0)
 submarine = NodePath("ship/submarine attatchment/Submarine")
 
-[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=714225256]
+[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=1206136310]
 transform = Transform3D(0.99999964, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 0.99999964, 0.21999252, 8.713526, -13.557764)
 
 [node name="Submarine" parent="ship/ship/submarine attatchment" index="0" unique_id=1525268326 instance=ExtResource("2_4wdbe")]
@@ -196,9 +195,6 @@ mesh = SubResource("PlaneMesh_oxewe")
 
 [node name="rock formation area" parent="." unique_id=1878182716 instance=ExtResource("10_oxewe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.173023, -154.25421, -30.005108)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1247862262]
-stream = ExtResource("11_kyray")
 
 [editable path="ship"]
 [editable path="ship/ship"]

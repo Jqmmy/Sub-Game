@@ -15,13 +15,15 @@ var last_raycast_hover_target:Interactable
 @export var camera_3d:Camera3D
 @export var head:Node3D
 @export var skeleton:Skeleton3D
+
+
+@onready var arms_ik: CCDIK3D = $charecter/Armature/Skeleton3D/CCDIK3D
+@onready var hand_transforms: CopyTransformModifier3D = $charecter/Armature/Skeleton3D/CopyTransformModifier3D
 @export var gem_hold_spot:Marker3D
 @onready var light: SpotLight3D = $head/Camera3D/light
 @onready var radar:WristRadar = $Radar
 @onready var looking_direction: Marker3D = $"head/looking direction"
 
-@export var skeleton_ik_3d: SkeletonIK3D
-@export var right_arm_ik: SkeletonIK3D 
 @onready var charecter: Node3D = $charecter
 @onready var animation_tree: AnimationTree = $charecter/AnimationTree
 @onready var radar_target_dist_label: Label = $"Radar/wrist UI/VBoxContainer/HBoxContainer/radar target dist"
@@ -68,23 +70,23 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	#var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
-	#var look_margin:float = 0.1
-	#if look_vector.x > look_margin or look_vector.x < -look_margin:
-		#if head.rotation.y < 0.5 and head.rotation.y > -0.5:
-			#head.rotate_y(look_vector.x * sens)
-		#else:
-			#rotate_y(look_vector.x * sens)
-			#head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
-	#else:
-		#if head.rotation.y >= 0.5:
-			#head.rotation.y = 0.49
-		#elif head.rotation.y <= -0.5:
-			#head.rotation.y = -0.49
-		#
-	#if look_vector.y > look_margin or look_vector.y < -look_margin:
-		#camera_3d.rotate_x(look_vector.y * sens)
-		#camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
+	var look_margin:float = 0.1
+	if look_vector.x > look_margin or look_vector.x < -look_margin:
+		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
+			head.rotate_y(look_vector.x * Settings.controller_sens)
+		else:
+			rotate_y(look_vector.x * Settings.controller_sens)
+			head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
+	else:
+		if head.rotation.y >= 0.5:
+			head.rotation.y = 0.49
+		elif head.rotation.y <= -0.5:
+			head.rotation.y = -0.49
+		
+	if look_vector.y > look_margin or look_vector.y < -look_margin:
+		camera_3d.rotate_x(look_vector.y * Settings.controller_sens)
+		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * Settings.sens)
@@ -170,3 +172,17 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 	move_and_slide()
+
+func set_ik_targets(target_left:Node3D, target_right:Node3D, is_active:bool, change_time:float) -> void:
+	arms_ik.set_target_node(0, arms_ik.get_path_to(target_left))
+	arms_ik.set_target_node(1, arms_ik.get_path_to(target_right))
+	hand_transforms.set_reference_node(0, arms_ik.get_path_to(target_right))
+	hand_transforms.set_reference_node(1, arms_ik.get_path_to(target_left))
+	var tween = get_tree().create_tween()
+	if is_active:
+		tween.tween_property(arms_ik, "influence", 1.0, change_time)
+		tween.tween_property(hand_transforms, "influence", 1.0, change_time)
+	else:
+		tween.tween_property(arms_ik, "influence", 0.0, change_time)
+		tween.tween_property(hand_transforms, "influence", 0.0, change_time)
+	

@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="controller stuff"
+run/main_scene="uid://btbsnk4tbdk0k"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,7 +25,6 @@ Settings="*res://Scripts/Globals/settings.gd"
 
 [display]
 
-window/size/mode=2
 window/size/initial_position_type=3
 window/stretch/mode="viewport"
 

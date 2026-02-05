@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 @export var seat_pos:Node3D
+@onready var joystick_ik: Marker3D = $"diver/joystick right and left base/Cube_014/control IK"
+@onready var buttons_ik: Node3D = $"IK target"
 @onready var control: Control = $Control
 @onready var node_3d: Node3D = $Node3D
 @onready var animationtree: AnimationTree = $"button animationtree"
@@ -219,8 +221,7 @@ func seat_animation_finished(anim_name:String):
 		elif times_in_seat > 0:
 			print("yeah")
 			driving = true
-			player.skeleton_ik_3d.start()
-			player.right_arm_ik.start()
+			player.set_ik_targets(joystick_ik, buttons_ik, true, 1.0)
 			player.animation_tree.set("parameters/Transition/transition_request", "state_0")
 
 

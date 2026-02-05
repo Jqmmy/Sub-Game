@@ -11,7 +11,7 @@ func _ready() -> void:
 		if body.is_in_group("submarine"):
 			body.in_water = true
 			body.linear_velocity.y = 0.0
-			)
+			body.gravity_scale = 0.0)
 	body_exited.connect(func(body):
 		if body is Player:
 			body.motion_mode =CharacterBody3D.MOTION_MODE_GROUNDED

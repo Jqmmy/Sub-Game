@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://durd25idaxpyb"]
+[gd_scene format=3 uid="uid://durd25idaxpyb"]
 
 [ext_resource type="Shader" uid="uid://cr8pxx2spskdr" path="res://Assets/materials/scan.gdshader" id="1_vf3wh"]
 [ext_resource type="Script" uid="uid://qngbd74c3tov" path="res://Scripts/scan_line.gd" id="2_uftsl"]
@@ -15,14 +15,8 @@ shader_parameter/fresnel_sharpness = 10.0
 material = SubResource("ShaderMaterial_ynf5e")
 size = Vector2(200, 100)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_uftsl"]
-
-[node name="scan line" type="MeshInstance3D"]
+[node name="scan line" type="MeshInstance3D" unique_id=1533130540]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("PlaneMesh_bhf8s")
 script = ExtResource("2_uftsl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(10.818386, 0, 0, 0, 2.6104314, 0, 0, -7.1054274e-15, -12.530115, 0, 0, 0)
-mesh = SubResource("CylinderMesh_uftsl")

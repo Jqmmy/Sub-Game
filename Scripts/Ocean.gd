@@ -1,6 +1,7 @@
 class_name Ocean
 extends Area3D
 
+signal player_jumped_in_water
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,6 +9,7 @@ func _ready() -> void:
 		if body is Player:
 			body.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
 			body.current_speed = body.WATER_SPEED
+			player_jumped_in_water.emit()
 		if body.is_in_group("submarine"):
 			body.in_water = true
 			body.linear_velocity.y = 0.0

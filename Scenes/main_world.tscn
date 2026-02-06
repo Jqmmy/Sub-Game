@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2e2kkuq36jrw"]
 
 [ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="1_4wdbe"]
+[ext_resource type="Script" uid="uid://c74rdvy0uceae" path="res://Scripts/main_world.gd" id="1_l2j04"]
 [ext_resource type="PackedScene" uid="uid://ch6xrrfybrktg" path="res://Prefabs/submarine fabs/submarine.tscn" id="2_4wdbe"]
 [ext_resource type="PackedScene" uid="uid://cugedhnsj2gwj" path="res://Prefabs/ship.tscn" id="2_k5cj5"]
 [ext_resource type="PackedScene" uid="uid://hqp1mnmed638" path="res://Prefabs/gem.tscn" id="4_uq1df"]
@@ -10,6 +11,9 @@
 [ext_resource type="Script" uid="uid://cv1xvvvoq56j8" path="res://Scripts/Ocean.gd" id="8_k5cj5"]
 [ext_resource type="Shader" uid="uid://bmy0acqr8xc3" path="res://Assets/materials/water.gdshader" id="9_lyqml"]
 [ext_resource type="PackedScene" uid="uid://fkhyvu5mwgl" path="res://Assets/blend files/rock formation area.blend" id="10_oxewe"]
+[ext_resource type="AudioStream" uid="uid://batddbv2scxts" path="res://Assets/Music/jump into water.ogg" id="11_kyray"]
+[ext_resource type="AudioStream" uid="uid://d0433431cuoub" path="res://Assets/SFX/Jumpinginwater.ogg" id="13_26rrv"]
+[ext_resource type="AudioStream" uid="uid://bq8pypxa2y4sm" path="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg" id="14_6f08l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -130,7 +134,15 @@ size = Vector2(100, 100)
 subdivide_width = 100
 subdivide_depth = 100
 
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_6f08l"]
+stream_count = 2
+stream_0/stream = ExtResource("11_kyray")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("13_26rrv")
+stream_1/volume = 0.0
+
 [node name="Main World" type="Node3D" unique_id=1363505768]
+script = ExtResource("1_l2j04")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1694242934]
 transform = Transform3D(-0.8160367, -0.50056285, 0.28900006, 2.7805946e-08, 0.49999994, 0.86602545, -0.5780001, 0.70670855, -0.4080183, 0, 0, 0)
@@ -145,14 +157,14 @@ sky_mode = 1
 environment = SubResource("Environment_1tp12")
 compositor = SubResource("Compositor_lefxv")
 
-[node name="player" parent="." unique_id=513241315 instance=ExtResource("7_42jam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0573454, 5.11234, -3.3419368)
+[node name="player" parent="." unique_id=1252446106 instance=ExtResource("7_42jam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14625072, 5.1158323, -1.516963)
 
 [node name="ship" parent="." unique_id=183951493 node_paths=PackedStringArray("submarine") instance=ExtResource("2_k5cj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7168055, 0)
 submarine = NodePath("ship/submarine attatchment/Submarine")
 
-[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=1206136310]
+[node name="submarine attatchment" parent="ship/ship" parent_id_path=PackedInt32Array(183951493, 1344346977) index="20" unique_id=714225256]
 transform = Transform3D(0.99999964, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 0.99999964, 0.21999252, 8.713526, -13.557764)
 
 [node name="Submarine" parent="ship/ship/submarine attatchment" index="0" unique_id=1525268326 instance=ExtResource("2_4wdbe")]
@@ -194,7 +206,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6891588, 0)
 mesh = SubResource("PlaneMesh_oxewe")
 
 [node name="rock formation area" parent="." unique_id=1878182716 instance=ExtResource("10_oxewe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.173023, -154.25421, -30.005108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5383644, -42.554905, 10.183689)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1337573627]
+stream = SubResource("AudioStreamSynchronized_6f08l")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=148815800]
+stream = ExtResource("14_6f08l")
+
+[connection signal="player_jumped_in_water" from="Ocean" to="." method="_on_ocean_player_jumped_in_water"]
 
 [editable path="ship"]
 [editable path="ship/ship"]

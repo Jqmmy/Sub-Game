@@ -4,7 +4,6 @@
 transparency = 1
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.76240367, 0.7624037, 0.7624035, 0.21568628)
-roughness = 0.05
-refraction_enabled = true
+albedo_color = Color(0.76, 0.76, 0.76, 0.21568628)
+roughness = 0.1
 refraction_scale = 0.01

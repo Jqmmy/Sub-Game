@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bq8pypxa2y4sm"
+path="res://.godot/imported/Aquanaut’s descent ( phase 1).ogg-5cf502c9297e6e58b395ac34f45c308c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg"
+dest_files=["res://.godot/imported/Aquanaut’s descent ( phase 1).ogg-5cf502c9297e6e58b395ac34f45c308c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

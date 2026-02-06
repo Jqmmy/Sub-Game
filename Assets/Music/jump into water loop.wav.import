@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jd77uhw4okg6"
+path="res://.godot/imported/jump into water loop.wav-8457a8d7b2b64ad3dea04ad85a039510.sample"
+
+[deps]
+
+source_file="res://Assets/Music/jump into water loop.wav"
+dest_files=["res://.godot/imported/jump into water loop.wav-8457a8d7b2b64ad3dea04ad85a039510.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

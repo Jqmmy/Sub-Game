@@ -28,6 +28,7 @@ var last_raycast_hover_target:Interactable
 @onready var animation_tree: AnimationTree = $charecter/AnimationTree
 @onready var radar_target_dist_label: Label = $"Radar/wrist UI/VBoxContainer/HBoxContainer/radar target dist"
 @onready var ray_cast_3d: RayCast3D = $head/Camera3D/RayCast3D
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
 func _ready() -> void:
@@ -133,6 +134,8 @@ func _physics_process(delta: float) -> void:
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
 		var direction = (head.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if velocity > Vector3.ZERO and not audio_stream_player_3d.playing:
+			audio_stream_player_3d.play()
 		
 		if direction:
 			velocity.x = direction.x * current_speed

@@ -7,6 +7,7 @@ extends Node3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var back_on_ship_point: Marker3D = $"back on ship point"
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var deck_door_open:bool = false
 
@@ -22,6 +23,9 @@ func _on_use_door_interacted() -> void:
 	else:
 		animation_player.play_backwards("open close door")
 		deck_door_open = false
+	
+	#get_tree().create_timer(2.5).timeout.connect(func():
+		#audio_stream_player.play())
 
 
 func _on_move_forward_interacted() -> void:

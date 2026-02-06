@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://batddbv2scxts"
+path="res://.godot/imported/jump into water.ogg-1bfa70ee494b6c0aa3b4d702e78cbe14.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Music/jump into water.ogg"
+dest_files=["res://.godot/imported/jump into water.ogg-1bfa70ee494b6c0aa3b4d702e78cbe14.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

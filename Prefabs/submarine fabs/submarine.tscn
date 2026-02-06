@@ -426,8 +426,10 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
+
 bones/40/rotation = Quaternion(-0.0011448017, -0.4434316, -0.0030472088, 0.8963024)
 bones/41/rotation = Quaternion(0.0300401, 0.9195748, 0.38512957, 0.07179859)
+
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0" unique_id=410802867]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
@@ -538,6 +540,7 @@ metadata/_custom_type_script = "uid://xo27f5p84mpt"
 transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.018554688)
 shape = SubResource("CylinderShape3D_0vtxn")
 
+
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=1162380844]
 transform = Transform3D(-0.50863063, 0.57047015, -0.64487034, 0.11813355, -0.6956681, -0.70858276, -0.85284144, -0.43658802, 0.2864465, -0.23101723, 4.1617036, 0.33972466)
 
@@ -555,6 +558,7 @@ transform = Transform3D(-0.10292746, 0.11544138, -0.13049713, 0.02390574, -0.140
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=1489743550]
 transform = Transform3D(0.12216359, 0.11220326, 0.11591706, -0.0016550778, -0.14452232, 0.14163627, 0.16131833, -0.08645235, -0.08632884, 0.0020182154, 4.2588844, 0.21420486)
+
 
 [node name="map button_001" parent="diver" index="20" unique_id=1622002100]
 surface_material_override/0 = SubResource("StandardMaterial3D_fgt3x")

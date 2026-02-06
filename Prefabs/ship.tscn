@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://kpp1crplowmm" path="res://Scripts/ship.gd" id="1_ba1si"]
 [ext_resource type="Script" uid="uid://xo27f5p84mpt" path="res://Scripts/Interactable.gd" id="2_88h6h"]
 [ext_resource type="AudioStream" uid="uid://dp82vbfg4epvp" path="res://Assets/SFX/DooropeningMetal.ogg" id="3_cm1ru"]
+
 [ext_resource type="AudioStream" uid="uid://bq8pypxa2y4sm" path="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg" id="5_0ww3j"]
 [ext_resource type="AudioStream" uid="uid://btn1ska1i6jji" path="res://Assets/SFX/Oceanambienceabovewater_1.ogg" id="6_xyywq"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ba1si"]
 size = Vector3(0.19433594, 0.068359375, 0.26757813)

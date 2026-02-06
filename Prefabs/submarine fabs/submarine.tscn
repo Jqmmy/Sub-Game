@@ -427,6 +427,7 @@ bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
 
+
 bones/40/rotation = Quaternion(-0.0011448017, -0.4434316, -0.0030472088, 0.8963024)
 bones/41/rotation = Quaternion(0.0300401, 0.9195748, 0.38512957, 0.07179859)
 
@@ -541,20 +542,24 @@ transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371
 shape = SubResource("CylinderShape3D_0vtxn")
 
 
-[node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=1162380844]
-transform = Transform3D(-0.50863063, 0.57047015, -0.64487034, 0.11813355, -0.6956681, -0.70858276, -0.85284144, -0.43658802, 0.2864465, -0.23101723, 4.1617036, 0.33972466)
+[node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=1335460421]
+transform = Transform3D(0.62275755, -0.54744315, -0.5589975, 0.012949346, -0.7071424, 0.7069522, -0.7823074, -0.44749862, -0.43328932, -0.07734303, 4.5241513, 0.16052176)
 
-[node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22" unique_id=2106413627]
-transform = Transform3D(-0.5086307, 0.5704703, -0.6448703, 0.11813357, -0.69566804, -0.7085829, -0.85284144, -0.43658814, 0.2864465, -0.23101684, 4.1617036, 0.33972442)
+[node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22" unique_id=266445998]
+transform = Transform3D(0.6227576, -0.5474432, -0.5589976, 0.012949346, -0.7071426, 0.70695215, -0.7823075, -0.4474986, -0.43328935, -0.07734327, 4.5241504, 0.16052158)
 
-[node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23" unique_id=108468132]
-transform = Transform3D(0.6448706, 0.5704701, -0.50863063, 0.7085832, -0.6956681, 0.118133545, -0.28644654, -0.43658787, -0.8528416, -0.20049466, 4.3731623, 0.05554849)
+[node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23" unique_id=365205131]
+transform = Transform3D(0.5589978, -0.5474433, 0.6227576, -0.7069526, -0.7071424, 0.0129491985, 0.43328965, -0.44749856, -0.78230757, 0.22281863, 4.3540006, 0.07476474)
 
-[node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24" unique_id=146499959]
-transform = Transform3D(0.6448704, 0.5704702, -0.5086308, 0.7085828, -0.6956683, 0.118133694, -0.28644627, -0.4365883, -0.852842, -0.20049423, 4.3731627, 0.055547774)
+[node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24" unique_id=228692624]
+transform = Transform3D(0.55899745, -0.54744333, 0.62275803, -0.70695215, -0.7071426, 0.0129491985, 0.43328953, -0.44749904, -0.7823077, 0.22281924, 4.3539996, 0.0747647)
 
-[node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25" unique_id=311529673]
-transform = Transform3D(-0.10292746, 0.11544138, -0.13049713, 0.02390574, -0.14077665, -0.14339013, -0.17258257, -0.08834877, 0.057965823, 0.0020187437, 4.258885, 0.21420449)
+[node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25" unique_id=1531314393]
+transform = Transform3D(0.12602238, -0.110781595, -0.11311978, 0.0026204595, -0.14309865, 0.14306012, -0.15830918, -0.09055666, -0.087681234, -0.00051313936, 4.258859, 0.21729116)
+
+[node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=841794970]
+transform = Transform3D(0.12602235, -0.11078162, -0.11311976, 0.0026204588, -0.14309864, 0.1430601, -0.15830913, -0.09055665, -0.08768121, -0.0005127104, 4.2588587, 0.21729149)
+
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=1489743550]
 transform = Transform3D(0.12216359, 0.11220326, 0.11591706, -0.0016550778, -0.14452232, 0.14163627, 0.16131833, -0.08645235, -0.08632884, 0.0020182154, 4.2588844, 0.21420486)

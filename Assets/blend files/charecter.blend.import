@@ -2096,7 +2096,6 @@ _subresources={
 "slices/amount": 0
 }
 },
-
 "materials": {
 "Material": {
 "use_external/enabled": true,

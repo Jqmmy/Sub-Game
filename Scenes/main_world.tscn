@@ -14,18 +14,20 @@
 [ext_resource type="AudioStream" uid="uid://batddbv2scxts" path="res://Assets/Music/jump into water.ogg" id="11_kyray"]
 [ext_resource type="AudioStream" uid="uid://d0433431cuoub" path="res://Assets/SFX/Jumpinginwater.ogg" id="13_26rrv"]
 [ext_resource type="AudioStream" uid="uid://bq8pypxa2y4sm" path="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg" id="14_6f08l"]
+[ext_resource type="PackedScene" uid="uid://c3lcrurxkx8ax" path="res://Assets/blend files/diver cabinet.blend" id="15_11cts"]
+[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="16_jms6i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_uq1df"]
+[sub_resource type="Sky" id="Sky_jms6i"]
 sky_material = SubResource("ProceduralSkyMaterial_lefxv")
 
 [sub_resource type="Environment" id="Environment_1tp12"]
 background_mode = 1
 background_color = Color(0, 0.06500001, 0.15, 1)
-sky = SubResource("Sky_uq1df")
+sky = SubResource("Sky_jms6i")
 ssr_max_steps = 128
 ssr_fade_in = 0.07764475
 ssr_depth_tolerance = 0.21
@@ -33,8 +35,8 @@ ssao_sharpness = 1.0
 sdfgi_enabled = true
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 2
-fog_enabled = true
 fog_density = 0.0665
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.1
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
@@ -213,6 +215,13 @@ stream = SubResource("AudioStreamSynchronized_6f08l")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=148815800]
 stream = ExtResource("14_6f08l")
+
+[node name="diver cabinet" parent="." unique_id=1222125613 instance=ExtResource("15_11cts")]
+transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 1.2099067, 5.1251254, 4.4193845)
+
+[node name="fish origin" type="Node3D" parent="." unique_id=331936768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.282443, -18.52, -6.506134)
+script = ExtResource("16_jms6i")
 
 [connection signal="player_jumped_in_water" from="Ocean" to="." method="_on_ocean_player_jumped_in_water"]
 

@@ -7,6 +7,7 @@ var speed:float  = 0.1
 var movv:float = 2.0
 var target_influence:float = 1.0
 var obstacle:Node3D = null
+var max_detections:int = 5
 
 func _physics_process(delta: float) -> void:
 	var target_point:Vector3 = get_parent().global_position
@@ -15,10 +16,14 @@ func _physics_process(delta: float) -> void:
 		var avgVel := Vector3.ZERO
 		var avgPos := Vector3.ZERO
 		var steerAway := Vector3.ZERO
+		var detections:int = 0
 		for boid in local_boids:
+			detections += 1
 			avgVel += boid.velocity
 			avgPos += boid.position
 			steerAway -= (boid.global_position - global_position) * (movv/( global_position - boid.global_position).length())
+			if detections >= max_detections:
+				break
 
 		avgVel /= numOfBoids
 		velocity += (avgVel - velocity)/2

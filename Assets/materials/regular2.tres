@@ -4,3 +4,4 @@
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.7789168, 0.7612072, 0.7239104, 1)
+roughness = 0.0

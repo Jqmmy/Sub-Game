@@ -4,10 +4,11 @@ extends Area3D
 var local_boids:Array[FishBoid] = []
 var velocity:Vector3
 var speed:float  = 0.1
-var movv:float = 2.0
+var movv:float = 3.0
 var target_influence:float = 1.0
 var obstacle:Node3D = null
-var max_detections:int = 5
+var max_detections:int = 10
+var dispersing:bool
 
 func _physics_process(delta: float) -> void:
 	var target_point:Vector3 = get_parent().global_position
@@ -48,7 +49,10 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = velocity.normalized() * speed
 	
-	global_position += velocity * delta
+	if dispersing:
+		global_position -= velocity * delta
+	else:
+		global_position += velocity * delta
 
 
 func _on_area_entered(area: Area3D) -> void:
@@ -59,9 +63,12 @@ func _on_area_exited(area: Area3D) -> void:
 	if area.is_in_group("fish"):
 		local_boids.erase(area)
 
-
 func _on_body_entered(body: Node3D) -> void:
 	obstacle = body
 
 func _on_body_exited(body: Node3D) -> void:
 	obstacle = null
+
+func disperse() -> void:
+	dispersing = true
+	get_tree().create_timer(randf_range(4.0, 5.0)).timeout.connect(func(): queue_free())

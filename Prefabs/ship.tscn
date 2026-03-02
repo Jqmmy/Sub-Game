@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dp82vbfg4epvp" path="res://Assets/SFX/DooropeningMetal.ogg" id="3_cm1ru"]
 [ext_resource type="AudioStream" uid="uid://bq8pypxa2y4sm" path="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg" id="5_0ww3j"]
 [ext_resource type="AudioStream" uid="uid://btn1ska1i6jji" path="res://Assets/SFX/Oceanambienceabovewater_1.ogg" id="6_xyywq"]
+[ext_resource type="PackedScene" uid="uid://c3lcrurxkx8ax" path="res://Assets/blend files/diver cabinet.blend" id="7_y5gpt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ba1si"]
 size = Vector3(0.19433594, 0.068359375, 0.26757813)
@@ -264,6 +265,9 @@ autoplay = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1780130296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8733091, 5.0428786, -1.1506021)
+
+[node name="diver cabinet" parent="." unique_id=1222125613 instance=ExtResource("7_y5gpt")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.2134907, 3.3998866, 4.429301)
 
 [connection signal="interacted" from="Move Forward" to="." method="_on_move_forward_interacted"]
 [connection signal="interacted" from="Move Backward" to="." method="_on_move_backward_interacted"]

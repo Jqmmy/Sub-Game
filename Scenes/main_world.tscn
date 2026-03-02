@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://d0433431cuoub" path="res://Assets/SFX/Jumpinginwater.ogg" id="13_26rrv"]
 [ext_resource type="AudioStream" uid="uid://bq8pypxa2y4sm" path="res://Assets/Music/Aquanaut’s descent ( phase 1).ogg" id="14_6f08l"]
 [ext_resource type="PackedScene" uid="uid://c3lcrurxkx8ax" path="res://Assets/blend files/diver cabinet.blend" id="15_11cts"]
-[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/main.gd" id="16_jms6i"]
+[ext_resource type="Script" uid="uid://cvas6r167d8h6" path="res://Scripts/fish spawner.gd" id="16_jms6i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lefxv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -63,18 +63,6 @@ metadata/_custom_type_script = "uid://bxrxe2w0n85wn"
 
 [sub_resource type="Compositor" id="Compositor_lefxv"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4wdbe"), SubResource("CompositorEffect_lefxv")])
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_42jam"]
-render_priority = 0
-shader = ExtResource("6_1tp12")
-shader_parameter/Refraction_Strength = 0.05
-shader_parameter/Fresnel_Power = 1.0
-shader_parameter/Emission_Power = 1.0
-shader_parameter/Specular_Power = 1.0
-shader_parameter/Roughness_Power = 0.1
-shader_parameter/Rim_Power = 0.1
-shader_parameter/Blur = 0.0
-shader_parameter/Taint = Color(0.52534366, 0.4051612, 0.9686708, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lyqml"]
 size = Vector3(800, 1300, 800)
@@ -132,7 +120,7 @@ shader_parameter/cut_out_z = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oxewe"]
 material = SubResource("ShaderMaterial_6f08l")
-size = Vector2(100, 100)
+size = Vector2(150, 150)
 subdivide_width = 100
 subdivide_depth = 100
 
@@ -142,6 +130,26 @@ stream_0/stream = ExtResource("11_kyray")
 stream_0/volume = 0.0
 stream_1/stream = ExtResource("13_26rrv")
 stream_1/volume = 0.0
+
+[sub_resource type="Curve3D" id="Curve3D_jms6i"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -5.6352286, -13.064987, 4.68132, 0, 0, 0, 0, 0, 0, -18.173483, -10.598057, -4.690811, 0, 0, 0, 0, 0, 0, -34.50543, -10.557064, 1.306284, 0, 0, 0, 0, 0, 0, -36.83821, -5.473301, 11.813068, 0, 0, 0, 0, 0, 0, -30.36301, -4.871975, 29.117489, 0, 0, 0, 0, 0, 0, -27.564333, -4.056278, 29.058998, 0, 0, 0, 0, 0, 0, -18.688623, 3.177662, 9.591567, 0, 0, 0, 0, 0, 0, -16.63826, 3.7222023, 9.036325, 0, 0, 0, 0, 0, 0, -8.498217, 3.446537, 11.843058, 0, 0, 0, 0, 0, 0, -8.756484, 2.2140713, 17.64296, 0, 0, 0, 0, 0, 0, -12.1467705, -9.441849, 40.35972, 0, 0, 0, 0, 0, 0, -5.750034, -15.545338, 52.83279, 0, 0, 0, 0, 0, 0, -2.5130749, -15.776997, 53.877773, 0, 0, 0, 0, 0, 0, -0.45834732, -15.808258, 52.377457, 0, 0, 0, 0, 0, 0, 12.524788, -12.165779, 38.415874, 0, 0, 0, 0, 0, 0, 29.279758, -13.15691, 30.763802, 0, 0, 0, 0, 0, 0, 32.2667, -12.34203, 26.3574, 0, 0, 0, 0, 0, 0, 30.797012, -12.007023, 22.622744, 0, 0, 0, 0, 0, 0, 11.492959, -14.038609, 22.886456, 0, 0, 0, 0, 0, 0, 8.352675, -13.979622, 22.257101, 0, 0, 0, 0, 0, 0, 5.3096333, -13.298538, 20.657177, 0, 0, 0, 0, 0, 0, 0.1709261, -12.015961, 17.421167),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 22
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_42jam"]
+render_priority = 0
+shader = ExtResource("6_1tp12")
+shader_parameter/Refraction_Strength = 0.05
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Emission_Power = 1.0
+shader_parameter/Specular_Power = 1.0
+shader_parameter/Roughness_Power = 0.1
+shader_parameter/Rim_Power = 0.1
+shader_parameter/Blur = 0.0
+shader_parameter/Taint = Color(0.52534366, 0.4051612, 0.9686708, 1)
 
 [node name="Main World" type="Node3D" unique_id=1363505768]
 script = ExtResource("1_l2j04")
@@ -172,16 +180,6 @@ transform = Transform3D(0.99999964, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0
 [node name="Submarine" parent="ship/ship/submarine attatchment" index="0" unique_id=1525268326 instance=ExtResource("2_4wdbe")]
 unique_name_in_owner = true
 transform = Transform3D(-0.9999998, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -0.9999998, -0.21999153, -5.274336, 1.560029)
-
-[node name="gem" parent="." unique_id=2000569373 instance=ExtResource("4_uq1df")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1681685, 3.7366886, 19.163872)
-metadata/_edit_group_ = true
-
-[node name="gems" parent="gem" unique_id=772816771 instance=ExtResource("5_1tp12")]
-
-[node name="Icosphere" parent="gem/gems" index="0"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-material_override = SubResource("ShaderMaterial_42jam")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1973069580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8950584, 5.1091766, -1.2223488)
@@ -220,11 +218,29 @@ stream = ExtResource("14_6f08l")
 transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 1.2099067, 5.1251254, 4.4193845)
 
 [node name="fish origin" type="Node3D" parent="." unique_id=331936768]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.282443, -18.52, -6.506134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.282443, -32.10345, -6.506134)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=963308735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.0788, 0)
+curve = SubResource("Curve3D_jms6i")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=784326626 node_paths=PackedStringArray("center_gem")]
+transform = Transform3D(0.5987089, 0.12468712, 0.7912019, 0, 0.9878089, -0.1556708, -0.80096644, 0.09320153, 0.59141004, -5.6352286, -13.064987, 4.68132)
 script = ExtResource("16_jms6i")
+center_gem = NodePath("gem")
+
+[node name="gem" parent="Path3D/PathFollow3D" unique_id=2000569373 instance=ExtResource("4_uq1df")]
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="gems" parent="Path3D/PathFollow3D/gem" unique_id=772816771 instance=ExtResource("5_1tp12")]
+
+[node name="Icosphere" parent="Path3D/PathFollow3D/gem/gems" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_42jam")
 
 [connection signal="player_jumped_in_water" from="Ocean" to="." method="_on_ocean_player_jumped_in_water"]
 
 [editable path="ship"]
 [editable path="ship/ship"]
-[editable path="gem/gems"]
+[editable path="Path3D/PathFollow3D/gem/gems"]

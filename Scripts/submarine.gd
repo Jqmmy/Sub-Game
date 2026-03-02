@@ -114,8 +114,9 @@ func _process(delta: float) -> void:
 			player.head.rotate_y(-axis.x * Settings.sens * 4)
 		if axis.y > look_margin or axis.y < -look_margin:
 			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
-		#set up rotation clamps here at some point
 		
+		player.camera_3d.rotation_degrees.x = clampf(player.camera_3d.rotation_degrees.x, -45, 45)
+		player.head.rotation_degrees.y = clampf(player.head.rotation_degrees.y, -45, 45)
 		
 		radar_timer += delta
 
@@ -133,6 +134,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 		if Input.is_action_just_pressed("exit cockpit"):
 			ship_animation_tree["parameters/Transition 2/transition_request"] = "b"
+			player.animation_tree.set("parameters/sitting/add_amount", 0.0)
+			player.arms_ik.active = false
+			player.hand_transforms.active = false
 			radar_container.hide()
 			driving = false
 			exiting = true
@@ -201,7 +205,8 @@ func _on_interactable_interacted() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	player.reparent(seat_pos)
 	player.light.light_energy = 0
-	
+	player.animation_tree.set("parameters/add walking/add_amount", 0.0)
+	player.animation_tree.set("parameters/sitting/add_amount", 1.0)
 	
 	tween.tween_property(player, "global_transform", seat_pos.global_transform, 1.25)
 	tween.finished.connect(func(): ship_animation_tree["parameters/Transition 2/transition_request"] = "f")
@@ -223,6 +228,7 @@ func seat_animation_finished(anim_name:String):
 			driving = true
 			player.set_ik_targets(joystick_ik, buttons_ik, true, 1.0)
 			player.animation_tree.set("parameters/Transition/transition_request", "state_0")
+			
 
 
 func _on_button_interacted() -> void:

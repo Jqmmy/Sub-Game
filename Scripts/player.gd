@@ -68,47 +68,45 @@ func _process(_delta: float) -> void:
 	elif ray_cast_is_hovering:
 		ray_cast_is_hovering = false
 		last_raycast_hover_target.hovering = false
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
-	var look_margin:float = 0.1
-	if look_vector.x > look_margin or look_vector.x < -look_margin:
-		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
-			head.rotate_y(look_vector.x * Settings.controller_sens)
+	
+	if Settings.current_control == Settings.control.CONTROLLER:
+		var look_vector:Vector2 = Vector2(-Input.get_joy_axis(0,JOY_AXIS_RIGHT_X), -Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y))
+		var look_margin:float = 0.1
+		if look_vector.x > look_margin or look_vector.x < -look_margin:
+			if head.rotation.y < 0.5 and head.rotation.y > -0.5:
+				head.rotate_y(look_vector.x * Settings.controller_sens)
+			else:
+				rotate_y(look_vector.x * Settings.controller_sens)
+				head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
 		else:
-			rotate_y(look_vector.x * Settings.controller_sens)
-			head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
-	else:
+			if head.rotation.y >= 0.5:
+				head.rotation.y = 0.49
+			elif head.rotation.y <= -0.5:
+				head.rotation.y = -0.49
+			
+		if look_vector.y > look_margin or look_vector.y < -look_margin:
+			camera_3d.rotate_x(look_vector.y * Settings.controller_sens)
+			camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
+	
+	
+	if Input.get_last_mouse_velocity() == Vector2.ZERO and Settings.current_control == Settings.control.KEYBOARD:
 		if head.rotation.y >= 0.5:
 			head.rotation.y = 0.49
 		elif head.rotation.y <= -0.5:
 			head.rotation.y = -0.49
-		
-	if look_vector.y > look_margin or look_vector.y < -look_margin:
-		camera_3d.rotate_x(look_vector.y * Settings.controller_sens)
-		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 	
+	print(Settings.current_control)
+
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * Settings.sens)
-		head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
-		
+		if head.rotation.y < 0.5 and head.rotation.y > -0.5:
+			head.rotate_y(-event.relative.x * Settings.sens)
+		else:
+			rotate_y(-event.relative.x * Settings.sens)
+			head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
+	
 		camera_3d.rotate_x(-event.relative.y * Settings.sens)
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
-		#if head.rotation.y < 0.5 or head.rotation.y > -0.5:
-			#head.rotate_y(-event.relative.x * Settings.sens)
-			#print(head.rotation.y)
-		#else:
-			#rotate_y(-event.relative.x * sens)
-			#head.rotation.y = clamp(head.rotation.y, -0.5, 0.5)
-		#
-		#camera_3d.rotate_x(-event.relative.y * Settings.sens)
-		#camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
-	#else:
-		#if head.rotation.y >= 0.5:
-			#head.rotation.y = 0.49
-		#elif head.rotation.y <= -0.5:
-			#head.rotation.y = -0.49
 	
 	if Input.is_action_just_pressed("turn off lights"):
 		if light.light_energy == 0:
@@ -123,7 +121,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 
 func _physics_process(delta: float) -> void:
-
 	if motion_mode == MotionMode.MOTION_MODE_GROUNDED:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -140,9 +137,13 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction.x * current_speed
 			velocity.z = direction.z * current_speed
+			
+			animation_tree.set("parameters/add walking/add_amount", 1.0)
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 			velocity.z = move_toward(velocity.z, 0, current_speed)
+			
+			animation_tree.set("parameters/add walking/add_amount", 0.0)
 	
 	else:
 		var water_gravity:float = 0.25

@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://btbsnk4tbdk0k"]
 
 [ext_resource type="Script" uid="uid://bk7nkab7r08po" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://cugedhnsj2gwj" path="res://Prefabs/ship.tscn" id="2_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://mrww0w0284ml" path="res://Assets/Textures/Bun_Game_Logo_White.png" id="2_n45e2"]
-[ext_resource type="PackedScene" uid="uid://cp72cwvmj3syh" path="res://Assets/blend files/ship.blend" id="3_ce3w2"]
 [ext_resource type="Texture2D" uid="uid://c0vl78gne5n47" path="res://Assets/Textures/logo_vertical_monochrome_dark.png" id="3_opfnp"]
-[ext_resource type="PackedScene" uid="uid://c3lcrurxkx8ax" path="res://Assets/blend files/diver cabinet.blend" id="4_n45e2"]
 [ext_resource type="Script" uid="uid://bxrxe2w0n85wn" path="res://Scripts/Post Process/RobertsCross.gd" id="5_n45e2"]
 [ext_resource type="AudioStream" uid="uid://82fj01o1n1c7" path="res://Assets/Music/WaterforJudahHesthirsty.ogg" id="7_cp0ys"]
 
@@ -70,16 +69,13 @@ size = Vector3(0.21386719, 0.19360352, 0.049072266)
 [node name="Node3D" type="Node3D" unique_id=1065688907]
 script = ExtResource("1_28flt")
 
+[node name="ship2" parent="." unique_id=183951493 instance=ExtResource("2_cp0ys")]
+
 [node name="OmniLight3D" type="SpotLight3D" parent="." unique_id=232336946]
-transform = Transform3D(0.97909874, 0, 0.20338541, -0.16948257, 0.5528099, 0.8158902, -0.11243348, -0.8333074, 0.5412555, -0.94705415, 7.1987953, -2.7560997)
+transform = Transform3D(-0.95607644, -0.29311764, 5.0548444e-08, -0.16948257, 0.5528099, 0.81589025, -0.23915187, 0.78005344, -0.5782068, 1.0589732, 6.028087, 2.7794404)
 light_color = Color(0.80009687, 0.8672754, 1, 1)
 light_energy = 0.445
 spot_angle = 50.450867
-
-[node name="ship" parent="." unique_id=1892937086 instance=ExtResource("3_ce3w2")]
-
-[node name="diver cabinet" parent="." unique_id=1222125613 instance=ExtResource("4_n45e2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.177651, 4.57199, -4.3957167)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=619892000]
 transform = Transform3D(-0.9406915, -0.29381076, 0.1696317, 2.7805946e-08, 0.49999994, 0.86602545, -0.33926344, 0.81466275, -0.47034562, 0, 0, 0)
@@ -95,7 +91,7 @@ environment = SubResource("Environment_cp0ys")
 compositor = SubResource("Compositor_yhxw7")
 
 [node name="Path3D" type="Path3D" parent="." unique_id=117646869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.583404, 6.1054535, -3.7959476)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.6498809, 4.9347453, 3.845767)
 curve = SubResource("Curve3D_trj04")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=390217803]
@@ -103,13 +99,13 @@ transform = Transform3D(0.9328248, -0.0037368576, -0.36007896, 0, 0.9997896, -0.
 use_model_front = true
 
 [node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D" unique_id=1370971708]
-transform = Transform3D(1.000017, 0, 0, 0, 1.0000397, 0, 0, 0, 1.0000061, 0, 0, 0)
+transform = Transform3D(-1.000017, 0, 8.742331e-08, 0, 1.0000397, 0, -8.742427e-08, 0, -1.0000061, 0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=175902144]
 stream = ExtResource("7_cp0ys")
 
 [node name="credits area" type="Area3D" parent="." unique_id=1311188484]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1584069, 5.538245, -3.8742425)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.2219023, 4.367537, 3.9056585)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="credits area" unique_id=84307138]
 shape = SubResource("BoxShape3D_cp0ys")
@@ -124,7 +120,7 @@ font_size = 25
 outline_size = 0
 
 [node name="settings area" type="Area3D" parent="." unique_id=492851840]
-transform = Transform3D(0.6641872, 0, 0.7475663, 0, 1, 0, -0.7475663, 0, 0.6641872, -2.0369217, 5.8210626, -3.5959983)
+transform = Transform3D(-0.54711044, 0, -0.83706033, 0, 1, 0, 0.83706033, 0, -0.54711044, 2.0879974, 4.6503544, 3.6501377)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="settings area" unique_id=1190690148]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008080602, 0, 0)
@@ -140,7 +136,7 @@ font_size = 25
 outline_size = 0
 
 [node name="play area" type="Area3D" parent="." unique_id=1583560672]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4962107, 6.1095405, -3.957035)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.5558208, 4.9388323, 4.002944)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="play area" unique_id=100698892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008080602, 0, 0)
@@ -156,7 +152,7 @@ font_size = 25
 outline_size = 0
 
 [node name="quit area" type="Area3D" parent="." unique_id=1478603432]
-transform = Transform3D(0.83392435, 0, 0.55187875, 0, 1, 0, -0.55187875, 0, 0.83392435, -1.7562109, 5.436341, -3.9852571)
+transform = Transform3D(-0.75470954, 0, -0.6560591, 0, 1, 0, 0.6560591, 0, -0.75470954, 1.7914119, 4.2656326, 4.015521)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="quit area" unique_id=344829092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008080602, 0, 0)

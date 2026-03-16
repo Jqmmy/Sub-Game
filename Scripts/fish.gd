@@ -26,9 +26,11 @@ func _physics_process(delta: float) -> void:
 			if detections >= max_detections:
 				break
 
+		#cohesion
 		avgVel /= numOfBoids
 		velocity += (avgVel - velocity)/2
 		
+		#alignment
 		avgPos /= numOfBoids
 		velocity += (avgPos - position)
 		if global_position.distance_to(target_point) > 7:
@@ -36,9 +38,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			speed = move_toward(speed, 5, 1.0 * delta)
 		
+		#seperation
 		steerAway /= numOfBoids
 		velocity += (steerAway)
 		
+	#make them stay in a sphere shape
 	if global_position.distance_to(target_point) > 6:
 		var point_direction:Vector3
 		point_direction = global_position.direction_to(target_point) * target_influence

@@ -22,12 +22,12 @@ uv1_triplanar_sharpness = 2.639011
 height = 0.1484375
 radius = 0.096191406
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2qsgv"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_icesl"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgt3x"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_2qsgv")
+albedo_texture = SubResource("ViewportTexture_icesl")
 uv1_scale = Vector3(1.01, 1.635, 1)
 uv1_offset = Vector3(-0.015, -0.65, 0)
 
@@ -416,8 +416,8 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(0.0059460476, 0.43615308, 0.006408236, 0.8998301)
-bones/41/rotation = Quaternion(0.38629934, -1.8392619e-05, 2.2211741e-05, 0.9223735)
+bones/40/rotation = Quaternion(0.00088653446, -0.16017443, -0.00023358063, 0.9870884)
+bones/41/rotation = Quaternion(0.3862994, -1.8439889e-05, 2.2367782e-05, 0.9223735)
 
 [node name="chair" parent="diver/armature for sub/Skeleton3D" index="0" unique_id=856279890]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
@@ -529,22 +529,22 @@ transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371
 shape = SubResource("CylinderShape3D_0vtxn")
 
 [node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=254192677]
-transform = Transform3D(0.62243295, -0.54762566, -0.5591805, 0.012950742, -0.70714575, 0.7069488, -0.78256565, -0.44727013, -0.43305868, -0.07736734, 4.5241504, 0.16055329)
+transform = Transform3D(0.94748175, 0.22226766, 0.22994518, -0.0045009237, -0.70966923, 0.70452017, 0.31977722, -0.6685553, -0.67139834, 0.032730646, 4.523864, 0.12348335)
 
 [node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22" unique_id=231929447]
-transform = Transform3D(0.622433, -0.54762566, -0.55918056, 0.012950741, -0.70714605, 0.7069488, -0.7825657, -0.4472701, -0.43305877, -0.07736758, 4.52415, 0.16055308)
+transform = Transform3D(0.94748193, 0.22226764, 0.22994517, -0.004500922, -0.7096695, 0.7045203, 0.31977722, -0.66855526, -0.67139846, 0.032730736, 4.5238633, 0.12348306)
 
 [node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23" unique_id=2055608996]
-transform = Transform3D(0.5591807, -0.5476258, 0.622433, -0.70694906, -0.7071457, 0.01295054, 0.43305895, -0.4472701, -0.78256583, 0.22275952, 4.3540015, 0.07467209)
+transform = Transform3D(-0.22994536, 0.22226754, 0.947482, -0.7045206, -0.70966923, -0.0045010448, 0.67139864, -0.6685554, 0.31977722, 0.21237081, 4.3499436, 0.37623549)
 
 [node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24" unique_id=284336561]
-transform = Transform3D(0.55918044, -0.5476257, 0.62243336, -0.70694876, -0.707146, 0.012950599, 0.43305892, -0.4472705, -0.782566, 0.22276011, 4.3540006, 0.074672036)
+transform = Transform3D(-0.22994542, 0.22226799, 0.94748235, -0.7045202, -0.7096695, -0.0045010746, 0.6713984, -0.66855556, 0.3197775, 0.21237108, 4.349943, 0.37623602)
 
 [node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25" unique_id=1568233079]
-transform = Transform3D(0.1259567, -0.11081852, -0.113156796, 0.002620742, -0.14309932, 0.14305943, -0.15836143, -0.09051041, -0.08763456, -0.00051270233, 4.258859, 0.21729131)
+transform = Transform3D(0.1917342, 0.0449785, 0.046532135, -0.0009108092, -0.14360999, 0.14256799, 0.06471072, -0.13529007, -0.13586542, 0.00077502447, 4.2588887, 0.21443626)
 
 [node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=1515051160]
-transform = Transform3D(0.12595667, -0.11081852, -0.11315678, 0.0026207415, -0.1430993, 0.14305943, -0.15836139, -0.09051042, -0.08763453, -0.0005122733, 4.2588587, 0.21729164)
+transform = Transform3D(0.19173415, 0.04497843, 0.04653213, -0.0009108593, -0.14360999, 0.14256796, 0.064710654, -0.13529007, -0.13586539, 0.0007748498, 4.2588882, 0.21443678)
 
 [node name="map button_001" parent="diver" index="20" unique_id=1776637126]
 surface_material_override/0 = SubResource("StandardMaterial3D_fgt3x")

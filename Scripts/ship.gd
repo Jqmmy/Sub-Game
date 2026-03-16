@@ -13,7 +13,8 @@ var deck_door_open:bool = false
 
 func _ready() -> void:
 	var sub = get_node("%Submarine")
-	sub.gravity_scale = 0
+	if sub:
+		sub.gravity_scale = 0
 
 
 func _on_use_door_interacted() -> void:

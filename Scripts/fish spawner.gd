@@ -3,10 +3,11 @@ extends PathFollow3D
 const FISH = preload("uid://cagrfw40y8ip7")
 var cluster_speed:float = 2.5
 @export var center_gem:Gem
+@export var fish_amount:int = 650
 
 func _ready() -> void:
-	center_gem.picked_up.connect(on_center_picked_up)
-	var fish_amount:int = 650
+	if center_gem:
+		center_gem.picked_up.connect(on_center_picked_up)
 	
 	for fish in fish_amount:
 		var boid:FishBoid = FISH.instantiate()

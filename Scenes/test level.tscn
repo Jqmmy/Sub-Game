@@ -54,12 +54,12 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_y8la
 [sub_resource type="BoxShape3D" id="BoxShape3D_21xkr"]
 size = Vector3(500, 0, 750)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_y8lat"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yjwv2"]
 viewport_path = NodePath("CharacterBody3D/Radar/wrist UI")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spywk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgose"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_y8lat")
+albedo_texture = SubResource("ViewportTexture_yjwv2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 render_priority = 1
@@ -277,48 +277,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4yf0q")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_twes1"]
-viewport_path = NodePath("Submarine/map/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uef0m"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_twes1")
-uv1_scale = Vector3(1.01, 2.1, 1)
-uv1_offset = Vector3(-0.005, -0.55, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kry3j"]
-render_priority = 0
-shader = ExtResource("4_mo73o")
-shader_parameter/Refraction_Strength = 0.05
-shader_parameter/Fresnel_Power = 1.0
-shader_parameter/Emission_Power = 1.0
-shader_parameter/Specular_Power = 1.0
-shader_parameter/Roughness_Power = 0.1
-shader_parameter/Rim_Power = 0.1
-shader_parameter/Blur = 0.0
-shader_parameter/Taint = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_21xkr"]
-render_priority = 0
-shader = ExtResource("4_mo73o")
-shader_parameter/Refraction_Strength = 0.0
-shader_parameter/Fresnel_Power = 1.0
-shader_parameter/Emission_Power = 1.0
-shader_parameter/Specular_Power = 0.0
-shader_parameter/Roughness_Power = 0.1
-shader_parameter/Rim_Power = 0.1
-shader_parameter/Blur = 1.0
-shader_parameter/Taint = Color(1, 1, 1, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_48c03"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nuvcx"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_48c03")
-uv1_scale = Vector3(1.01, 1.635, 1)
-uv1_offset = Vector3(-0.015, -0.65, 0)
-
 [sub_resource type="Gradient" id="Gradient_d1ilt"]
 offsets = PackedFloat32Array(0, 0.49839228, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
@@ -404,20 +362,24 @@ shape = SubResource("BoxShape3D_21xkr")
 [node name="CharacterBody3D" parent="." unique_id=1252446106 instance=ExtResource("3_l3r2j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 3.2005494, 20.922344)
 
-[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1118339298, 1782784585) index="0" unique_id=1068982326]
+[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1118339298, 43318827) index="0" unique_id=297656962]
 bones/1/position = Vector3(-2.775558e-17, 0, 0.7631609)
 bones/70/position = Vector3(-2.775558e-17, 0, 0.7631609)
+bones/72/rotation = Quaternion(0.5241993, -1.3666813e-08, 5.3648805e-09, 0.8515956)
 bones/75/position = Vector3(2.7755576e-17, 0, 0.7631609)
 bones/83/rotation = Quaternion(0.707107, 0, -0.70710653, 0)
 
-[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=586986004]
+[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=110690326]
 transform = Transform3D(1, 0, 8.742279e-08, 1.7763568e-15, 1, 0, -8.742279e-08, 0, 1, -1.6570399e-15, 1.5749999, 0.07499999)
 
-[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1118339298, 202384960) index="1" unique_id=801507463]
-surface_material_override/0 = SubResource("StandardMaterial3D_spywk")
+[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1118339298, 2137099009) index="1" unique_id=801507463]
+surface_material_override/0 = SubResource("StandardMaterial3D_lgose")
 
-[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=560559511]
+[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=672530743]
 transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 1.5353273e-32)
+
+[node name="Submarine" parent="CharacterBody3D" unique_id=1525268326 instance=ExtResource("5_48oh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044774532, -0.75200343, -2.9204597)
 
 [node name="gems" type="Node3D" parent="." unique_id=629335001]
 transform = Transform3D(1, 0, -2.1316282e-14, 0, 1, 5.9604645e-08, 0, 0, 1, -0.093147546, 0.9999995, -17.612751)
@@ -454,54 +416,6 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 11.2202835, 1.57109, 0)
 material_override = SubResource("ShaderMaterial_344ge")
 mesh = SubResource("ArrayMesh_602nx")
 skeleton = NodePath("")
-
-[node name="Submarine" parent="." unique_id=115754777 instance=ExtResource("5_48oh6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 2.4597511, 18.03343)
-
-[node name="sub" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1069834659) index="0" unique_id=1866472186]
-surface_material_override/1 = SubResource("StandardMaterial3D_uef0m")
-
-[node name="floor glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1069834659) index="2" unique_id=1707886460]
-surface_material_override/1 = SubResource("ShaderMaterial_kry3j")
-
-[node name="glass" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1069834659) index="3" unique_id=1425725342]
-visible = false
-surface_material_override/0 = SubResource("ShaderMaterial_21xkr")
-
-[node name="control IK" parent="Submarine/diver/joystick right and left base/Cube_014" parent_id_path=PackedInt32Array(115754777, 1069834659, 1583868229) index="2" unique_id=139756949]
-transform = Transform3D(-0.20311576, 0.96891004, -0.14127012, 0.9345935, 0.23487327, 0.26715118, 0.29202604, -0.07776749, -0.95324355, 0.041513056, 0.10060501, -0.070144445)
-
-[node name="Skeleton3D" parent="Submarine/diver/armature for sub" parent_id_path=PackedInt32Array(115754777, 1069834659, 1154057272) index="0" unique_id=2101164870]
-bones/40/rotation = Quaternion(0.002125378, -0.04994011, 0.0012334395, 0.9987492)
-bones/41/rotation = Quaternion(0.38629943, -1.8443898e-05, 2.2369411e-05, 0.9223734)
-
-[node name="Plane_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="21" unique_id=254192677]
-transform = Transform3D(0.99462867, 0.07204719, 0.074314445, -0.0015144411, -0.7077675, 0.70644337, 0.10349465, -0.70276153, -0.70385677, 0.010513717, 4.5241237, 0.119766116)
-
-[node name="Plane_007" parent="Submarine/diver/armature for sub/Skeleton3D" index="22" unique_id=231929447]
-transform = Transform3D(0.9946287, 0.07204719, 0.07431445, -0.001514439, -0.7077677, 0.70644325, 0.10349466, -0.70276153, -0.7038569, 0.010513748, 4.5241237, 0.11976582)
-
-[node name="Plane_006" parent="Submarine/diver/armature for sub/Skeleton3D" index="23" unique_id=2055608996]
-transform = Transform3D(-0.074314535, 0.072047144, 0.9946288, -0.70644367, -0.7077675, -0.0015146136, 0.7038571, -0.7027616, 0.103494644, 0.24192196, 4.3504624, 0.32639235)
-
-[node name="Plane_004" parent="Submarine/diver/armature for sub/Skeleton3D" index="24" unique_id=284336561]
-transform = Transform3D(-0.07431468, 0.07204741, 0.9946292, -0.70644337, -0.7077678, -0.0015145838, 0.7038569, -0.70276177, 0.10349479, 0.24192235, 4.350462, 0.32639283)
-
-[node name="Cone_001" parent="Submarine/diver/armature for sub/Skeleton3D" index="25" unique_id=1568233079]
-transform = Transform3D(0.2012749, 0.014579613, 0.015038413, -0.00030645903, -0.14322515, 0.14295715, 0.020943383, -0.14221212, -0.14243376, 0.00021185086, 4.258887, 0.21488963)
-
-[node name="Cone" parent="Submarine/diver/armature for sub/Skeleton3D" index="26" unique_id=1515051160]
-transform = Transform3D(0.20127484, 0.014579539, 0.015038414, -0.00030650914, -0.14322515, 0.14295712, 0.020943329, -0.1422121, -0.14243375, 0.00021179538, 4.2588863, 0.21489017)
-
-[node name="map button_001" parent="Submarine/diver" parent_id_path=PackedInt32Array(115754777, 1069834659) index="20" unique_id=1776637126]
-surface_material_override/0 = SubResource("StandardMaterial3D_nuvcx")
-
-[node name="radar container" parent="Submarine/Control" parent_id_path=PackedInt32Array(115754777, 1760935703) index="0" unique_id=618123083]
-offset_top = -50.0
-offset_bottom = 50.0
-
-[node name="button IK target" parent="Submarine" index="15" unique_id=631042782]
-transform = Transform3D(1, 0, 0, 0, 0.08715581, 0.99619484, 0, -0.99619484, 0.08715581, 0.376, 1.739, -0.301)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1121809187]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.714555, 2.5672932, -9.666583)
@@ -552,5 +466,3 @@ visible = false
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/head/Camera3D/Node3D/face mask"]
 [editable path="CharacterBody3D/charecter"]
-[editable path="Submarine"]
-[editable path="Submarine/diver"]

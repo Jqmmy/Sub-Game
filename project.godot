@@ -35,6 +35,10 @@ Settings="*res://Scripts/Globals/settings.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csg_terrain/plugin.cfg")
+
 [file_customization]
 
 folder_colors={

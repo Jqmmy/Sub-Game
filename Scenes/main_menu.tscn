@@ -95,7 +95,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.64
 curve = SubResource("Curve3D_trj04")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=390217803]
-transform = Transform3D(0.9328248, -0.0037368576, -0.36007896, 0, 0.9997896, -0.0103768995, 0.36010465, 0.009680056, 0.9327582, -0.004687748, -0.0003008172, -0.03365056)
+transform = Transform3D(0.9328248, -0.003736858, -0.360079, 0, 0.9997896, -0.0103768995, 0.36010468, 0.009680056, 0.9327582, -0.004687748, -0.0003008172, -0.03365056)
 use_model_front = true
 
 [node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D" unique_id=1370971708]

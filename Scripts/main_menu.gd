@@ -8,8 +8,7 @@ extends Node3D
 @onready var bun_icon: TextureRect = $"Main Menu/ColorRect/bun icon2"
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var main_menu: Control = $"Main Menu"
-const MAIN_WORLD = preload("uid://d2e2kkuq36jrw")
-
+const MAIN_WORLD = preload("uid://6k30x2u3vdpi")
 
 var ended_path:bool = false
 var camera_rot_offset:float = -10
@@ -41,6 +40,16 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_pressed("menu left"):
+		Input.warp_mouse(get_viewport().get_mouse_position() + Vector2(-1, 0))
+	if Input.is_action_pressed("menu right"):
+		Input.warp_mouse(get_viewport().get_mouse_position() + Vector2(1, 0))
+	if Input.is_action_pressed("menu up"):
+		Input.warp_mouse(get_viewport().get_mouse_position() + Vector2(0, -1))
+	if Input.is_action_pressed("menu down"):
+		Input.warp_mouse(get_viewport().get_mouse_position() + Vector2(0, 1))
+	
+	
 	if ended_path:
 		var mouse_uv_pos:Vector2 = \
 		get_window().get_mouse_position() / Vector2(get_window().size.x, get_window().size.y) * 2.0 - Vector2(1.0, 1.0)
@@ -62,3 +71,11 @@ func _on_play_area_input_event(camera: Node, event: InputEvent, event_position: 
 func _on_quit_area_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event.is_action_pressed("fire"):
 		get_tree().quit()
+
+
+func _on_play_area_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+func _on_play_area_mouse_exited() -> void:
+	pass # Replace with function body.

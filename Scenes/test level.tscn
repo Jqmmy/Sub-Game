@@ -61,6 +61,15 @@ viewport_path = NodePath("CharacterBody3D/Radar/wrist UI")
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_lgose")
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_rdhca"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvmcw"]
+render_priority = -1
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.5176471)
+stencil_flags = 2
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 render_priority = 1
 shader = ExtResource("4_mo73o")
@@ -362,23 +371,28 @@ shape = SubResource("BoxShape3D_21xkr")
 [node name="CharacterBody3D" parent="." unique_id=1252446106 instance=ExtResource("3_l3r2j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 3.2005494, 20.922344)
 
-[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1118339298, 43318827) index="0" unique_id=297656962]
+[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1018301311, 1746100620) index="0" unique_id=1779331837]
 bones/1/position = Vector3(-2.775558e-17, 0, 0.7631609)
 bones/70/position = Vector3(-2.775558e-17, 0, 0.7631609)
 bones/75/position = Vector3(2.7755576e-17, 0, 0.7631609)
 bones/83/rotation = Quaternion(0.707107, 0, -0.70710653, 0)
 
-[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=110690326]
+[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=2011396056]
 transform = Transform3D(1, 0, 8.742279e-08, 1.7763568e-15, 1, 0, -8.742279e-08, 0, 1, -1.6570399e-15, 1.5749999, 0.07499999)
 
-[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1118339298, 2137099009) index="1" unique_id=801507463]
+[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1018301311, 1056712066) index="1" unique_id=801507463]
 surface_material_override/0 = SubResource("StandardMaterial3D_y8lat")
 
-[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=672530743]
+[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=1694503464]
 transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 1.5353273e-32)
 
-[node name="Submarine" parent="CharacterBody3D" unique_id=1525268326 instance=ExtResource("5_48oh6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044774532, -0.75200343, -2.9204597)
+[node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("5_48oh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0637925, 2.402508, 18.502518)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1900773726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.901448, 3.8018925, 19.333395)
+mesh = SubResource("PlaneMesh_rdhca")
+surface_material_override/0 = SubResource("StandardMaterial3D_dvmcw")
 
 [node name="gems" type="Node3D" parent="." unique_id=629335001]
 transform = Transform3D(1, 0, -2.1316282e-14, 0, 1, 5.9604645e-08, 0, 0, 1, -0.093147546, 0.9999995, -17.612751)
@@ -422,14 +436,11 @@ visible = false
 mesh = SubResource("CylinderMesh_jkdf5")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=1177881936]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055217743, 3.6042378, -17.229092)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.976, 5.0060177, 13.678)
 mesh = SubResource("SphereMesh_kry3j")
 
 [node name="Objective waypoint2" parent="MeshInstance3D9" unique_id=1210902567 instance=ExtResource("7_smwye")]
 use_last_scan_position = true
-
-[node name="Objective waypoint" parent="." unique_id=943043480 instance=ExtResource("7_smwye")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.495736, 3.768523, -1.6535902)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1335463808]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.316331, -12)

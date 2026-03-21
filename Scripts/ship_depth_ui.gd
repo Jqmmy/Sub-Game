@@ -1,7 +1,7 @@
 @tool
 extends Control
 
-@onready var radar: Control = $VBoxContainer/HBoxContainer2/radar
+@onready var radar: Control = $HBoxContainer/VBoxContainer2/radar
 @onready var panel_container_2: PanelContainer = $HBoxContainer/VBoxContainer/PanelContainer/PanelContainer2
 
 

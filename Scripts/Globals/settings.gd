@@ -1,7 +1,7 @@
 extends Node
 
 var sens = 0.005
-var controller_sens:float = 0.01
+var controller_sens:float = 0.04
 var current_control:control = control.KEYBOARD
 enum control {
 	KEYBOARD,

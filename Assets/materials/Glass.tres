@@ -1,6 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://d3jnmorbhubx1"]
 
 [resource]
+render_priority = 1
 transparency = 1
 diffuse_mode = 3
 specular_mode = 1

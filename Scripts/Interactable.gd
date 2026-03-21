@@ -15,6 +15,13 @@ var hovering:bool = false:
 
 signal interacted
 
+func _ready() -> void:
+	var player = get_tree().get_first_node_in_group("player") as Player
+	if player:
+		player.player_paused.connect(func(paused):
+			if paused:
+				hovering = false)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if hovering and enabled:

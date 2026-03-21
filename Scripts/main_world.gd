@@ -16,3 +16,10 @@ func _process(delta: float) -> void:
 func _on_ocean_player_jumped_in_water() -> void:
 	audio_stream_player.play()
 	audio_stream_player_2.stop()
+
+
+func _on_gem_picked_up() -> void:
+	const TEMP_ENDING_SCREEN = preload("uid://dp1yow8xlbn1l")
+	var timer = get_tree().create_timer(8.0).timeout.connect(
+		func():
+			get_tree().change_scene_to_packed(TEMP_ENDING_SCREEN))

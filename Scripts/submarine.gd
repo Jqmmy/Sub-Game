@@ -3,25 +3,49 @@ extends RigidBody3D
 @export var seat_pos:Node3D
 @onready var joystick_ik: Marker3D = $"diver/joystick right and left base/Cube_014/control IK"
 @onready var buttons_ik: Node3D = $"IK target"
-@onready var control: Control = $Control
 @onready var node_3d: Node3D = $Node3D
 @onready var animationtree: AnimationTree = $"button animationtree"
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var atractor: Area3D = $Atractor
-@onready var radar_container: HBoxContainer = $"Control/radar container"
-@onready var radar_left: ColorRect = $"Control/radar container/radar left"
-@onready var radar_right: ColorRect = $"Control/radar container/radar right"
-
-@onready var radar_fade_timer: Timer = $"radar fade timer"
 
 @onready var ship_depth_ui: Control = $"SubViewport/Ship depth UI"
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var ship_animation_tree: AnimationTree = $diver/AnimationTree
 @onready var map_cam: Camera3D = $"map/map cam"
 @onready var sub_viewport: SubViewport = $map/SubViewport
 @onready var map: SubViewportContainer = $map/SubViewport/map
+@onready var radar_reference: Marker3D = $"Radar reference"
+@onready var radar_rotator_origin: Marker3D = $"radar rotator origin"
+@onready var radar_rotator: Marker3D = $"Radar reference/radar rotator"
+var radar_check_angle:float = 0.0
+enum radar_levels {
+	level1,
+	level2,
+	level3,
+	level4
+}
+var current_radar_level:radar_levels = radar_levels.level1:
+	set(value):
+		match value:
+			radar_levels.level1:
+				ship_depth_ui.radar.arc_width = 1.571
+				radar_check_angle = 0.0
+				current_radar_level = value
+			radar_levels.level2:
+				ship_depth_ui.radar.arc_width = 1.17825
+				radar_check_angle = 0.25
+				current_radar_level = value
+			radar_levels.level3:
+				ship_depth_ui.radar.arc_width = 0.7855
+				radar_check_angle = 0.5
+				current_radar_level = value
+			radar_levels.level4:
+				ship_depth_ui.radar.arc_width = 0.39275
+				radar_check_angle = 0.75
+				current_radar_level = value
+			_:
+				push_error("wrong number for radar level")
 
-@export_node_path("SubViewport") var viewport:NodePath
+
 
 var driving:bool = false
 var exiting:bool = true
@@ -57,66 +81,68 @@ var SCAN_LINE:PackedScene = preload("res://Prefabs/submarine fabs/scan_line.tscn
 func _ready() -> void:
 	animationtree.set("parameters/fan blend/blend_position", 0.5)
 	ship_animation_tree.animation_finished.connect(seat_animation_finished)
-	radar_container.modulate = Color(1,1,1,0)
+	var ui_viewport:Texture2D = $SubViewport.get_texture()
+	var ui_material:StandardMaterial3D = StandardMaterial3D.new()
+	ui_material.albedo_texture = ui_viewport
+	ui_material.uv1_offset = Vector3(-0.015,-0.64,0.0)
+	ui_material.uv1_scale = Vector3(1.01,1.635, 1.0)
+	$"diver/map button_001".set_surface_override_material(0, ui_material)
+	var map_viewport:Texture2D = $map/SubViewport.get_texture()
+	var map_material:StandardMaterial3D = StandardMaterial3D.new()
+	map_material.albedo_texture = map_viewport
+	
+	$diver/sub.set_surface_override_material(1, map_material)
 
 
 func _input(event: InputEvent) -> void:
 	if using_map:
 		sub_viewport.push_input(event, true)
+		if Input.is_action_just_pressed("exit cockpit"):
+			var player = get_tree().get_first_node_in_group("player") as Player
+			var unpause_timer:SceneTreeTimer = get_tree().create_timer(0.1)
+			player.camera_3d.make_current()
+			unpause_timer.timeout.connect(func(): player.pause(false))
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			using_map = false
 	if driving:
-		var radar_change_speed:float = 500.0
-		
-		if Input.is_action_pressed("long radar"):
-			radar_container.custom_minimum_size.x += radar_change_speed * get_process_delta_time()
-			radar_container.modulate = Color(1,1,1,1)
-			radar_fade_timer.start()
-			
-		if Input.is_action_pressed("short radar"):
-			radar_container.custom_minimum_size.x -= radar_change_speed * get_process_delta_time()
-			radar_container.modulate = Color(1,1,1,1)
-			radar_fade_timer.start()
-			
-		radar_container.custom_minimum_size.x = clamp(radar_container.custom_minimum_size.x, 40, 750)
-		
-		if Input.is_action_pressed("radar"):
-			radar_container.modulate = Color(1,1,1,1)
-			radar_fade_timer.start()
-			if radar_timer >= 3.0:
-				var scans = get_tree().get_nodes_in_group("scanable")
-				var camera_view = get_viewport().get_camera_3d()
-				
-				player.head.add_child(SCAN_LINE.instantiate())
-				for scan in scans:
-					var scan_screen_pos = camera_view.unproject_position(scan.global_position)
-					if not camera_view.is_position_in_frustum(scan.global_position):
-						continue
-					elif scan_screen_pos.x > radar_left.global_position.x and scan_screen_pos.x < radar_right.global_position.x:
-						print("scanned")
-						if radar_container.custom_minimum_size.x < 50:
-							if scan is Waypoint:
-								scan.active = true
-				radar_timer = 0
-			
-		if Input.is_action_just_released("radar"):
-			radar_timer = 0.0
-
+		if Input.is_action_just_pressed("radar"):
+			var radar_direction:Vector3 = radar_rotator_origin.global_position.direction_to(radar_rotator.global_position)
+			var objectives:Array[Node] = get_tree().get_nodes_in_group("scanable")
+			for objective in objectives:
+				if objective is Node3D:
+					var object_direction:Vector3 = Vector3(radar_reference.global_position.x, 0 , radar_reference.global_position.z).\
+					direction_to(Vector3(objective.global_position.x,0,objective.global_position.z))
+					if object_direction.dot(radar_direction) > radar_check_angle:
+						if objective is Waypoint:
+							objective.active = true
+					
+		if Input.is_action_just_pressed("short radar"):
+			current_radar_level += 1
+		if Input.is_action_just_pressed("long radar"):
+			current_radar_level -= 1
+	
+		if Input.is_action_just_pressed("fire"):
+			print("yes")
+			var tween = get_tree().create_tween()
+			tween.tween_property(player.camera_3d,"fov" , 60, 0.2)
+		if Input.is_action_just_released("fire"):
+			var tween = get_tree().create_tween()
+			tween.tween_property(player.camera_3d,"fov" , 80, 0.2)
 
 func _process(delta: float) -> void:
 	if driving:
 		if !get_tree().root.has_focus():
 			get_tree().root.grab_focus()
 			
-		
-	
 		var axis:Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_X), Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y))
 		var look_margin:float = 0.02
 		if axis.x > look_margin or axis.x < -look_margin:
-			player.head.rotate_y(-axis.x * Settings.sens * 4)
+			player.head.rotate_y(-axis.x * Settings.controller_sens)
 		if axis.y > look_margin or axis.y < -look_margin:
-			player.camera_3d.rotate_x(-axis.y * Settings.sens * 4)
+			player.camera_3d.rotate_x(-axis.y * Settings.controller_sens)
 		
 		player.camera_3d.rotation_degrees.x = clampf(player.camera_3d.rotation_degrees.x, -45, 45)
-		player.head.rotation_degrees.y = clampf(player.head.rotation_degrees.y, -45, 45)
+		player.head.rotation_degrees.y = clampf(player.head.rotation_degrees.y, -90, 90)
 		
 		radar_timer += delta
 
@@ -124,10 +150,19 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if driving:
 		var player:Player = get_tree().get_first_node_in_group("player")
+		if event is InputEventMouseMotion:
+			
+			if player.head.rotation.y < 0.5 and player.head.rotation.y > -0.5:
+				player.head.rotate_y(-event.relative.x * Settings.sens)
+			else:
+				rotate_y(-event.relative.x * Settings.sens)
+				player.head.rotation.y = clamp(player.head.rotation.y, -0.5, 0.5)
+		
+			player.camera_3d.rotate_x(-event.relative.y * Settings.sens)
+			player.camera_3d.rotation_degrees.x = clamp(player.camera_3d.rotation_degrees.x, -45, 45)
 		if Input.is_action_just_pressed("reset view"):
 			player.camera_3d.rotation = Vector3.ZERO
 			player.head.rotation = Vector3.ZERO
-			Input.warp_mouse(control.size / 2)
 	
 		if Input.is_action_just_pressed("park"):
 			parked = !parked
@@ -137,19 +172,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.animation_tree.set("parameters/sitting/add_amount", 0.0)
 			player.arms_ik.active = false
 			player.hand_transforms.active = false
-			radar_container.hide()
 			driving = false
 			exiting = true
 	
 		if Input.is_action_just_pressed("Open map"):
 			pass
 			
-
-
+		
 
 func _physics_process(delta: float) -> void:
-	ship_depth_ui.radar.arc_position = fposmod(rotation.y, TAU)
+	var radar_axis:float = Input.get_axis("radar left", "radar right")
+	if radar_axis:
+		radar_reference.rotation_degrees.y -= radar_axis
+	ship_depth_ui.radar.arc_position = deg_to_rad(radar_reference.rotation_degrees.y) * -1
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
+	
 	if driving and not parked:
 		
 		var float_booster:float
@@ -185,7 +222,6 @@ func _physics_process(delta: float) -> void:
 					animationtree["parameters/fan blend/blend_position"] = 0.625
 				else:
 					animationtree["parameters/fan blend/blend_position"] = 0.25
-					print(animationtree["parameters/fan blend/blend_position"])
 			
 			elif float_booster == 1.0:
 				animationtree["parameters/fan blend/blend_position"] = 0.0
@@ -201,15 +237,16 @@ func _physics_process(delta: float) -> void:
 func _on_interactable_interacted() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Player
 	var tween = get_tree().create_tween()
-	player.process_mode = Node.PROCESS_MODE_DISABLED
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	player.pause(true)
 	player.reparent(seat_pos)
 	player.light.light_energy = 0
 	player.animation_tree.set("parameters/add walking/add_amount", 0.0)
 	player.animation_tree.set("parameters/sitting/add_amount", 1.0)
 	
-	tween.tween_property(player, "global_transform", seat_pos.global_transform, 1.25)
-	tween.finished.connect(func(): ship_animation_tree["parameters/Transition 2/transition_request"] = "f")
+	tween.tween_property(player, "global_transform", seat_pos.global_transform, 0.75)
+	tween.finished.connect(func(): 
+		ship_animation_tree["parameters/Transition 2/transition_request"] = "f"
+		player.global_transform = seat_pos.global_transform)
 	exiting = false
 
 
@@ -218,15 +255,15 @@ func seat_animation_finished(anim_name:String):
 	if anim_name == "get in seat":
 		times_in_seat += 1
 		if exiting and times_in_seat > 0:
-			
-			player.process_mode = Node.PROCESS_MODE_PAUSABLE
+			player.pause(false)
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player.reparent(get_parent())
 			player.global_position = node_3d.global_position
 		elif times_in_seat > 0:
-			print("yeah")
 			driving = true
 			player.set_ik_targets(joystick_ik, buttons_ik, true, 1.0)
+			player.arms_ik.active = true
+			player.hand_transforms.active = true
 			player.animation_tree.set("parameters/Transition/transition_request", "state_0")
 			
 
@@ -268,14 +305,11 @@ func _on_area_3d_2_body_exited(body: Node3D) -> void:
 
 func _on_radar_fade_timer_timeout() -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(radar_container, "modulate", Color(1.0, 1.0, 1.0, 0.0), 1.0)
-
 
 func _on_map_interacted() -> void:
-	print("yes")
 	var player = get_tree().get_first_node_in_group("player") as Player
 	map_cam.make_current()
-	player.process_mode = Node.PROCESS_MODE_DISABLED
+	player.pause(true)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	using_map = true
 	

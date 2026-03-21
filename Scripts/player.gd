@@ -17,7 +17,7 @@ var last_raycast_hover_target:Interactable
 @export var skeleton:Skeleton3D
 
 
-@onready var arms_ik: CCDIK3D = $charecter/Armature/Skeleton3D/CCDIK3D
+@onready var arms_ik: FABRIK3D = $charecter/Armature/Skeleton3D/FABRIKIK
 @onready var hand_transforms: CopyTransformModifier3D = $charecter/Armature/Skeleton3D/CopyTransformModifier3D
 @export var gem_hold_spot:Marker3D
 @onready var light: SpotLight3D = $head/Camera3D/light
@@ -30,6 +30,7 @@ var last_raycast_hover_target:Interactable
 @onready var ray_cast_3d: RayCast3D = $head/Camera3D/RayCast3D
 @onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
+signal player_paused(paused:bool)
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -88,14 +89,12 @@ func _process(_delta: float) -> void:
 			camera_3d.rotate_x(look_vector.y * Settings.controller_sens)
 			camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x, -45, 45)
 	
-	
 	if Input.get_last_mouse_velocity() == Vector2.ZERO and Settings.current_control == Settings.control.KEYBOARD:
 		if head.rotation.y >= 0.5:
 			head.rotation.y = 0.49
 		elif head.rotation.y <= -0.5:
 			head.rotation.y = -0.49
 	
-	print(Settings.current_control)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -189,4 +188,10 @@ func set_ik_targets(target_left:Node3D, target_right:Node3D, is_active:bool, cha
 	else:
 		tween.tween_property(arms_ik, "influence", 0.0, change_time)
 		tween.tween_property(hand_transforms, "influence", 0.0, change_time)
-	
+
+func pause(pausing:bool) -> void:
+	if pausing:
+		process_mode = Node.PROCESS_MODE_DISABLED
+		player_paused.emit(true)
+	else:
+		process_mode = Node.PROCESS_MODE_PAUSABLE

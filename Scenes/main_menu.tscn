@@ -95,11 +95,11 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.64
 curve = SubResource("Curve3D_trj04")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=390217803]
-transform = Transform3D(0.9328248, -0.003736858, -0.360079, 0, 0.9997896, -0.0103768995, 0.36010468, 0.009680056, 0.9327582, -0.004687748, -0.0003008172, -0.03365056)
+transform = Transform3D(0.9328248, -0.0037368576, -0.36007896, 0, 0.9997896, -0.0103768995, 0.36010465, 0.009680056, 0.9327582, -0.004687748, -0.0003008172, -0.03365056)
 use_model_front = true
 
 [node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D" unique_id=1370971708]
-transform = Transform3D(-1.000017, 0, 8.742331e-08, 0, 1.0000397, 0, -8.742427e-08, 0, -1.0000061, 0, 0, 0)
+transform = Transform3D(1.000017, 0, 0, 0, 1.0000397, 0, 0, 0, 1.0000061, 0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=175902144]
 stream = ExtResource("7_cp0ys")
@@ -217,7 +217,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="Label3D4" type="Label3D" parent="." unique_id=299617976]
+transform = Transform3D(-0.96610177, 0, 0.25816151, 0, 1, 0, -0.25816151, 0, -0.96610177, 1.5488385, 5.007019, 4.0012317)
+no_depth_test = true
+text = "AQUANAUT"
+font_size = 9
+outline_size = 0
+
 [connection signal="input_event" from="credits area" to="." method="_on_credits_area_input_event"]
 [connection signal="input_event" from="settings area" to="." method="_on_settings_area_input_event"]
 [connection signal="input_event" from="play area" to="." method="_on_play_area_input_event"]
+[connection signal="mouse_entered" from="play area" to="." method="_on_play_area_mouse_entered"]
+[connection signal="mouse_exited" from="play area" to="." method="_on_play_area_mouse_exited"]
 [connection signal="input_event" from="quit area" to="." method="_on_quit_area_input_event"]

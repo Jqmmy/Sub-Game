@@ -371,19 +371,19 @@ shape = SubResource("BoxShape3D_21xkr")
 [node name="CharacterBody3D" parent="." unique_id=1252446106 instance=ExtResource("3_l3r2j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9308357, 3.2005494, 20.922344)
 
-[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1018301311, 1746100620) index="0" unique_id=1779331837]
+[node name="Skeleton3D" parent="CharacterBody3D/charecter/Armature" parent_id_path=PackedInt32Array(1252446106, 1018301311, 230074064) index="0" unique_id=2015052567]
 bones/1/position = Vector3(-2.775558e-17, 0, 0.7631609)
 bones/70/position = Vector3(-2.775558e-17, 0, 0.7631609)
 bones/75/position = Vector3(2.7755576e-17, 0, 0.7631609)
 bones/83/rotation = Quaternion(0.707107, 0, -0.70710653, 0)
 
-[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=2011396056]
+[node name="head" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="0" unique_id=315397887]
 transform = Transform3D(1, 0, 8.742279e-08, 1.7763568e-15, 1, 0, -8.742279e-08, 0, 1, -1.6570399e-15, 1.5749999, 0.07499999)
 
-[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1018301311, 1056712066) index="1" unique_id=801507463]
+[node name="MeshInstance3D" parent="CharacterBody3D/charecter/Armature/Skeleton3D/forarm_l" parent_id_path=PackedInt32Array(1252446106, 1018301311, 1195435426) index="1" unique_id=801507463]
 surface_material_override/0 = SubResource("StandardMaterial3D_y8lat")
 
-[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=1694503464]
+[node name="torso" parent="CharacterBody3D/charecter/Armature/Skeleton3D" index="2" unique_id=1857670763]
 transform = Transform3D(1, 3.9334625e-17, 2.3841858e-07, -3.9334625e-17, 1, -9.3781054e-24, -2.3841858e-07, 0, 1, -2.775558e-17, 0.92696065, 1.5353273e-32)
 
 [node name="Submarine" parent="." unique_id=1525268326 instance=ExtResource("5_48oh6")]

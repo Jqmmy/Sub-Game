@@ -122,7 +122,6 @@ func _input(event: InputEvent) -> void:
 			current_radar_level -= 1
 	
 		if Input.is_action_just_pressed("fire"):
-			print("yes")
 			var tween = get_tree().create_tween()
 			tween.tween_property(player.camera_3d,"fov" , 60, 0.2)
 		if Input.is_action_just_released("fire"):
@@ -151,15 +150,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if driving:
 		var player:Player = get_tree().get_first_node_in_group("player")
 		if event is InputEventMouseMotion:
-			
-			if player.head.rotation.y < 0.5 and player.head.rotation.y > -0.5:
-				player.head.rotate_y(-event.relative.x * Settings.sens)
-			else:
-				rotate_y(-event.relative.x * Settings.sens)
-				player.head.rotation.y = clamp(player.head.rotation.y, -0.5, 0.5)
-		
+			player.head.rotate_y(-event.relative.x * Settings.sens)
+			player.head.rotation_degrees.y = clamp(player.head.rotation_degrees.y, -90, 90)
 			player.camera_3d.rotate_x(-event.relative.y * Settings.sens)
 			player.camera_3d.rotation_degrees.x = clamp(player.camera_3d.rotation_degrees.x, -45, 45)
+			
 		if Input.is_action_just_pressed("reset view"):
 			player.camera_3d.rotation = Vector3.ZERO
 			player.head.rotation = Vector3.ZERO
@@ -178,14 +173,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("Open map"):
 			pass
 			
-		
+
 
 func _physics_process(delta: float) -> void:
 	var radar_axis:float = Input.get_axis("radar left", "radar right")
 	if radar_axis:
 		radar_reference.rotation_degrees.y -= radar_axis
 	ship_depth_ui.radar.arc_position = deg_to_rad(radar_reference.rotation_degrees.y) * -1
-	ship_depth_ui.change_depth_sensor(global_position.y, 0, 500)
+	ship_depth_ui.change_depth_sensor(global_position.y, 0, -150)
 	
 	if driving and not parked:
 		

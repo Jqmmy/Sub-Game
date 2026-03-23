@@ -8,6 +8,7 @@ const WATER_BOOST = 3
 const JUMP_VELOCITY = 4.5
 var radar_is_up:bool = false
 var is_holding_gem:bool = false
+var inside_ship:bool = false
 
 var ray_cast_is_hovering:bool = false
 var last_raycast_hover_target:Interactable

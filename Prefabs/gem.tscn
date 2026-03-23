@@ -27,4 +27,3 @@ shape = SubResource("BoxShape3D_va7jc")
 shape = SubResource("BoxShape3D_d6h50")
 
 [node name="Objective waypoint" parent="." unique_id=1940372961 instance=ExtResource("3_nmhil")]
-use_last_scan_position = true

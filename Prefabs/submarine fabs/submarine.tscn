@@ -106,12 +106,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0yn0q")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2qsgv"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_icesl"]
 viewport_path = NodePath("map/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgt3x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qsgv"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_2qsgv")
+albedo_texture = SubResource("ViewportTexture_icesl")
 uv1_scale = Vector3(1, 2.035, 1)
 uv1_offset = Vector3(0, -0.525, 0)
 uv1_triplanar_sharpness = 2.639011
@@ -120,12 +120,12 @@ uv1_triplanar_sharpness = 2.639011
 height = 0.1484375
 radius = 0.096191406
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xmbpj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fgt3x"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbw6m"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7j3v"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_xmbpj")
+albedo_texture = SubResource("ViewportTexture_fgt3x")
 uv1_scale = Vector3(1.01, 1.635, 1)
 uv1_offset = Vector3(-0.015, -0.64, 0)
 
@@ -493,23 +493,23 @@ skeleton = NodePath("")
 [node name="diver" parent="." unique_id=1001619587 instance=ExtResource("2_dws13")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1.2844992)
 
-[node name="sub" parent="diver" index="0" unique_id=995746081]
+[node name="sub" parent="diver" index="0" unique_id=1191565516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4682245e-05, 2.0845084, 1.3890762)
-surface_material_override/1 = SubResource("StandardMaterial3D_fgt3x")
+surface_material_override/1 = SubResource("StandardMaterial3D_2qsgv")
 
-[node name="Circle" parent="diver/fan arms" parent_id_path=PackedInt32Array(1001619587, 714169857) index="0" unique_id=1338197761]
+[node name="Circle" parent="diver/fan arms" parent_id_path=PackedInt32Array(1001619587, 1023373004) index="0" unique_id=1823799402]
 transform = Transform3D(1.1121775, 0, 0, 0, 1.1121775, 0, 0, 0, 1.1121775, 1.2995204, -0.38751578, -0.008727074)
 
-[node name="joystick right and left base" parent="diver" index="13" unique_id=1671789267]
+[node name="joystick right and left base" parent="diver" index="13" unique_id=364240447]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365, 1.656, 1.617967)
 
-[node name="Cube_014" parent="diver/joystick right and left base" index="0" unique_id=1435851807]
-transform = Transform3D(0.94551855, 0.32556814, 0, -0.32556814, 0.94551855, 0, 0, 0, 1, 0, 0.00073444843, 0)
+[node name="Cube_014" parent="diver/joystick right and left base" index="0" unique_id=1343904656]
+transform = Transform3D(0.94551855, 0.32556817, 0, -0.32556817, 0.94551855, 0, 0, 0, 1, 0, 0.00073444843, 0)
 
 [node name="control IK" type="Marker3D" parent="diver/joystick right and left base/Cube_014" index="2" unique_id=139756949]
 transform = Transform3D(-0.0075961286, 0.08682411, 0.99619424, 0.9961944, 0.087155804, 0, -0.08682413, 0.9924039, -0.08715572, 0.031814992, 0.10369253, -0.062000006)
 
-[node name="Skeleton3D" parent="diver/armature for sub" parent_id_path=PackedInt32Array(1001619587, 1458834009) index="0" unique_id=1928687410]
+[node name="Skeleton3D" parent="diver/armature for sub" parent_id_path=PackedInt32Array(1001619587, 1524021154) index="0" unique_id=908404734]
 bones/1/rotation = Quaternion(0.64519745, 0.28770146, 0.64621603, 0.28870934)
 bones/2/rotation = Quaternion(0.00022049728, 0.00016993903, 0.44541484, 0.89532435)
 bones/3/rotation = Quaternion(-0.0014797564, 6.871847e-05, 0.6647642, 0.7470518)
@@ -522,109 +522,109 @@ bones/22/rotation = Quaternion(-0.27059847, 0.6532818, -0.6532813, -0.2705974)
 bones/26/rotation = Quaternion(0.56098586, -0.4304601, 0.4304588, 0.560985)
 bones/30/rotation = Quaternion(0.7010575, -0.09229691, 0.09229512, 0.70105726)
 bones/32/rotation = Quaternion(0.70105726, 0.09229504, -0.092296995, 0.7010575)
-bones/40/rotation = Quaternion(-0.0013678254, -0.46661183, -0.0033224449, 0.884455)
-bones/41/rotation = Quaternion(0.38334602, 0.113766015, 0.04767609, 0.9153307)
+bones/40/rotation = Quaternion(0.007603014, -0.65423816, 0.0032373108, 0.75624347)
+bones/41/rotation = Quaternion(0.38629937, -1.8382441e-05, 2.2207569e-05, 0.9223735)
 
-[node name="chair" parent="diver/armature for sub/Skeleton3D" index="0" unique_id=1420841086]
+[node name="chair" parent="diver/armature for sub/Skeleton3D" index="0" unique_id=1544563479]
 transform = Transform3D(-0.40481597, -0.00015769387, -3.122394e-05, -9.46417e-05, 0.6664196, -0.013265481, 3.4324774e-05, -0.021849615, -0.40459865, -0.003143149, 1.6430551, 0.04286939)
 
 [node name="seat pos" type="Node3D" parent="diver/armature for sub/Skeleton3D/chair" index="1" unique_id=962616881]
 transform = Transform3D(-2.4702575, 1.0307874e-07, 6.919256e-08, 6.2968596e-08, 1.4997495, 1.0928615e-07, -1.040533e-07, 1.263433e-07, -2.4702582, 1.3216446e-07, -1.439811, 0.14930776)
 
-[node name="chair pedal base" parent="diver/armature for sub/Skeleton3D" index="1" unique_id=72975506]
+[node name="chair pedal base" parent="diver/armature for sub/Skeleton3D" index="1" unique_id=1403340994]
 transform = Transform3D(-0.99999976, -0.00023653102, -7.7130964e-05, -0.00023384788, 0.9994626, -0.032769065, 8.4822765e-05, -0.032768954, -0.9994629, -0.19226545, 0.881261, -0.3150319)
 
-[node name="entrance_012 -col" parent="diver/armature for sub/Skeleton3D" index="2" unique_id=1234373417]
+[node name="entrance_012 -col" parent="diver/armature for sub/Skeleton3D" index="2" unique_id=803481785]
 transform = Transform3D(1.8664272e-05, -0.078896366, -6.0853604e-06, -0.07885398, -1.8454914e-05, -0.0025853636, 0.002585354, 6.6923785e-06, -0.07885402, -0.19228558, 0.8800036, -0.55647075)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_012 -col/entrance_012 " parent_id_path=PackedInt32Array(1001619587, 185826902) index="0" unique_id=1340650690]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_012 -col/entrance_012 " parent_id_path=PackedInt32Array(1001619587, 1392541669) index="0" unique_id=1924426387]
 collision_layer = 8
 
-[node name="entrance_013 -col" parent="diver/armature for sub/Skeleton3D" index="3" unique_id=1239767436]
+[node name="entrance_013 -col" parent="diver/armature for sub/Skeleton3D" index="3" unique_id=1879811295]
 transform = Transform3D(1.8664272e-05, -0.078896366, -6.0853604e-06, -0.07885398, -1.8454914e-05, -0.0025853636, 0.002585354, 6.6923785e-06, -0.07885402, 0.18625456, 0.88009214, -0.55650306)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_013 -col/entrance_013 " parent_id_path=PackedInt32Array(1001619587, 1152467112) index="0" unique_id=922981852]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_013 -col/entrance_013 " parent_id_path=PackedInt32Array(1001619587, 175166184) index="0" unique_id=1434125661]
 collision_layer = 8
 
-[node name="chair arm" parent="diver/armature for sub/Skeleton3D" index="4" unique_id=2117280392]
+[node name="chair arm" parent="diver/armature for sub/Skeleton3D" index="4" unique_id=1966314431]
 transform = Transform3D(-0.12445022, -2.349227e-05, -4.55087e-05, -5.236485e-06, 0.057013057, -0.07500318, 6.0970953e-05, -0.043058913, -0.0993095, -0.0031968774, 2.1968708, 0.68214446)
 
-[node name="chair arm top" parent="diver/armature for sub/Skeleton3D" index="5" unique_id=2058754771]
+[node name="chair arm top" parent="diver/armature for sub/Skeleton3D" index="5" unique_id=847548773]
 transform = Transform3D(-0.09145725, -3.5490666e-06, -0.00010939337, 7.9414785e-05, 0.060753558, -0.06836252, 7.5322256e-05, -0.068362564, -0.060753517, -0.0016218316, 3.4775755, 0.079853415)
 
-[node name="entrance_004 -col" parent="diver/armature for sub/Skeleton3D" index="6" unique_id=196642877]
+[node name="entrance_004 -col" parent="diver/armature for sub/Skeleton3D" index="6" unique_id=368189824]
 transform = Transform3D(0.9999999, 8.309931e-08, -2.9802514e-08, -2.3283363e-08, 0.9999999, -1.9915939e-07, -1.4901275e-08, 2.1404702e-07, 0.9999998, -2.3841858e-07, 0.659027, -3.7078936)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_004 -col/entrance_004 " parent_id_path=PackedInt32Array(1001619587, 1621200344) index="0" unique_id=2135584973]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_004 -col/entrance_004 " parent_id_path=PackedInt32Array(1001619587, 1591624170) index="0" unique_id=31375641]
 collision_layer = 8
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_005 -col/entrance_005 " parent_id_path=PackedInt32Array(1001619587, 1925432263) index="0" unique_id=386670810]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_005 -col/entrance_005 " parent_id_path=PackedInt32Array(1001619587, 1119813539) index="0" unique_id=1303508651]
 collision_layer = 8
 
-[node name="entrance_003 -col" parent="diver/armature for sub/Skeleton3D" index="8" unique_id=423262773]
+[node name="entrance_003 -col" parent="diver/armature for sub/Skeleton3D" index="8" unique_id=1499644819]
 transform = Transform3D(1, 1.8722426e-07, -5.960459e-08, -1.232151e-07, 1, -1.1475828e-07, 1.490131e-08, 2.0592302e-07, 1.0000001, -5.9604645e-08, 0.6590271, -3.7078938)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_003 -col/entrance_003 " parent_id_path=PackedInt32Array(1001619587, 1845197239) index="0" unique_id=863059375]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_003 -col/entrance_003 " parent_id_path=PackedInt32Array(1001619587, 2105338627) index="0" unique_id=857145096]
 collision_layer = 8
 
-[node name="entrance_002 -col" parent="diver/armature for sub/Skeleton3D" index="9" unique_id=252847052]
+[node name="entrance_002 -col" parent="diver/armature for sub/Skeleton3D" index="9" unique_id=1931540922]
 transform = Transform3D(1, 2.170882e-07, -2.6822042e-07, -1.8118874e-07, 1, -1.215846e-07, 8.9407564e-08, 1.2768095e-07, 1, -2.682209e-07, 0.6590269, -3.7078931)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_002 -col/entrance_002 " parent_id_path=PackedInt32Array(1001619587, 1195165158) index="0" unique_id=96932724]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_002 -col/entrance_002 " parent_id_path=PackedInt32Array(1001619587, 1734448154) index="0" unique_id=2105859588]
 collision_layer = 8
 
-[node name="entrance_001 -col" parent="diver/armature for sub/Skeleton3D" index="10" unique_id=2131151565]
+[node name="entrance_001 -col" parent="diver/armature for sub/Skeleton3D" index="10" unique_id=1846475372]
 transform = Transform3D(1.0000001, 8.482357e-08, -2.9801875e-08, -1.115377e-07, 1, 4.654917e-07, -1.4900202e-08, -2.337215e-07, 1.0000001, -0.09999986, 0.65902704, -3.3346884)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_001 -col/entrance_001 " parent_id_path=PackedInt32Array(1001619587, 623834791) index="0" unique_id=53732018]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_001 -col/entrance_001 " parent_id_path=PackedInt32Array(1001619587, 2079254157) index="0" unique_id=1159563063]
 collision_layer = 8
 
-[node name="entrance -col" parent="diver/armature for sub/Skeleton3D" index="11" unique_id=1514607645]
+[node name="entrance -col" parent="diver/armature for sub/Skeleton3D" index="11" unique_id=2065012130]
 transform = Transform3D(1.0000001, -9.7001134e-08, -1.4901914e-08, 1.0806093e-07, 1, 5.259983e-08, 1.04307425e-07, 7.9596845e-08, 1.0000001, 0.09999992, 0.65902704, -3.3346884)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance -col/entrance " parent_id_path=PackedInt32Array(1001619587, 255831422) index="0" unique_id=571617394]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance -col/entrance " parent_id_path=PackedInt32Array(1001619587, 517891809) index="0" unique_id=1374736585]
 collision_layer = 8
 
-[node name="entrance_011 -col" parent="diver/armature for sub/Skeleton3D" index="12" unique_id=388836901]
+[node name="entrance_011 -col" parent="diver/armature for sub/Skeleton3D" index="12" unique_id=2031000415]
 transform = Transform3D(1, 1.6171998e-07, 8.940539e-08, -1.3480576e-07, 1, 1.4503325e-07, -1.6413537e-12, -3.7396603e-08, 1, 8.940697e-08, 0.659027, -3.7078934)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_011 -col/entrance_011 " parent_id_path=PackedInt32Array(1001619587, 2139066846) index="0" unique_id=2004738323]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_011 -col/entrance_011 " parent_id_path=PackedInt32Array(1001619587, 1401906870) index="0" unique_id=2062969417]
 collision_layer = 8
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_010 -col/entrance_010 " parent_id_path=PackedInt32Array(1001619587, 1870545192) index="0" unique_id=278493804]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_010 -col/entrance_010 " parent_id_path=PackedInt32Array(1001619587, 174799080) index="0" unique_id=330424512]
 collision_layer = 8
 
-[node name="entrance_009 -col" parent="diver/armature for sub/Skeleton3D" index="14" unique_id=2095914950]
+[node name="entrance_009 -col" parent="diver/armature for sub/Skeleton3D" index="14" unique_id=1358619693]
 transform = Transform3D(1, 6.1767764e-09, -4.470195e-08, -2.2574397e-08, 1, 7.518156e-08, 4.4704812e-08, -1.5917499e-07, 0.99999994, -2.9802322e-08, 0.6590271, -3.7078936)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_009 -col/entrance_009 " parent_id_path=PackedInt32Array(1001619587, 316719549) index="0" unique_id=1022747833]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_009 -col/entrance_009 " parent_id_path=PackedInt32Array(1001619587, 1790367241) index="0" unique_id=1451762836]
 collision_layer = 8
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_008 -col/entrance_008 " parent_id_path=PackedInt32Array(1001619587, 1562970551) index="0" unique_id=676619482]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_008 -col/entrance_008 " parent_id_path=PackedInt32Array(1001619587, 746062539) index="0" unique_id=2085775786]
 collision_layer = 8
 
-[node name="entrance_007 -col" parent="diver/armature for sub/Skeleton3D" index="16" unique_id=338478386]
+[node name="entrance_007 -col" parent="diver/armature for sub/Skeleton3D" index="16" unique_id=2108528193]
 transform = Transform3D(1.0000001, 3.6189067e-07, 3.2782762e-07, -3.4480513e-07, 1, 1.7111046e-07, 4.4703611e-07, -2.1661191e-07, 0.99999994, 5.2154064e-08, 0.65902704, -3.7078938)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_007 -col/entrance_007 " parent_id_path=PackedInt32Array(1001619587, 259957372) index="0" unique_id=75036400]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_007 -col/entrance_007 " parent_id_path=PackedInt32Array(1001619587, 467436352) index="0" unique_id=1310486528]
 collision_layer = 8
 
-[node name="entrance_006 -col" parent="diver/armature for sub/Skeleton3D" index="17" unique_id=1520113502]
+[node name="entrance_006 -col" parent="diver/armature for sub/Skeleton3D" index="17" unique_id=692444001]
 transform = Transform3D(1.0000001, 3.679654e-07, -3.576301e-07, -3.5259814e-07, 1, -1.1711637e-07, -3.5762952e-07, 8.996625e-08, 0.99999994, -9.685755e-08, 0.65902704, -3.7078938)
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_006 -col/entrance_006 " parent_id_path=PackedInt32Array(1001619587, 751443985) index="0" unique_id=1446011491]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/entrance_006 -col/entrance_006 " parent_id_path=PackedInt32Array(1001619587, 127322832) index="0" unique_id=1751756528]
 collision_layer = 8
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/doors_001 -col/doors_001 " parent_id_path=PackedInt32Array(1001619587, 1359755056) index="0" unique_id=1424149499]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/doors_001 -col/doors_001 " parent_id_path=PackedInt32Array(1001619587, 140038288) index="0" unique_id=2074566912]
 collision_layer = 8
 
-[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/doors -col/doors " parent_id_path=PackedInt32Array(1001619587, 1536653096) index="0" unique_id=695442331]
+[node name="StaticBody3D" parent="diver/armature for sub/Skeleton3D/doors -col/doors " parent_id_path=PackedInt32Array(1001619587, 1664623413) index="0" unique_id=1421791772]
 collision_layer = 8
 
-[node name="Cylinder_001" parent="diver/armature for sub/Skeleton3D/Cylinder_001" parent_id_path=PackedInt32Array(1001619587, 2108312728) index="0" unique_id=592918189]
+[node name="Cylinder_001" parent="diver/armature for sub/Skeleton3D/Cylinder_001" parent_id_path=PackedInt32Array(1001619587, 592054664) index="0" unique_id=1025427833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -3.5527137e-15, 1, 0, 0, 0)
 
-[node name="button" type="Area3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001" parent_id_path=PackedInt32Array(1001619587, 2108312728) index="1" unique_id=1600675576]
+[node name="button" type="Area3D" parent="diver/armature for sub/Skeleton3D/Cylinder_001" parent_id_path=PackedInt32Array(1001619587, 592054664) index="1" unique_id=1600675576]
 transform = Transform3D(-0.9920737, -4.7073456e-14, -0.12565726, 0.12565726, -4.3711378e-08, -0.9920737, -5.4926526e-09, -1, 4.3364913e-08, 0, 0, 0)
 script = ExtResource("3_0vtxn")
 hover_text = "Open door"
@@ -634,26 +634,26 @@ metadata/_custom_type_script = "uid://xo27f5p84mpt"
 transform = Transform3D(1, 0, -1.0411457e-23, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.018554688)
 shape = SubResource("CylinderShape3D_0vtxn")
 
-[node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=489651255]
-transform = Transform3D(0.68804467, 0.5774778, 0.4394465, 0.1654393, -0.7144564, 0.6798393, 0.7065576, -0.39505804, -0.58711547, 0.044877097, 4.518138, 0.11190127)
+[node name="Plane_001" parent="diver/armature for sub/Skeleton3D" index="21" unique_id=2078753674]
+transform = Transform3D(0.14024751, 0.7064938, 0.6936833, -0.008860451, -0.6996843, 0.71439683, 0.99007666, -0.10633877, -0.09186913, 0.08989054, 4.5251575, 0.20484966)
 
-[node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22" unique_id=1836723625]
-transform = Transform3D(0.68804467, 0.5774778, 0.4394466, 0.16543931, -0.71445656, 0.67983925, 0.7065577, -0.39505798, -0.5871155, 0.044877343, 4.518138, 0.11190112)
+[node name="Plane_007" parent="diver/armature for sub/Skeleton3D" index="22" unique_id=908647501]
+transform = Transform3D(0.14024752, 0.7064938, 0.69368345, -0.008860449, -0.6996845, 0.71439683, 0.99007666, -0.10633876, -0.09186915, 0.08989084, 4.525157, 0.2048496)
 
-[node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23" unique_id=1023517953]
-transform = Transform3D(-0.43944678, 0.5774778, 0.6880448, -0.6798395, -0.71445644, 0.16543922, 0.5871157, -0.39505816, 0.70655775, 0.104621425, 4.393231, 0.43936312)
+[node name="Plane_006" parent="diver/armature for sub/Skeleton3D" index="23" unique_id=1682268932]
+transform = Transform3D(-0.6936837, 0.70649385, 0.14024761, -0.71439713, -0.6996844, -0.008860588, 0.091869146, -0.10633883, 0.9900768, -0.052826516, 4.347605, 0.47781387)
 
-[node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24" unique_id=560510420]
-transform = Transform3D(-0.43944678, 0.57747823, 0.6880449, -0.67983925, -0.71445656, 0.16543925, 0.5871153, -0.39505804, 0.7065581, 0.10462147, 4.3932304, 0.43936378)
+[node name="Plane_004" parent="diver/armature for sub/Skeleton3D" index="24" unique_id=2028714988]
+transform = Transform3D(-0.6936835, 0.70649415, 0.1402475, -0.7143969, -0.6996846, -0.008860618, 0.09186892, -0.10633859, 0.99007714, -0.052826874, 4.3476043, 0.47781435)
 
-[node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25" unique_id=1350192581]
-transform = Transform3D(0.13923399, 0.11685948, 0.08892722, 0.033478618, -0.14457873, 0.1375735, 0.14298032, -0.079944655, -0.118809775, 0.0021520627, 4.258884, 0.21421063)
+[node name="Cone_001" parent="diver/armature for sub/Skeleton3D" index="25" unique_id=443858108]
+transform = Transform3D(0.028380739, 0.14296739, 0.14037505, -0.0017930114, -0.14158942, 0.14456663, 0.20035376, -0.021518894, -0.018590806, -0.002189439, 4.2588625, 0.21550988)
 
-[node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=29708340]
-transform = Transform3D(0.11360156, 0.116446465, 0.120354414, -0.0016855444, -0.14463063, 0.14152533, 0.16745782, -0.08045178, -0.08022259, 0.0021515968, 4.2588835, 0.21421093)
+[node name="Cone" parent="diver/armature for sub/Skeleton3D" index="26" unique_id=2132870373]
+transform = Transform3D(0.028380733, 0.14296739, 0.14037502, -0.0017930106, -0.1415894, 0.14456663, 0.2003537, -0.021518895, -0.018590804, -0.0021899706, 4.258862, 0.21550994)
 
-[node name="map button_001" parent="diver" index="19" unique_id=1779342635]
-surface_material_override/0 = SubResource("StandardMaterial3D_sbw6m")
+[node name="map button_001" parent="diver" index="19" unique_id=1675412750]
+surface_material_override/0 = SubResource("StandardMaterial3D_k7j3v")
 
 [node name="AnimationTree" type="AnimationTree" parent="diver" unique_id=1093322183]
 tree_root = SubResource("AnimationNodeBlendTree_erfuo")
@@ -765,18 +765,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0872245, 1.0697609)
 [node name="radar rotator" type="Marker3D" parent="Radar reference" unique_id=1793675490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 
-[node name="Area3D" type="Area3D" parent="." unique_id=556375920]
+[node name="inside ship checker" type="Area3D" parent="." unique_id=556375920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.053449, 1.5773609)
 collision_mask = 4
 priority = 1
 gravity_space_override = 3
 script = ExtResource("4_dws13")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1741089685]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="inside ship checker" unique_id=1741089685]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.0105896, 0.013092041, 0.44908762)
 shape = SubResource("BoxShape3D_icesl")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=2038296017]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="inside ship checker" unique_id=2038296017]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28632557, 3.3809206)
 shape = SubResource("CylinderShape3D_ibfwu")
 

@@ -1,7 +1,7 @@
 extends PathFollow3D
 
 const FISH = preload("uid://cagrfw40y8ip7")
-var cluster_speed:float = 2.5
+var cluster_speed:float = 0.5
 @export var center_gem:Gem
 @export var fish_amount:int = 650
 

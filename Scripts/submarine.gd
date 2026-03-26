@@ -16,6 +16,8 @@ extends RigidBody3D
 @onready var radar_reference: Marker3D = $"Radar reference"
 @onready var radar_rotator_origin: Marker3D = $"radar rotator origin"
 @onready var radar_rotator: Marker3D = $"Radar reference/radar rotator"
+@onready var joystick_button: MeshInstance3D = $"diver/joystick right and left base/Cube_014/joystick button"
+
 var radar_check_angle:float = 0.0
 enum radar_levels {
 	level1,
@@ -118,7 +120,9 @@ func _input(event: InputEvent) -> void:
 					
 		if Input.is_action_just_pressed("short radar"):
 			current_radar_level += 1
+			joystick_button.rotation_degrees.x = -33
 		if Input.is_action_just_pressed("long radar"):
+			joystick_button.rotation_degrees.x = -13
 			current_radar_level -= 1
 	
 		if Input.is_action_just_pressed("fire"):

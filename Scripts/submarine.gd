@@ -48,7 +48,7 @@ var current_radar_level:radar_levels = radar_levels.level1:
 				push_error("wrong number for radar level")
 
 
-var is_radar_charged:bool = true
+var is_radar_charged:bool = true 
 var driving:bool = false
 var exiting:bool = true
 var times_in_seat:int = -1

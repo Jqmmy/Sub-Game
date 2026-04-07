@@ -109,5 +109,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 script = ExtResource("2_iol08")
-arc_position = -3.142
+arc_position = -6.284
 circle_size = 200.0
+radar_charge = 100.0

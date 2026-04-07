@@ -48,18 +48,11 @@ var current_radar_level:radar_levels = radar_levels.level1:
 				push_error("wrong number for radar level")
 
 
-
+var is_radar_charged:bool = true
 var driving:bool = false
 var exiting:bool = true
 var times_in_seat:int = -1
 var hatch_open:bool = false
-var parked:bool = true:
-	set(value):
-		parked = value
-		if parked and in_water:
-			gravity_scale = 0
-		else:
-			gravity_scale = 1
 var using_map:bool = false
 var in_water:bool = false
 
@@ -75,7 +68,6 @@ var last_rotation_dir:float :
 var front_accel = 3.0
 var up_accel = 1.5
 
-var SCAN_LINE:PackedScene = preload("res://Prefabs/submarine fabs/scan_line.tscn")
 @onready var player:Player = get_tree().get_first_node_in_group("player")
 
 
@@ -107,7 +99,11 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			using_map = false
 	if driving:
-		if Input.is_action_just_pressed("radar"):
+		if Input.is_action_just_pressed("radar") and is_radar_charged:
+			is_radar_charged = false
+			get_tree().create_timer(2.5).timeout.connect(func():
+				is_radar_charged = true)
+			ship_depth_ui.activate_radar(2.5)
 			var radar_direction:Vector3 = radar_rotator_origin.global_position.direction_to(radar_rotator.global_position)
 			var objectives:Array[Node] = get_tree().get_nodes_in_group("scanable")
 			for objective in objectives:
@@ -163,9 +159,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.camera_3d.rotation = Vector3.ZERO
 			player.head.rotation = Vector3.ZERO
 	
-		if Input.is_action_just_pressed("park"):
-			parked = !parked
-	
 		if Input.is_action_just_pressed("exit cockpit"):
 			ship_animation_tree["parameters/Transition 2/transition_request"] = "b"
 			player.animation_tree.set("parameters/sitting/add_amount", 0.0)
@@ -185,15 +178,18 @@ func _physics_process(delta: float) -> void:
 		radar_reference.rotation_degrees.y -= radar_axis
 	ship_depth_ui.radar.arc_position = deg_to_rad(radar_reference.rotation_degrees.y) * -1
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, -150)
-	
-	if driving and not parked:
+	if driving:
 		
 		var float_booster:float
+		var player:Player = get_tree().get_first_node_in_group("player")
 		if Input.is_action_pressed("up"):
+			player.animation_tree.set("parameters/pedal add/add_amount", 1)
 			float_booster = 1.0
 		if Input.is_action_pressed("down"):
+			player.animation_tree.set("parameters/pedal add/add_amount", -1)
 			float_booster = -1.0
 		elif !Input.is_action_pressed("up"):
+			player.animation_tree.set("parameters/pedal add/add_amount", 0)
 			float_booster = 0
 		
 		var input_dir = Input.get_axis("forward", "backward")
@@ -229,7 +225,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not driving and in_water:
 		if shape_cast_3d.is_colliding():
-			apply_central_force(Vector3(0,2.5,0))
+			apply_central_force(Vector3(0,2.0,0))
 			
 
 

@@ -18,6 +18,7 @@ extends Control
 		radar_charge = value
 		queue_redraw()
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		queue_redraw()

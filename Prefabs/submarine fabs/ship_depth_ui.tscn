@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4t4q54k0pct6" path="res://Scripts/ship_depth_ui.gd" id="1_n8sj5"]
 [ext_resource type="Script" uid="uid://0y8a4h6pmhpl" path="res://Scripts/Radar.gd" id="2_iol08"]
+[ext_resource type="PackedScene" uid="uid://ew71ttol5l2h" path="res://Scenes/Map.tscn" id="2_web34"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ehsr"]
 bg_color = Color(2.5027991e-06, 0.35911858, 0.62764484, 1)
@@ -35,7 +36,7 @@ corner_radius_bottom_left = 50
 [sub_resource type="Theme" id="Theme_4wcn3"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_ti6qa")
 
-[node name="Ship depth UI" type="Control" unique_id=1820531656]
+[node name="Ship depth UI" type="Control" unique_id=1820531656 node_paths=PackedStringArray("radar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_n8sj5")
+radar = NodePath("HBoxContainer/MarginContainer/radar")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1592661570]
 layout_mode = 1
@@ -99,16 +101,37 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 50
 text = "5000"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=354044873]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=274107233]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="radar" type="Control" parent="HBoxContainer/VBoxContainer2" unique_id=1111292865]
-custom_minimum_size = Vector2(400, 0)
+[node name="SubViewportContainer" parent="HBoxContainer/MarginContainer" unique_id=443506739 instance=ExtResource("2_web34")]
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 8
+size_flags_horizontal = 8
+stretch = true
+
+[node name="SubViewport2" parent="HBoxContainer/MarginContainer/SubViewportContainer" index="0" unique_id=984399894]
+size = Vector2i(420, 628)
+size_2d_override_stretch = true
+
+[node name="radar" type="Control" parent="HBoxContainer/MarginContainer" unique_id=1111292865]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
 script = ExtResource("2_iol08")
-arc_position = -6.284
+arc_position = -12.568
 circle_size = 200.0
 radar_charge = 100.0
+
+[node name="fade timer" type="Timer" parent="." unique_id=1706134000]
+wait_time = 3.5
+one_shot = true
+
+[connection signal="timeout" from="fade timer" to="." method="_on_fade_timer_timeout"]
+
+[editable path="HBoxContainer/MarginContainer/SubViewportContainer"]

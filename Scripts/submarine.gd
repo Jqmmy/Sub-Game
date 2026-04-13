@@ -17,6 +17,7 @@ extends RigidBody3D
 @onready var radar_rotator_origin: Marker3D = $"radar rotator origin"
 @onready var radar_rotator: Marker3D = $"Radar reference/radar rotator"
 @onready var joystick_button: MeshInstance3D = $"diver/joystick right and left base/Cube_014/joystick button"
+@onready var radar_audio_stream: AudioStreamPlayer3D = $"radar audio stream"
 
 var radar_check_angle:float = 0.0
 enum radar_levels {
@@ -46,7 +47,6 @@ var current_radar_level:radar_levels = radar_levels.level1:
 				current_radar_level = value
 			_:
 				push_error("wrong number for radar level")
-
 
 var is_radar_charged:bool = true 
 var driving:bool = false
@@ -81,16 +81,10 @@ func _ready() -> void:
 	ui_material.uv1_offset = Vector3(-0.015,-0.64,0.0)
 	ui_material.uv1_scale = Vector3(1.01,1.635, 1.0)
 	$"diver/map button_001".set_surface_override_material(0, ui_material)
-	var map_viewport:Texture2D = $map/SubViewport.get_texture()
-	var map_material:StandardMaterial3D = StandardMaterial3D.new()
-	map_material.albedo_texture = map_viewport
-	
-	$diver/sub.set_surface_override_material(1, map_material)
 
 
 func _input(event: InputEvent) -> void:
 	if using_map:
-		sub_viewport.push_input(event, true)
 		if Input.is_action_just_pressed("exit cockpit"):
 			var player = get_tree().get_first_node_in_group("player") as Player
 			var unpause_timer:SceneTreeTimer = get_tree().create_timer(0.1)
@@ -104,6 +98,8 @@ func _input(event: InputEvent) -> void:
 			get_tree().create_timer(2.5).timeout.connect(func():
 				is_radar_charged = true)
 			ship_depth_ui.activate_radar(2.5)
+			radar_audio_stream.pitch_scale = randf_range(0.9, 1.1)
+			radar_audio_stream.play()
 			var radar_direction:Vector3 = radar_rotator_origin.global_position.direction_to(radar_rotator.global_position)
 			var objectives:Array[Node] = get_tree().get_nodes_in_group("scanable")
 			for objective in objectives:
@@ -176,6 +172,9 @@ func _physics_process(delta: float) -> void:
 	var radar_axis:float = Input.get_axis("radar left", "radar right")
 	if radar_axis:
 		radar_reference.rotation_degrees.y -= radar_axis
+		ship_depth_ui.radar.self_modulate = Color(1.0,1.0,1.0,1.0)
+		ship_depth_ui.fade_timer.wait_time = 2.0
+		ship_depth_ui.fade_timer.start()
 	ship_depth_ui.radar.arc_position = deg_to_rad(radar_reference.rotation_degrees.y) * -1
 	ship_depth_ui.change_depth_sensor(global_position.y, 0, -150)
 	if driving:
@@ -308,12 +307,6 @@ func _on_map_interacted() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	using_map = true
 	
-
-
-func _on_update_map_timer_timeout() -> void:
-	if Vector2(linear_velocity.x, linear_velocity.z) > Vector2.ZERO:
-		map.update_fog(Vector2(global_position.x, global_position.z), 30)
-
 
 func _on_net_interactable_interacted() -> void:
 	var player:Player = get_tree().get_first_node_in_group("player")

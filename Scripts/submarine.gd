@@ -54,6 +54,7 @@ var exiting:bool = true
 var times_in_seat:int = -1
 var hatch_open:bool = false
 var using_map:bool = false
+var zoomed_on_small_map:bool = false
 var in_water:bool = false
 
 var radar_timer:float = 0
@@ -164,7 +165,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			exiting = true
 	
 		if Input.is_action_just_pressed("Open map"):
-			pass
+			if zoomed_on_small_map:
+				zoomed_on_small_map = false
+				ship_depth_ui.set_map_fullscreen(false)
+			else:
+				zoomed_on_small_map = true
+				ship_depth_ui.set_map_fullscreen(true)
+			#set using map bool true which makes looking around move the map around
 			
 
 

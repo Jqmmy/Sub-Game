@@ -3,6 +3,8 @@ extends Control
 
 @export var radar: Control
 @onready var panel_container_2: PanelContainer = $HBoxContainer/VBoxContainer/PanelContainer/PanelContainer2
+@onready var v_box_container: VBoxContainer = $HBoxContainer/VBoxContainer
+@onready var margin_container: MarginContainer = $HBoxContainer/MarginContainer
 @onready var fade_timer: Timer = $"fade timer"
 
 func change_depth_sensor(depth:float, range_min:float, range_max:float):
@@ -21,6 +23,15 @@ func activate_radar(charge_time:float = 2.5) -> void:
 		finish_tween.tween_property(radar, "radar_charge", 100, charge_time))
 	
 	fade_timer.start()
+
+func set_map_fullscreen(set_full:bool) -> void:
+	if set_full:
+		margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		v_box_container.hide()
+	else:
+		margin_container.size_flags_horizontal = Control.SIZE_SHRINK_END
+		v_box_container.size_flags_horizontal = Control.SIZE_EXPAND
+		v_box_container.show()
 
 
 func _on_fade_timer_timeout() -> void:

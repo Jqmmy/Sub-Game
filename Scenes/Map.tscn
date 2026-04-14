@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7yn8b")
+fog_reveal_radius = 30.0
 
 [node name="SubViewport2" type="SubViewport" parent="." unique_id=984399894]
 handle_input_locally = false
@@ -31,6 +32,12 @@ near = 0.001
 
 [node name="map mesh" type="MeshInstance3D" parent="." unique_id=294197982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 145, 0)
-visible = false
-extra_cull_margin = 20.0
+ignore_occlusion_culling = true
+gi_mode = 0
 mesh = SubResource("PlaneMesh_7yn8b")
+
+[node name="fog update timer" type="Timer" parent="." unique_id=1272744164]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="fog update timer" to="." method="_on_fog_update_timer_timeout"]
